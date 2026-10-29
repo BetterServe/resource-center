@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diaper Distribution Pilot Program Resource Center | MOD Collective</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Source+Serif+4:ital,opsz,wght@1,8..60,600&display=swap');
+
+/* ==========================================================================
+   DDPP Resource Center — iframe build
+   MOD Collective / Diaper Dollars
+
+   This version is meant to be embedded in an iframe on modcollective.org.
+   The site nav bar has been removed, since MOD's real nav sits above the frame.
+   Height is reported to the parent page so the frame resizes itself.
+   ========================================================================== */
+
+.mod-dd {
+  --green: #1B3939;
+  --med-green: #1B6B6B;
+  --teal: #64E8E4;
+  --cream: #EBE9E3;
+  --med-gray: #B8B6B1;
+  --dark-gray: #67655F;
+  --yellow: #FFC44D;
+  --red: #CC3633;
+  --coral: #FF7D7D;
+  --white: #FFFFFF;
+
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "Figtree", "Helvetica Neue", Arial, sans-serif;
+
+  --wrap: 920px;
+
+  font-family: var(--sans);
+  color: var(--green);
+  background: var(--cream);
+  line-height: 1.6;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+html, body { margin: 0; padding: 0; background: #EBE9E3; }
+.mod-dd *, .mod-dd *::before, .mod-dd *::after { box-sizing: border-box; }
+.mod-dd img { max-width: 100%; height: auto; display: block; }
+.mod-dd a { color: inherit; }
+.mod-dd button { font: inherit; color: inherit; background: none; border: 0; margin: 0; padding: 0; text-align: left; cursor: pointer; }
+.mod-dd :focus-visible { outline: 3px solid var(--med-green); outline-offset: 2px; border-radius: 2px; }
+
+/* ---------- Diaper Dollars bar + section nav ---------- */
+.mod-dd .ddbar { background: var(--green); }
+.mod-dd .ddbar .inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.mod-dd .ddmark { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.mod-dd .ddmark img { width: 104px; }
+.mod-dd .ddmark span {
+  color: var(--teal); font-size: 13px; font-weight: 600;
+  border-left: 1px solid rgba(235,233,227,.28); padding-left: 14px;
+}
+.mod-dd .secnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.mod-dd .secnav button {
+  color: var(--cream); text-decoration: none; cursor: pointer;
+  font-size: 14px; font-weight: 500; padding: 7px 13px; border-radius: 999px;
+  transition: background .15s, color .15s;
+}
+.mod-dd .secnav button:hover { background: rgba(100,232,228,.14); }
+.mod-dd .secnav button.active { background: var(--teal); color: var(--green); font-weight: 700; }
+
+/* ---------- Page shell ---------- */
+.mod-dd .wrap { max-width: var(--wrap); margin: 0 auto; padding: 46px 22px 70px; }
+.mod-dd .page { display: none; }
+.mod-dd .page.active { display: block; }
+
+/* ---------- Type ---------- */
+.mod-dd h2 {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(31px, 4.6vw, 43px); line-height: 1.15; letter-spacing: -.01em;
+  margin: 0 0 14px; max-width: 20ch;
+}
+.mod-dd h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px; letter-spacing: -.005em; }
+.mod-dd h4 { font-size: 16px; font-weight: 700; margin: 20px 0 5px; color: var(--med-green); }
+.mod-dd p { margin: 0 0 14px; max-width: 72ch; }
+.mod-dd .lede { font-size: 19px; color: #3C5555; margin-bottom: 34px; max-width: 62ch; }
+.mod-dd strong { font-weight: 700; }
+
+.mod-dd .squiggle { display: block; width: 260px; max-width: 62%; margin: -4px 0 22px; overflow: visible; }
+.mod-dd .squiggle path { fill: none; stroke: var(--coral); stroke-width: 6; stroke-linecap: round; }
+
+/* ---------- Home: navigation cards ---------- */
+.mod-dd .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 16px; margin-bottom: 36px; }
+.mod-dd .card {
+  background: var(--white); border: 1px solid var(--med-gray); border-radius: 12px;
+  padding: 26px 24px 24px; cursor: pointer; transition: border-color .15s, background .15s;
+  display: flex; flex-direction: column;
+}
+.mod-dd .card:hover { border-color: var(--med-green); background: #FCFCFB; }
+.mod-dd .card h3 { font-size: 19px; margin-bottom: 7px; }
+.mod-dd .card p { margin: 0; font-size: 15px; color: var(--dark-gray); line-height: 1.55; }
+.mod-dd .card .go { display: block; margin-top: 16px; font-size: 14px; font-weight: 700; color: var(--med-green); }
+
+/* ---------- Home: enrollment counter ---------- */
+/* ---------- Home: support call to action ----------
+   This page is only ever seen by site staff, so it carries MOD's number
+   alone. What staff hand to families lives in Training & Support. */
+.mod-dd .help {
+  background: var(--green); color: var(--cream);
+  border-radius: 14px; padding: 30px 32px 26px;
+}
+.mod-dd .help h3 {
+  margin: 0 0 9px; font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(26px, 4vw, 34px); line-height: 1.1; color: var(--teal);
+}
+.mod-dd .help p { margin: 0 0 20px; max-width: 56ch; color: var(--cream); font-size: 16px; }
+.mod-dd .help .btn { margin: 5px 10px 5px 0; }
+.mod-dd .help .btn.secondary { background: transparent; color: var(--cream); border-color: var(--cream); }
+.mod-dd .help .btn.secondary:hover { background: var(--cream); color: var(--green); border-color: var(--cream); }
+
+/* ---------- Home: by-site leaderboard ----------
+   Bars are scaled to the leading site, not to the goal — at 42 of 5,500 a
+   goal-scaled bar is invisible, and the point of this table is comparison
+   between sites rather than progress against the target. */
+.mod-dd .sites { margin: 6px 0 4px; }
+.mod-dd .siterow {
+  display: grid; grid-template-columns: minmax(150px, 1.5fr) 2fr auto;
+  gap: 16px; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--med-gray);
+}
+.mod-dd .siterow:last-child { border-bottom: none; }
+.mod-dd .sitename { font-size: 15px; font-weight: 600; color: var(--green); }
+.mod-dd .sitetrack { height: 10px; border-radius: 999px; background: rgba(27,107,107,.12); overflow: hidden; }
+.mod-dd .sitetrack i { display: block; height: 100%; width: 0; background: var(--med-green); border-radius: 999px; }
+.mod-dd .siterow:first-child .sitetrack i { background: var(--teal); }
+.mod-dd .sitecount { font-size: 17px; font-weight: 700; color: var(--green); text-align: right; white-space: nowrap; }
+.mod-dd .sitecount span { font-size: 13px; font-weight: 500; color: var(--dark-gray); margin-left: 6px; }
+@media (max-width: 620px) {
+  .mod-dd .siterow { grid-template-columns: 1fr auto; gap: 6px 14px; }
+  .mod-dd .sitetrack { grid-column: 1 / -1; }
+}
+
+/* ---------- Home: the two status bars ---------- */
+.mod-dd .panels {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(298px, 1fr));
+  gap: 16px; margin-bottom: 24px;
+}
+.mod-dd .panel {
+  background: var(--green); border-radius: 14px;
+  padding: 26px 30px 22px; color: var(--cream);
+}
+.mod-dd .phead {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.mod-dd .panel h3 {
+  margin: 0; font-size: 14px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--teal);
+}
+.mod-dd .pmeta { font-size: 13px; color: var(--med-gray); }
+.mod-dd .pbig { margin: 0 0 20px; max-width: none; line-height: 1; }
+.mod-dd .pbig strong {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(34px, 5.5vw, 48px); line-height: 1; color: var(--teal);
+}
+.mod-dd .pbig span { font-size: 16px; color: var(--cream); margin-left: 9px; }
+.mod-dd .panel.closed .pbig strong { color: var(--med-gray); }
+
+/* The track. A dot rides it for the date window; the fill alone carries the count. */
+.mod-dd .track {
+  position: relative; height: 10px; border-radius: 999px;
+  background: rgba(235,233,227,.18); margin: 0 0 12px;
+}
+.mod-dd .track .fill {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+  background: var(--teal); border-radius: 999px; transition: width .6s ease;
+}
+.mod-dd .track .dot {
+  position: absolute; top: 50%; left: 0%;
+  width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%;
+  background: var(--teal); border: 4px solid var(--green);
+  box-shadow: 0 0 0 2px var(--teal); transition: left .6s ease;
+}
+.mod-dd .panel.closed .track .dot { background: var(--med-gray); box-shadow: 0 0 0 2px var(--med-gray); }
+.mod-dd .ends {
+  display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  font-size: 13px; color: var(--med-gray);
+}
+.mod-dd .ends b { color: var(--cream); font-weight: 600; }
+
+
+/* ---------- Shared blocks ---------- */
+.mod-dd .back {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600;
+  color: var(--med-green); cursor: pointer; margin-bottom: 20px; text-decoration: none;
+}
+.mod-dd .back:hover { color: var(--red); }
+
+/* ---------- Eligibility criteria box ---------- */
+.mod-dd .elig {
+  background: var(--white); border: 1px solid var(--med-gray);
+  border-left: 5px solid var(--teal); border-radius: 12px;
+  padding: 24px 26px; margin: 0 0 30px;
+}
+.mod-dd .elig h3 { margin: 0 0 16px; font-size: 19px; }
+.mod-dd .elig dl { margin: 0; }
+.mod-dd .elig dl > div {
+  display: grid; grid-template-columns: 196px 1fr; gap: 4px 20px;
+  padding: 12px 0; border-top: 1px solid var(--med-gray);
+}
+.mod-dd .elig dl > div:first-child { border-top: none; padding-top: 0; }
+.mod-dd .elig dl > div:last-child { padding-bottom: 0; }
+.mod-dd .elig dt { font-weight: 700; color: var(--med-green); font-size: 15px; }
+.mod-dd .elig dd { margin: 0; font-size: 16px; }
+@media (max-width: 560px) {
+  .mod-dd .elig dl > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+.mod-dd .callout {
+  background: var(--white); border: 1px solid var(--med-gray); border-left: 5px solid var(--teal);
+  border-radius: 10px; padding: 18px 22px; margin: 0 0 32px;
+}
+.mod-dd .callout p { margin: 0 0 12px; }
+.mod-dd .callout p:last-child { margin-bottom: 0; }
+.mod-dd .callout h3 { font-size: 17px; margin-bottom: 8px; }
+.mod-dd .callout.warn { border-left-color: var(--yellow); }
+.mod-dd .callout .detail { font-weight: 700; font-size: 16px; }
+
+/* Contact links: readable as links without shouting. */
+.mod-dd .detail a { text-decoration: none; border-bottom: 1px solid rgba(27,107,107,.35); }
+.mod-dd .detail a:hover { color: var(--med-green); border-bottom-color: var(--med-green); }
+
+.mod-dd .subsection { padding: 26px 0; border-bottom: 1px solid var(--med-gray); }
+.mod-dd .subsection:first-of-type { padding-top: 6px; }
+.mod-dd .subsection:last-of-type { border-bottom: none; }
+.mod-dd .subsection p:last-child { margin-bottom: 0; }
+
+.mod-dd .steps { counter-reset: step; list-style: none; padding: 0; margin: 0 0 28px; }
+.mod-dd .steps li {
+  counter-increment: step; position: relative; padding: 15px 0 15px 52px;
+  border-bottom: 1px solid var(--med-gray); max-width: 72ch;
+}
+.mod-dd .steps li:last-child { border-bottom: none; }
+.mod-dd .steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 14px;
+  width: 32px; height: 32px; border-radius: 50%; background: var(--med-green); color: var(--cream);
+  display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;
+}
+
+.mod-dd .btn {
+  display: inline-block; background: var(--red); color: var(--white);
+  padding: 13px 28px; border-radius: 999px; text-decoration: none;
+  font-weight: 700; font-size: 15px; cursor: pointer; margin: 4px 10px 4px 0;
+  border: 2px solid var(--red); transition: background .15s, color .15s;
+}
+.mod-dd .btn:hover { background: #A82B28; border-color: #A82B28; }
+.mod-dd .btn.secondary { background: transparent; color: var(--green); border-color: var(--green); }
+.mod-dd .btn.secondary:hover { background: var(--green); color: var(--cream); }
+
+/* ---------- Stat figures ---------- */
+.mod-dd .stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+  gap: 16px; margin: 22px 0 16px;
+}
+.mod-dd .stats > div {
+  background: var(--white); border: 1px solid var(--med-gray);
+  border-left: 5px solid var(--coral); border-radius: 12px; padding: 22px 24px;
+}
+.mod-dd .stats .fig {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(30px, 5vw, 40px); line-height: 1; color: var(--med-green); display: block;
+}
+.mod-dd .stats p { margin: 10px 0 0; font-size: 15px; color: #3C5555; max-width: none; }
+
+/* ---------- Benefits that exclude diapers ---------- */
+.mod-dd .excl {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 10px; margin: 20px 0 18px;
+}
+.mod-dd .excl li {
+  background: var(--white); border: 1px solid var(--med-gray);
+  border-radius: 8px; padding: 15px 18px; margin: 0;
+}
+.mod-dd .excl strong { display: block; font-size: 17px; color: var(--green); }
+.mod-dd .excl span { font-size: 13px; font-weight: 600; color: var(--red); }
+
+/* ---------- Question cards ---------- */
+.mod-dd .qcards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(266px, 1fr));
+  gap: 16px; margin: 20px 0 14px;
+}
+.mod-dd .qcards > div {
+  background: var(--white); border: 1px solid var(--med-gray);
+  border-top: 5px solid var(--teal); border-radius: 12px; padding: 22px 24px;
+}
+.mod-dd .qcards h4 {
+  margin: 0 0 9px; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--med-green);
+}
+.mod-dd .qcards .q { display: block; font-size: 17px; font-weight: 700; color: var(--green); margin-bottom: 9px; line-height: 1.35; }
+.mod-dd .qcards p { margin: 0; font-size: 15px; max-width: none; }
+.mod-dd .qcards .why { margin-top: 11px; font-size: 14px; color: var(--dark-gray); }
+
+/* ---------- Inline chip ---------- */
+.mod-dd .chip {
+  display: inline-block; vertical-align: middle; margin-left: 10px;
+  background: var(--teal); color: var(--green); font-size: 12px; font-weight: 700;
+  padding: 4px 11px; border-radius: 999px; letter-spacing: .03em; text-transform: uppercase;
+}
+
+/* ---------- Data tables ---------- */
+.mod-dd .tscroll {
+  overflow-x: auto; margin: 20px 0 14px;
+  border: 1px solid var(--med-gray); border-radius: 10px; background: var(--white);
+}
+.mod-dd table.dt { border-collapse: collapse; width: 100%; min-width: 440px; font-size: 15px; }
+.mod-dd table.dt th, .mod-dd table.dt td {
+  padding: 13px 16px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--med-gray);
+}
+.mod-dd table.dt thead th {
+  background: var(--green); color: var(--cream);
+  font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  border-bottom: none;
+}
+.mod-dd table.dt tbody tr:last-child th,
+.mod-dd table.dt tbody tr:last-child td { border-bottom: none; }
+.mod-dd table.dt tbody th { font-weight: 700; color: var(--green); }
+.mod-dd table.dt .amt {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: 24px; color: var(--med-green); white-space: nowrap;
+}
+.mod-dd .tnote { font-size: 14px; color: var(--dark-gray); margin: 0 0 4px; }
+
+/* ---------- Timeline ---------- */
+.mod-dd .tl { list-style: none; padding: 0; margin: 22px 0 0; position: relative; }
+.mod-dd .tl::before {
+  content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px;
+  width: 2px; background: var(--med-gray);
+}
+.mod-dd .tl li { position: relative; padding: 0 0 24px 38px; max-width: 64ch; }
+.mod-dd .tl li:last-child { padding-bottom: 0; }
+.mod-dd .tl li::before {
+  content: ""; position: absolute; left: 4px; top: 5px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--med-green); box-shadow: 0 0 0 4px var(--cream);
+}
+.mod-dd .tl .when {
+  display: block; font-size: 13px; font-weight: 700; color: var(--med-green);
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px;
+}
+.mod-dd .tl .what { margin: 0; font-size: 16px; }
+.mod-dd .tl .off::before { background: var(--med-gray); }
+.mod-dd .tl .off .when { color: var(--dark-gray); }
+
+/* ---------- You do / you do not ---------- */
+.mod-dd .split {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 16px; margin: 22px 0 0;
+}
+.mod-dd .split > div {
+  background: var(--white); border: 1px solid var(--med-gray);
+  border-radius: 12px; padding: 22px 24px;
+}
+.mod-dd .split h4 {
+  margin: 0 0 13px; font-size: 14px; letter-spacing: .04em; text-transform: uppercase;
+}
+.mod-dd .split .yes h4 { color: var(--med-green); }
+.mod-dd .split .no h4 { color: var(--red); }
+.mod-dd .split ul { list-style: none; padding: 0; margin: 0; }
+.mod-dd .split li { position: relative; padding: 0 0 11px 28px; font-size: 15px; line-height: 1.5; }
+.mod-dd .split li:last-child { padding-bottom: 0; }
+.mod-dd .split li::before { position: absolute; left: 0; top: -1px; font-weight: 700; font-size: 16px; }
+.mod-dd .split .yes li::before { content: "✓"; color: var(--med-green); }
+.mod-dd .split .no li::before { content: "✕"; color: var(--red); }
+
+/* ---------- Screenshots ---------- */
+.mod-dd .shot { margin: 20px 0 0; }
+.mod-dd .shot img {
+  border: 1px solid var(--med-gray); border-radius: 10px; background: var(--white);
+  max-width: min(100%, 420px);
+}
+.mod-dd .shot figcaption { font-size: 13px; color: var(--dark-gray); margin-top: 8px; max-width: 60ch; }
+
+/* ---------- Retailer grid ----------
+   Name blocks, not logo slots. Retailer logos are trademarks and clean
+   licensed artwork was not worth chasing for twelve tiles. */
+.mod-dd .retailers, .mod-dd .brands {
+  list-style: none; padding: 0; margin: 20px 0 14px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(142px, 1fr)); gap: 10px;
+}
+.mod-dd .retailers li, .mod-dd .brands li {
+  background: var(--white); border: 1px solid var(--med-gray); border-radius: 8px;
+  padding: 15px 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  text-align: center; font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--green);
+}
+.mod-dd .retailers .ecom {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--med-green); background: rgba(100,232,228,.30);
+  padding: 2px 8px; border-radius: 999px;
+}
+.mod-dd .retailers-note { font-size: 14px; color: var(--dark-gray); }
+
+/* ---------- Support page ---------- */
+.mod-dd .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 16px; margin: 4px 0 40px; }
+.mod-dd .contacts .who {
+  background: var(--white); border: 1px solid var(--med-gray); border-radius: 12px; padding: 24px;
+}
+.mod-dd .contacts .who h3 { font-size: 17px; }
+.mod-dd .contacts .who p { font-size: 15px; color: var(--dark-gray); }
+.mod-dd .contacts .who .detail { color: var(--green); font-weight: 700; font-size: 16px; line-height: 1.7; margin-bottom: 0; }
+
+.mod-dd .sectitle { font-size: 22px; font-weight: 700; margin: 42px 0 16px; }
+.mod-dd .sectitle:first-of-type { margin-top: 0; }
+
+.mod-dd .video {
+  display: flex; gap: 18px; align-items: center; padding: 14px 18px; margin-bottom: 10px;
+  background: var(--white); border: 1px solid var(--med-gray); border-radius: 10px;
+}
+.mod-dd .video .thumb {
+  width: 86px; height: 54px; flex-shrink: 0; border-radius: 6px; background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+}
+.mod-dd .video .thumb svg { width: 20px; height: 20px; fill: var(--teal); }
+.mod-dd .video .meta strong { display: block; font-size: 16px; }
+.mod-dd .video .meta span { font-size: 14px; color: var(--dark-gray); }
+
+.mod-dd .faq { border-top: 1px solid var(--med-gray); margin-bottom: 8px; }
+.mod-dd .faq:last-of-type { border-bottom: 1px solid var(--med-gray); }
+.mod-dd .faq summary {
+  cursor: pointer; font-weight: 600; font-size: 17px; padding: 16px 34px 16px 0;
+  position: relative; list-style: none;
+}
+.mod-dd .faq summary::-webkit-details-marker { display: none; }
+.mod-dd .faq summary::after {
+  content: ""; position: absolute; right: 6px; top: 24px;
+  width: 9px; height: 9px; border-right: 2px solid var(--med-green); border-bottom: 2px solid var(--med-green);
+  transform: rotate(45deg); transition: transform .18s;
+}
+.mod-dd .faq[open] summary::after { transform: rotate(-135deg); }
+.mod-dd .faq p { padding: 0 0 18px; margin: 0; color: #3C5555; font-size: 16px; }
+
+.mod-dd ul.plain { padding-left: 20px; margin: 0 0 14px; }
+.mod-dd ul.plain li { margin-bottom: 7px; }
+
+/* ---------- Footer ---------- */
+.mod-dd .foot { background: var(--green); color: var(--cream); }
+.mod-dd .foot .inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap;
+}
+.mod-dd .foot img { width: 120px; opacity: .95; }
+.mod-dd .foot .links { display: flex; gap: 24px; flex-wrap: wrap; }
+.mod-dd .foot a { color: var(--cream); text-decoration: none; font-size: 14px; font-weight: 500; }
+.mod-dd .foot a:hover { color: var(--teal); }
+.mod-dd .foot .fine { width: 100%; font-size: 13px; color: var(--med-gray); margin: 0; }
+
+@media (max-width: 720px) {
+  .mod-dd .ddbar .inner { padding: 14px 18px; gap: 14px; }
+  .mod-dd .secnav { width: 100%; gap: 4px; }
+  .mod-dd .secnav button { padding: 6px 11px; font-size: 13px; }
+  .mod-dd .wrap { padding: 32px 18px 52px; }
+  .mod-dd .panel { padding: 22px 20px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mod-dd * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="mod-dd">
+
+  <!-- ============ DIAPER DOLLARS BAR + SECTION NAV ============ -->
+  <div class="ddbar">
+    <div class="inner">
+      <div class="ddmark">
+        <img src="https://modcollective.org/wp-content/uploads/2024/04/MOD-Diaper-Dollars-Logo-White.png" alt="Diaper Dollars by MOD">
+        <span>Illinois DDPP Resource Center</span>
+      </div>
+      <nav class="secnav" aria-label="Resource center">
+        <button type="button" onclick="ddGo('home')" class="active" id="nav-home" aria-current="page">Home</button>
+        <button type="button" onclick="ddGo('program')" id="nav-program">How It Works</button>
+        <button type="button" onclick="ddGo('card')" id="nav-card">The Card</button>
+        <button type="button" onclick="ddGo('enroll')" id="nav-enroll">Enroll a Family</button>
+        <button type="button" onclick="ddGo('about')" id="nav-about">About the DDPP</button>
+        <button type="button" onclick="ddGo('support')" id="nav-support">Training &amp; Support</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ========== HOME ========== -->
+    <div class="page active" id="home">
+      <h2>Everything your team needs, in one place.</h2>
+      <svg class="squiggle" viewBox="0 0 260 14" aria-hidden="true">
+        <path d="M3 9.5C34 4 52 11.5 84 6.5c32-5 48 6 80 1.5 30-4.2 58 3.5 93-2.5"/>
+      </svg>
+      <p class="lede">This page is for staff at participating sites for the FY27 Diaper Distribution Pilot Program. Enrollment steps, family questions, training, and support all live here.</p>
+
+      <div class="cards">
+        <button type="button" class="card" onclick="ddGo('program')">
+          <h3>How It Works</h3>
+          <p>The benefit, what the card buys, where it works, online ordering, and who is eligible.</p>
+          <span class="go">Look it up</span>
+        </button>
+        <button type="button" class="card" onclick="ddGo('card')">
+          <h3>The Card</h3>
+          <p>What families see when they open their link, how they pay, and the one step that trips people up.</p>
+          <span class="go">Walk through it</span>
+        </button>
+        <button type="button" class="card" onclick="ddGo('enroll')">
+          <h3>Enroll a Family</h3>
+          <p>The step by step workflow, and what to tell families about what happens next.</p>
+          <span class="go">Start here</span>
+        </button>
+        <button type="button" class="card" onclick="ddGo('about')">
+          <h3>About the DDPP</h3>
+          <p>What the program is, why it exists, and what this pilot year is designed to learn.</p>
+          <span class="go">Read the background</span>
+        </button>
+        <button type="button" class="card" onclick="ddGo('support')">
+          <h3>Training &amp; Support</h3>
+          <p>Training videos, FAQ, contact information, and monthly call recordings.</p>
+          <span class="go">Get help</span>
+        </button>
+      </div>
+
+      <div class="panels">
+
+        <div class="panel" id="dd-window">
+          <div class="phead">
+            <h3>Enrollment window</h3>
+            <span class="pmeta" id="dd-window-note">Opens October 1, 2026</span>
+          </div>
+          <p class="pbig"><strong id="dd-days">&mdash;</strong><span id="dd-days-label">days until enrollment opens</span></p>
+          <div class="track">
+            <div class="fill" id="dd-window-fill"></div>
+            <div class="dot" id="dd-window-dot"></div>
+          </div>
+          <div class="ends">
+            <span><b>Oct 1, 2026</b></span>
+            <span><b>Dec 23, 2026</b></span>
+          </div>
+        </div>
+
+        <div class="panel" id="dd-tally">
+          <div class="phead">
+            <h3>Enrollment goal</h3>
+            <span class="pmeta" id="dd-asof">Checking&hellip;</span>
+          </div>
+          <p class="pbig"><strong id="dd-count">&mdash;</strong><span id="dd-label">enrolled</span></p>
+          <div class="track">
+            <div class="fill" id="dd-bar"></div>
+          </div>
+          <div class="ends">
+            <span>Goal: <b>5,500 children</b> across all 12 sites</span>
+            <span id="dd-pct">0%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="dd-sites-wrap" hidden>
+        <h3 class="sectitle">Enrollments by site</h3>
+        <div class="sites" id="dd-sites"></div>
+      </div>
+
+      <div class="help">
+        <h3>Need support?</h3>
+        <p>Enrollment questions, a lost enrollment link, a family situation you are not sure about, or anything else about the pilot. Reach MOD Collective directly.</p>
+        <a class="btn" href="tel:+18446632655">Call 844-663-2655</a>
+        <a class="btn secondary" href="mailto:support@modcollective.org?subject=DDPP%20site%20question">Email us</a>
+      </div>
+    </div>
+
+    <!-- ========== PROGRAM ========== -->
+    <div class="page" id="program">
+      <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
+      <h2>How the program works.</h2>
+      <p class="lede">Reference information for answering family questions. Each section is short. If you need more, check the FAQ.</p>
+
+      <div class="subsection">
+        <h3>The benefit</h3>
+        <p>A digital eCard, reloaded every 31 days for six cycles. The amount depends on how many children under 3 are in the household.</p>
+        <div class="tscroll">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th scope="col">Children under 3</th>
+                <th scope="col">Each 31 days</th>
+                <th scope="col">Across all 6 cycles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1 child</th><td class="amt">$40</td><td class="amt">$240</td></tr>
+              <tr><th scope="row">2 children</th><td class="amt">$80</td><td class="amt">$480</td></tr>
+              <tr><th scope="row">3 children</th><td class="amt">$120</td><td class="amt">$720</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tnote">Three children is the household maximum. The six cycle totals assume each balance is spent in full &mdash; whatever is left over is removed at the end of every 31 day cycle and does not carry forward.</p>
+        <p>Clients receive six installments. Each expires after 31 days, and a new benefit is loaded onto their Diaper Dollars eCard. <strong>The benefit cycle starts on the day a client receives their first benefit</strong>, not the day they enroll &mdash; so two families who enroll the same afternoon can end up on different schedules.</p>
+        <div class="callout warn">
+          <p><strong>31 days is not the same as a month.</strong> A family whose first benefit lands on 1 February gets the next one around 3 March, not 1 March &mdash; and the date keeps sliding later with every cycle. Families who expect money on the first of the month will think something has gone wrong. It has not.</p>
+        </div>
+        <p>This is a limited pilot for State Fiscal Year 2027, and services beyond this year are not guaranteed.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>What the card buys</h3>
+        <p>The Diaper Dollars eCard can be spent on diapers only.</p>
+        <p>We curate an approved product list at every participating retailer, covering each diaper product that retailer carries. When a client checks out and scans their eCard, the system identifies the qualifying items in the basket and applies their Diaper Dollars to those. Everything else in the basket is paid for as normal.</p>
+        <div class="split">
+          <div class="yes">
+            <h4>Covered</h4>
+            <ul>
+              <li>Disposable diapers for children</li>
+              <li>Every size, newborn through toddler</li>
+              <li>National brands and store brands alike</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>Not covered</h4>
+            <ul>
+              <li>Baby wipes</li>
+              <li>Diaper creams and ointments</li>
+              <li>Adult incontinence products</li>
+              <li>Anything else in the baby aisle</li>
+            </ul>
+          </div>
+        </div>
+        <p>So a basket with diapers and wipes in it is not a problem, <strong>as long as the Diaper Dollars barcode is scanned first</strong>. The card picks up the diapers and the family pays for the rest as normal. If another payment method goes through first, it takes the whole basket and the diaper benefit is never applied.</p>
+
+        <h4>Brands families will find</h4>
+        <ul class="brands">
+          <li>Pampers</li>
+          <li>Huggies</li>
+          <li>Luvs</li>
+          <li>Honest</li>
+          <li>Hello Bello</li>
+          <li>Seventh Generation</li>
+          <li>Cuties</li>
+          <li>Store brands</li>
+        </ul>
+        <p class="retailers-note">This is not a comprehensive list. Any baby diaper product at a participating retailer will qualify.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>Where the card works</h3>
+        <p>The card runs on the OTC network. These are the twelve retailers accepting it in Illinois. Families can use it at the register or at self checkout, and at three of them online as well.</p>
+        <ul class="retailers">
+          <li>Cub</li>
+          <li>CVS</li>
+          <li>Dollar General</li>
+          <li>Family Dollar</li>
+          <li>Food 4 Less<span class="ecom">Online too</span></li>
+          <li>Jewel<span class="ecom">Online too</span></li>
+          <li>Kroger</li>
+          <li>Mariano&rsquo;s</li>
+          <li>Meijer</li>
+          <li>Ruler</li>
+          <li>Walgreens</li>
+          <li>Walmart<span class="ecom">Online too</span></li>
+        </ul>
+        <p class="retailers-note">Retailer specific checkout instructions are shown on the card itself once a family picks where they are shopping, and are texted to them when the card is issued.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>Online ordering</h3>
+        <p><strong>Walmart is where most online ordering happens.</strong> In last year's program Walmart accounted for 79% of all transactions, and Walmart online alone was 29% of them &mdash; close to a third of every purchase families made. <strong>Food 4 Less</strong> and <strong>Jewel</strong> also take the card online. The other nine retailers are in store only.</p>
+        <div class="callout warn">
+          <p><strong>The online storefront is a separate entry in the store list.</strong> A family shopping Walmart online has to pick the Walmart.com listing, not the Walmart one. Choosing the in-store listing produces a barcode, which is no use at an online checkout.</p>
+        </div>
+        <ol class="steps">
+          <li>Open the card link and select the list of stores.</li>
+          <li>Choose the retailer's online listing, for example Walmart.com rather than Walmart.</li>
+          <li>Shop on the retailer's own website as normal.</li>
+          <li>At checkout, enter the card number from the top of the card into the debit or credit card field. There is no separate code and nothing to redeem.</li>
+        </ol>
+        <p>Which products are covered does not change online. If a family is unsure about an item, Check a Product works the same way.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>Eligibility</h3>
+        <div class="tscroll">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th scope="col">Requirement</th>
+                <th scope="col">WIC clinics</th>
+                <th scope="col">Home visiting programs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">The child</th><td colspan="2">Under 3 and currently in diapers.</td></tr>
+              <tr><th scope="row">Income standard</th><td colspan="2">Meets WIC income guidelines, 185% of the federal poverty level. This is the same across every site.</td></tr>
+              <tr><th scope="row">Verifying income</th><td>Already verified as part of WIC. Nothing extra to do.</td><td>Enrollment in WIC, SNAP, or Medicaid counts as verification.</td></tr>
+              <tr><th scope="row">Release of Information</th><td colspan="2">Not needed. The family consents on the form itself.</td></tr>
+              <tr><th scope="row">Children per family</th><td colspan="2">Up to 3, covered by one enrollment.</td></tr>
+              <tr><th scope="row">Enrollments per child</th><td colspan="2">One, at one site. No duplicates and no re-enrollment.</td></tr>
+              <tr><th scope="row">Already using a diaper bank</th><td colspan="2">Still eligible.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tnote">The short version: if a family qualifies for WIC, they qualify for this. The only thing that differs by site type is how income gets verified, not the standard it is measured against.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>Your role</h3>
+        <div class="split">
+          <div class="yes">
+            <h4>You do</h4>
+            <ul>
+              <li>Open your site's enrollment link at the visit</li>
+              <li>Walk the family through about five minutes of questions</li>
+              <li>Check the staff attestation box if you are assisting</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>You do not</h4>
+            <ul>
+              <li>Handle physical diapers, pallets, storage, or volunteers</li>
+              <li>Verify income beyond what you already do for WIC</li>
+              <li>Manage the eCard or field benefit questions</li>
+              <li>Do anything at all once the family has submitted</li>
+            </ul>
+          </div>
+        </div>
+        <p class="tnote">Once a family is enrolled, the Diaper Dollars support team handles everything. Families receive the support number and email with their card.</p>
+      </div>
+    </div>
+
+    <!-- ========== THE CARD ========== -->
+    <div class="page" id="card">
+      <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
+      <h2>How the Diaper Dollars card works.</h2>
+      <p class="lede">You will not manage the card, but families will ask you about it. This is what they see and how it behaves.</p>
+
+      <div class="subsection">
+        <h3>How families get the card</h3>
+        <p>Once a client confirms their number, their eCard arrives as a text with an activation link in it. There is no app to download. The link opens in any browser on a phone, tablet, or computer, and it is the same link for the whole program &mdash; it is not reissued each cycle. Tell families to save the message.</p>
+        <figure class="shot">
+          <img src="img/benefit-text.png" width="760" height="911" loading="lazy" alt="Text message reading: welcome to Diaper Dollars, activate your monthly diaper support now, followed by an activation link">
+          <figcaption>The benefit text. The activation code is masked here. Note the sender is 888-394-7729, which is not a number anyone can call back &mdash; it only sends.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>What they see when they open it</h3>
+        <p>A digital card with a payment card number and the client's name on it. This is a real payment method issued to that client, not a coupon or a voucher code. The card number matters for online shopping: it goes in the debit or credit card field at checkout, the same as any other card.</p>
+        <figure class="shot">
+          <img src="img/card-home.png" width="432" height="793" loading="lazy" alt="The card page: Diaper Dollars card at the top, a store list button, Check a Product and Pay with Barcode tiles, and the active offer below">
+          <figcaption>The whole card page. Card numbers in these screenshots are partly masked for this guide; a family sees the full number.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Available in 14 languages</h3>
+        <p>A language selector sits in the top right corner of the card page. Choosing a language translates the entire card experience, not just the menu. Spanish, Arabic, and Cantonese are among the options. Families do not need to ask anyone to set this up.</p>
+        <figure class="shot">
+          <img src="img/language-selector.png" width="283" height="356" loading="lazy" alt="Language dropdown open, showing English, Espanol, Arabic and Cantonese with a search box">
+          <figcaption>The selector is searchable, so a family can type their language rather than scroll.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Active offers, balance, and the 31 day cycle</h3>
+        <p>Below the card, families see their active offer: the amount they receive, the current balance, and a <strong>Valid thru</strong> date. The amount depends on how many children under 3 are in the household &mdash; $40 for one, $80 for two, $120 for three. It arrives as a single balance, not as a separate offer per child.</p>
+        <div class="callout warn">
+          <p><strong>The balance does not roll over.</strong> Families have 31 days to spend it. Whatever is left on the expiration date is removed and a fresh balance is issued for the next cycle. Unspent money does not accumulate and is not returned. Over a six month enrollment there are six of these cycles.</p>
+        </div>
+        <p>Say this out loud at enrollment. A family saving up several months for a bulk purchase will lose the earlier balances, and they will not find that out until the money is already gone.</p>
+        <p>The other half of it: <strong>31 days is not a calendar month.</strong> If a family's first benefit arrives on 1 February, the next is around 3 March rather than 1 March, and each cycle drifts a little later than the last. By the sixth installment it can be most of a week off where they expect it.</p>
+        <figure class="shot">
+          <img src="img/active-offers.png" width="568" height="306" loading="lazy" alt="Active Offers panel showing the offer name, a balance of forty dollars, and a valid thru date">
+          <figcaption>Balance and Valid thru date. This is where a family checks what is left and how long they have.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Paying in a store</h3>
+        <ol class="steps">
+          <li>Open the card link and select <strong>Click here for a list of stores</strong>.</li>
+          <li>Choose the retailer they are shopping at. The list is searchable and covers major grocery and pharmacy chains.</li>
+          <li>Select <strong>Pay with Barcode</strong>. Instructions specific to that retailer appear, for both self checkout and a staffed lane.</li>
+          <li>Follow the steps on that screen. They differ from store to store.</li>
+          <li>Scan the Diaper Dollars barcode, before any other form of payment.</li>
+        </ol>
+
+        <div class="callout">
+          <h3>Every retailer has its own checkout process</h3>
+          <p>The instructions that appear are written for the specific store the family picked, and they are not the same everywhere. It will not always be "press Total or Pay", and a staffed lane will not always ask for Credit/Debit. If a family describes steps that do not match what you remember, they are probably reading their screen correctly &mdash; tell them to follow it rather than going from memory.</p>
+        </div>
+
+        <div class="callout warn">
+          <h3>The one thing families get wrong</h3>
+          <p>Whatever the retailer's steps are, the Diaper Dollars barcode has to be scanned <strong>before any other payment type</strong>. If a family swipes a debit card or hands over cash first, the diaper benefit will not apply to the order. This is the most common reason a payment fails.</p>
+        </div>
+        <figure class="shot">
+          <img src="img/store-list.png" width="383" height="514" loading="lazy" alt="Searchable store list showing Walmart, Walmart.com, Acme Markets, Albertsons, Andronicos Markets and Bakers">
+          <figcaption>The store list is searchable by name, and online storefronts are separate entries.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/pay-barcode.png" width="556" height="883" loading="lazy" alt="Pay with Barcode screen for Walmart with self check-out and cashier instructions above a barcode">
+          <figcaption>Instructions differ by retailer and by lane type. The barcode is masked here.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Paying online</h3>
+        <p>Families enter the card number from the top of their card into the debit or credit card field at checkout. Online storefronts appear in the store list as their own entries, so a family shopping at Walmart online selects the Walmart.com listing rather than the in-store one.</p>
+        <figure class="shot">
+          <img src="img/card-front.png" width="385" height="236" loading="lazy" alt="Close-up of the Diaper Dollars card showing where the card number sits, with the cardholder name below">
+          <figcaption>The number runs across the middle of the card. That is what goes in the card field online.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Printing a card to carry</h3>
+        <p>Families who would rather not use a phone at the register can print one. They pick the retailer they intend to shop at, then use the print button at the bottom right. The result is a print ready card carrying that retailer's checkout instructions and a scannable barcode. It is retailer specific, so a family shopping at two stores prints two.</p>
+        <figure class="shot">
+          <img src="img/print-card.png" width="523" height="793" loading="lazy" alt="Print ready card headed Redeem Offers at Walmart, with the card, offer details, checkout instructions and a barcode">
+          <figcaption>The printed version carries the offer details and that retailer's instructions on one page.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Checking whether a product is covered</h3>
+        <p>The card page has a <strong>Check a Product</strong> feature. It opens the phone camera so a family can scan a barcode on the shelf and see immediately whether that item is covered, before they get to the register.</p>
+        <figure class="shot">
+          <img src="img/check-product.png" width="272" height="225" loading="lazy" alt="Check a Product tile reading: scan the barcode with your phone camera to make sure the offer applies">
+          <figcaption>Worth pointing out at enrollment. It prevents a declined item at the register.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection">
+        <h3>Program guidelines and help</h3>
+        <p>Buttons at the bottom of the card page open the full program guide and a help section with phone, email, and chat support, plus a program FAQ. Families do not need to come back to your site for any of this.</p>
+        <p>For anything at all &mdash; the program, enrollment, or a card that will not work &mdash; you and your families can call MOD Collective on <strong>844-663-2655</strong>. We will pass it to technical support ourselves if that is what it needs.</p>
+        <p>Families will also see <strong>888-253-5667</strong> printed on their own card. That is technical support directly, and it is a perfectly good number for them to use for a card or checkout problem. Either route works; 844 is the one to remember.</p>
+      </div>
+    </div>
+
+    <!-- ========== ENROLL ========== -->
+    <div class="page" id="enroll">
+      <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
+      <h2>Enroll a family.</h2>
+      <p class="lede">Five minutes at the visit. Nothing after that.</p>
+
+      <div class="elig">
+        <h3>Who is eligible</h3>
+        <dl>
+          <div>
+            <dt>The child</dt>
+            <dd>Under age 3 <strong>and currently in diapers</strong>.</dd>
+          </div>
+          <div>
+            <dt>Income</dt>
+            <dd>Meets WIC income guidelines, 185% of the federal poverty level. At a WIC clinic that is already verified. Otherwise, enrollment in another assistance program &mdash; SNAP or Medicaid &mdash; counts as verification of the same standard.</dd>
+          </div>
+          <div>
+            <dt>Children per family</dt>
+            <dd>Up to 3, on a single enrollment. One form covers the household &mdash; you are not filling it in three times. Each child does have to meet the criteria above on their own.</dd>
+          </div>
+          <div>
+            <dt>One enrollment per child</dt>
+            <dd>A child can be enrolled once, at one site. There is no re-enrollment period, and the same child cannot be added at a second site later.</dd>
+          </div>
+          <div>
+            <dt>Already getting diapers elsewhere</dt>
+            <dd>Still eligible. Using another diaper bank does not disqualify a family.</dd>
+          </div>
+        </dl>
+      </div>
+
+      <h3>The steps <span class="chip">About 5 minutes</span></h3>
+      <ol class="steps">
+        <li>Open your site's enrollment link on your tablet or computer. Each site has its own link.</li>
+        <li>Hand it to the family or walk them through it. One form covers the whole household, including every eligible child.</li>
+        <li>Fill in the first page: your staff email from the dropdown, the caregiver's ID number, their name, their mobile number twice, and how many children under 3 are in the household.</li>
+        <li>Answer the terms and conditions page: who is completing the form, how the client reviewed the terms, and the two consent boxes.</li>
+        <li>Complete the Diaper Need Assessment. Three short questions.</li>
+        <li>Submit. The client gets a text asking them to reply <strong>YES</strong>.</li>
+        <li>Done. Nothing else is needed from you.</li>
+      </ol>
+
+      <div class="subsection">
+        <h3>What the form asks for</h3>
+        <p>Three pages, about five minutes. Nothing here needs preparing in advance beyond the caregiver's ID and a mobile number.</p>
+
+        <h4>Page 1 &mdash; the household</h4>
+        <ul class="plain">
+          <li><strong>Staff email.</strong> A dropdown. Pick your own from the list.</li>
+          <li><strong>Caregiver ID number.</strong> Use the WIC household ID. Home visiting programs use their own equivalent.</li>
+          <li><strong>Caregiver name.</strong> First and last.</li>
+          <li><strong>Mobile phone number</strong>, entered twice to catch typos.</li>
+          <li><strong>Number of children under 3.</strong> A dropdown, maximum of three.</li>
+        </ul>
+        <div class="callout warn">
+          <p><strong>The phone number is the whole enrollment.</strong> Everything after this point &mdash; the confirmation, the card, every renewal &mdash; goes to that number by text. A mistyped digit means the family never hears from us again, and nothing about the submission will look wrong to you. Check it against the family, not just against the second box.</p>
+        </div>
+
+        <h4>Page 2 &mdash; terms and conditions</h4>
+        <ul class="plain">
+          <li><strong>Who is completing this page:</strong> the client themselves, or a staff member assisting.</li>
+          <li><strong>How the client reviewed and agreed:</strong> in person with the client present, by phone or virtual, or the client reviewed the terms directly and you submitted on their behalf.</li>
+          <li><strong>The terms and conditions box</strong>, which has the full legal language in it.</li>
+          <li><strong>Consent to receive communications</strong> from MOD Collective by email and text. This one is required &mdash; without it there is no way to deliver the card.</li>
+        </ul>
+
+        <h4>Page 3 &mdash; Diaper Need Assessment</h4>
+        <p>Three questions about the family's experience of getting diapers: whether they have ever received free diapers locally, what made that difficult, and whether running short has caused problems such as missing work or childcare, skipping changes, or cutting back on food, medicine or bills. Most are tick-all-that-apply.</p>
+        <p>The form is HIPAA compliant, and there is a Back button on every page, so a wrong answer is not a restart.</p>
+      </div>
+
+      <div class="callout warn">
+        <h3>Lost your enrollment link?</h3>
+        <p>Enrollment links are specific to your site and are not published on this page. That is deliberate. A family enrolled through another site's form is credited to that site, which distorts both your numbers and the state's comparison of WIC clinics against home visiting programs &mdash; the central question this pilot year is built to answer.</p>
+        <p><strong>To get your link back:</strong> ask your site coordinator first. If they cannot find it, contact support and we will reissue it to you directly.</p>
+        <p class="detail"><a href="tel:+18446632655">844-663-2655</a> &nbsp;&middot;&nbsp; <a href="mailto:support@modcollective.org">support@modcollective.org</a></p>
+      </div>
+
+      <button type="button" class="btn secondary" onclick="ddGo('support')">Having trouble?</button>
+
+      <div class="subsection">
+        <h3>What to tell the family about what happens next</h3>
+        <figure class="shot">
+          <img src="img/confirm-text.png" width="760" height="1083" loading="lazy" alt="Text exchange: Diaper Dollars asks the client to reply YES to confirm their number, the client replies YES, and a confirmation arrives saying the eCard will follow within two business days">
+          <figcaption>What the family sees after you submit. The reply is the step that matters.</figcaption>
+        </figure>
+        <ul class="tl">
+          <li>
+            <span class="when">Right away</span>
+            <p class="what">A text arrives from Diaper Dollars naming your site and asking them to <strong>reply YES</strong> to confirm this is the number they want their benefit on. Nothing moves until they reply, and this is where families most often stall.</p>
+          </li>
+          <li>
+            <span class="when">Once they reply</span>
+            <p class="what">A confirmation text comes back, with a link to the client resource page &mdash; what they can buy, where to shop, and how the card works.</p>
+          </li>
+          <li>
+            <span class="when">Within two business days</span>
+            <p class="what">Their eCard arrives as a separate text with an activation link in it.</p>
+          </li>
+          <li>
+            <span class="when">When the card is issued</span>
+            <p class="what">The first balance loads and the six cycle benefit begins. The clock starts here, not at enrollment.</p>
+          </li>
+          <li>
+            <span class="when">Every 31 days, six times</span>
+            <p class="what">A fresh balance replaces the old one. <strong>Anything unspent is removed</strong>, so it has to be used inside the cycle. Tell them 31 days rather than "monthly" &mdash; the date moves later each time, and it will not land on the same day of the month.</p>
+          </li>
+          <li class="off">
+            <span class="when">From then on</span>
+            <p class="what">The Diaper Dollars support team handles everything. Your site is not involved again.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3>Why the evaluation questions are on the form</h3>
+        <p>Families may ask why the form has extra questions. Here is what to tell them, depending on your site type. Individual responses are never shared with your site.</p>
+        <div class="qcards">
+          <div>
+            <h4>WIC clinics</h4>
+            <span class="q">Three questions about diaper access</span>
+            <p>Whether the family has ever received free diapers from a local organization, what made that difficult if they have, and whether running short has caused them to miss work, skip changes, or cut back on other essentials.</p>
+            <p class="why">These document what diaper access looks like in counties with no diaper bank.</p>
+          </div>
+          <div>
+            <h4>Home visiting programs</h4>
+            <span class="q">Three questions about connection to benefits</span>
+            <p>Whether the family had already connected to WIC, Medicaid, SNAP, or childcare assistance before this visit, whether they had a plan for getting diapers, and how concerned they are about affording diapers in the coming months.</p>
+            <p class="why">These test whether home visiting is an effective way to connect families to this benefit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ABOUT ========== -->
+    <div class="page" id="about">
+      <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
+      <h2>About the Diaper Distribution Pilot Program.</h2>
+      <p class="lede">A state funded test of whether Illinois can put a monthly diaper benefit in families' hands through the systems they already use.</p>
+
+      <div class="subsection">
+        <h3>What it is</h3>
+        <p>The Diaper Distribution Pilot Program was created by the Illinois General Assembly to test whether Illinois can provide a monthly diaper benefit to families with young children. It is funded through the Illinois Department of Human Services and the Illinois Department of Public Health, and operated by MOD Collective through the Diaper Dollars platform.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>Why it exists</h3>
+        <p>No federal program covers diapers. Every major benefit a young family is likely to already receive leaves them out:</p>
+        <ul class="excl">
+          <li><strong>SNAP</strong><span>&#10005; Excludes diapers</span></li>
+          <li><strong>WIC</strong><span>&#10005; Excludes diapers</span></li>
+          <li><strong>TANF</strong><span>&#10005; Excludes diapers</span></li>
+          <li><strong>Medicaid</strong><span>&#10005; Excludes diapers</span></li>
+        </ul>
+        <div class="stats">
+          <div><span class="fig">$70&ndash;100</span><p>What a month's supply costs, per child.</p></div>
+          <div><span class="fig">1 in 2</span><p>Families with young children who cannot consistently afford the diapers they need.</p></div>
+        </div>
+        <p>When families run short, children stay in wet diapers longer, parents miss work because childcare requires a daily diaper supply, and families cut back on food or medicine to cover the gap. Nationally, the cost of that gap is estimated at $4.5 billion a year &mdash; and research puts the return on closing it at roughly $2 of direct healthcare savings for every $1 spent on diaper assistance.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>How it works</h3>
+        <p>Instead of distributing physical diapers, the program loads a benefit onto a digital eCard that families use at retailers they already shop at.</p>
+        <div class="tscroll">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Physical distribution</th>
+                <th scope="col">Diaper Dollars</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Storage</th><td>Warehouse space and pallets</td><td>No physical inventory</td></tr>
+              <tr><th scope="row">Staffing</th><td>Volunteer coordination and on-site hours</td><td>A remote support team on existing infrastructure</td></tr>
+              <tr><th scope="row">Reaching families</th><td>Families travel to a distribution site</td><td>Existing benefit enrollment, then the card is delivered digitally</td></tr>
+              <tr><th scope="row">Brand and size</th><td>Whatever is in stock</td><td>The family chooses</td></tr>
+              <tr><th scope="row">Service area</th><td>Limited to the community around each site</td><td>Can deploy nationwide, and quickly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tnote">The model moves the work rather than removing it. There is still a support team behind the card. What changes is that none of it lands on your site.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>What previous years have shown</h3>
+        <p>FY25 ran through four WIC sites chosen to cover very different ground: CEDA across Chicagoland, Sinai Community Institute on Chicago's West Side, Henry-Stark County in rural western Illinois, and Southern Seven across seven southern counties. Between them they served <strong>5,410 families</strong> and distributed <strong>$1.26 million</strong> in benefits.</p>
+        <div class="stats">
+          <div><span class="fig">95.5%</span><p>Reported less stress about diapers. Three quarters said &ldquo;much less&rdquo;.</p></div>
+          <div><span class="fig">90.4%</span><p>Reported being better able to afford other household needs.</p></div>
+          <div><span class="fig">88.5%</span><p>Found the program easier to use than traditional sources such as food pantries.</p></div>
+        </div>
+        <p>Families used what they were given. Overall utilization was <strong>78.1%</strong>, with a median per-family rate of <strong>88.9%</strong> &mdash; and the rural sites were the highest of all, at 82.9% and 80.4%. The median transaction was exactly $40.00, a family spending a full month's benefit in one trip, and the median time from receiving a card to the first purchase was nine days.</p>
+        <p>Of the families offered a second enrollment, 63.3% took it. Every single one of them said they wanted to continue.</p>
+      </div>
+
+      <div class="subsection">
+        <h3>What this year is testing</h3>
+        <p>FY27 is built around two questions.</p>
+        <div class="qcards">
+          <div>
+            <h4>Question one</h4>
+            <span class="q">Can this be the primary diaper resource where nothing else exists?</span>
+            <p>Every WIC site in this year's program sits in a county identified as having zero existing diaper distribution.</p>
+          </div>
+          <div>
+            <h4>Question two</h4>
+            <span class="q">Is a WIC clinic the best way to reach families?</span>
+            <p>Two home visiting programs are participating alongside the WIC sites, so the state can compare enrollment, utilization, and reach across both models.</p>
+          </div>
+        </div>
+        <p>The answers will inform whether and how the program expands in future years.</p>
+        <p><a href="https://modcollective.org/wp-content/uploads/2026/03/DDPP_FY25_Case_Study.html" target="_blank" rel="noopener" class="btn secondary">Read the FY25 case study</a></p>
+      </div>
+    </div>
+
+    <!-- ========== SUPPORT ========== -->
+    <div class="page" id="support">
+      <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
+      <h2>Training and support.</h2>
+      <p class="lede">Who to call, what to watch, and answers to what sites ask most.</p>
+
+      <div class="contacts">
+        <div class="who">
+          <h3>For families: the card</h3>
+          <p>Trouble opening the card, or a payment that will not go through at the register. This is the number printed on the card itself, so families may already have it:</p>
+          <p class="detail"><a href="tel:+18882535667">888-253-5667</a></p>
+        </div>
+        <div class="who">
+          <h3>For site staff: the program</h3>
+          <p>Enrollment questions, a lost enrollment link, or anything about how the pilot runs. This reaches MOD Collective directly:</p>
+          <p class="detail"><a href="tel:+18446632655">844-663-2655</a><br><a href="mailto:support@modcollective.org">support@modcollective.org</a></p>
+        </div>
+      </div>
+
+      <h3 class="sectitle">Training videos</h3>
+      <div class="video">
+        <div class="thumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta"><strong>Program overview</strong><span>What Diaper Dollars is and how it works. About 8 minutes.</span></div>
+      </div>
+      <div class="video">
+        <div class="thumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta"><strong>Enrolling a family</strong><span>Walkthrough of the enrollment form, step by step. About 10 minutes.</span></div>
+      </div>
+      <div class="video">
+        <div class="thumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta"><strong>Answering family questions</strong><span>The most common questions families ask, and how to answer them. About 6 minutes.</span></div>
+      </div>
+      <div class="video">
+        <div class="thumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta"><strong>Intro call recording, September 24</strong><span>Posted after the call. Full recording of the kickoff Q and A session.</span></div>
+      </div>
+
+      <h3 class="sectitle">Frequently asked questions</h3>
+
+      <details class="faq">
+        <summary>Can families buy wipes with the card?</summary>
+        <p>No. The benefit is diapers only. Wipes, diaper creams, and adult incontinence products are all excluded. A mixed basket is still fine &mdash; the card picks out the diapers and the family pays for the rest as normal &mdash; but the Diaper Dollars barcode has to be scanned first. If another payment method goes through first, it takes the whole basket and the benefit is never applied.</p>
+      </details>
+      <details class="faq">
+        <summary>What happens to families after enrollment closes in December?</summary>
+        <p>Nothing changes for them. December 23 only stops new families being added. Anyone already enrolled keeps receiving a balance every 31 days until their six cycles are finished, which runs into June 2027 for the last enrollees. Your site is not involved in any of it.</p>
+      </details>
+      <details class="faq">
+        <summary>Will a family get their benefit on the same date every month?</summary>
+        <p>No. The cycle is 31 days, not a calendar month, so the date moves later each time. A first benefit on 1 February means the next lands around 3 March, then early April, and so on. Expect families to call on the first of the month thinking something has broken &mdash; and tell them at enrollment so they do not have to.</p>
+      </details>
+      <details class="faq">
+        <summary>What happens to money a family does not spend?</summary>
+        <p>It is removed at the end of the 31 day cycle and a fresh balance is issued. Unspent funds do not carry over and are not returned. Tell families this at enrollment, because a family saving up for a bulk purchase will lose the earlier balances without warning.</p>
+      </details>
+      <details class="faq">
+        <summary>A family's payment was declined at the register. What went wrong?</summary>
+        <p>Almost always the barcode was scanned after another payment type. It has to be scanned first, with the hand scanner, before cash or any card. If the order was rung up correctly and it still failed, they should call technical support at 888-253-5667.</p>
+      </details>
+      <details class="faq">
+        <summary>Why is our enrollment link not on this page?</summary>
+        <p>Enrollment forms are site specific and access to them is controlled for quality assurance. If links were published here, a family could be enrolled through the wrong site's form, which credits them to that site and distorts the state's comparison of WIC clinics against home visiting programs. If you have lost your link, ask your site coordinator, or call 844-663-2655 and we will reissue it.</p>
+      </details>
+      <details class="faq">
+        <summary>Do we enroll babies only, or can we enroll toddlers too?</summary>
+        <p>Any child under age 3 who is still in diapers. Newborns, infants, and toddlers all qualify. A child who has finished potty training is not eligible, even if they are under 3.</p>
+      </details>
+      <details class="faq">
+        <summary>Does a family with three children fill out three forms?</summary>
+        <p>No. One enrollment covers the household and up to 3 children. Each child still has to be under 3 and currently in diapers to be counted, and the benefit reflects how many qualify: $40, $80, or $120 per cycle. It arrives as one balance on one card, not as a card per child.</p>
+      </details>
+      <details class="faq">
+        <summary>Is there a cap on how many families we can enroll?</summary>
+        <p>No per site cap. The 5,500 target is shared across all 12 sites, first come first served. Enroll every eligible family you see.</p>
+      </details>
+      <details class="faq">
+        <summary>What if a family already gets diapers from another program?</summary>
+        <p>They are still eligible. The only restriction is no duplicate enrollments for the same child across sites.</p>
+      </details>
+      <details class="faq">
+        <summary>Do we need a Release of Information form?</summary>
+        <p>No. The family consents to share their information directly on the enrollment form. Nothing separate is needed from your office.</p>
+      </details>
+      <details class="faq">
+        <summary>Are there printed materials?</summary>
+        <p>No. Everything is texted to families.</p>
+      </details>
+      <details class="faq">
+        <summary>What if a family does not get their confirmation text?</summary>
+        <p>Check the number that went on the form first &mdash; a mistyped digit is the usual cause, and nothing about the submission will look wrong. If the number is right and nothing has arrived within a few minutes, call 844-663-2655 and we will look it up.</p>
+      </details>
+      <details class="faq">
+        <summary>How long does the enrollment form take?</summary>
+        <p>About 5 minutes, including the evaluation questions.</p>
+      </details>
+
+    </div>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="foot">
+    <div class="inner">
+      <a href="https://modcollective.org/" target="_top" aria-label="MOD Collective home">
+        <img src="https://modcollective.org/wp-content/uploads/2024/04/MOD-Diaper-Dollars-Logo-White.png" alt="Diaper Dollars by MOD">
+      </a>
+      <div class="links">
+        <a href="https://modcollective.org/" target="_top">modcollective.org</a>
+        <a href="https://modcollective.org/for-families/" target="_top">For Families</a>
+        <a href="https://modcollective.org/stay-connected/" target="_top">Contact</a>
+        <a href="https://modcollective.org/privacy-policy/" target="_top">Privacy Policy</a>
+      </div>
+      <p class="fine">The Diaper Distribution Pilot Program is funded by the Illinois Department of Human Services and the Illinois Department of Public Health, and operated by MOD Collective.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ---------- Settings you may want to change ---------- */
+var DD_ENDPOINT = '/api/count';   // the Netlify function
+var DD_GOAL     = 5500;           // fallback only — the feed supplies the real goal
+
+/* ---------- Section switching ---------- */
+var DD_SECTIONS = ['home', 'program', 'card', 'enroll', 'about', 'support'];
+
+function ddGo(id, opts) {
+  if (DD_SECTIONS.indexOf(id) === -1) id = 'home';
+  var root = document.querySelector('.mod-dd');
+  if (!root) return;
+  var quiet = opts && opts.quiet;
+
+  root.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
+  var target = root.querySelector('#' + id);
+  if (target) target.classList.add('active');
+
+  root.querySelectorAll('.secnav button').forEach(function (b) {
+    b.classList.remove('active');
+    b.removeAttribute('aria-current');
+  });
+  var nav = root.querySelector('#nav-' + id);
+  if (nav) { nav.classList.add('active'); nav.setAttribute('aria-current', 'page'); }
+
+  /* Keep the address in sync so a section can be linked to directly:
+     …netlify.app/#enroll opens the enrollment page. replaceState rather than
+     location.hash, which would make the parent page jump. */
+  try { history.replaceState(null, '', '#' + id); } catch (e) {}
+
+  /* Move focus into the new section, so keyboard and screen reader users
+     land on the content instead of being left behind on the nav bar. */
+  if (target && !quiet) {
+    var h = target.querySelector('h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+
+  ddReportHeight();
+  if (!quiet) ddScrollParentToTop();
+}
+
+/* ---------- Tell the parent page how tall we are ---------- */
+var ddLastHeight = 0, ddHeightPending = false;
+
+function ddReportHeight() {
+  if (ddHeightPending) return;
+  ddHeightPending = true;
+  requestAnimationFrame(function () {
+    ddHeightPending = false;
+    /* Measure the content wrapper, never documentElement.scrollHeight.
+       Inside an iframe that value is at least the frame's own height, so
+       reporting it makes the parent grow the frame, which grows the value,
+       which grows the frame. The page ends up scrolling forever past its
+       own footer. .mod-dd wraps everything and is sized by its content. */
+    var root = document.querySelector('.mod-dd');
+    var h = root ? Math.ceil(root.getBoundingClientRect().height)
+                 : (document.body ? document.body.scrollHeight : 0);
+    if (!h || Math.abs(h - ddLastHeight) < 2) return;   // ignore sub-pixel churn
+    ddLastHeight = h;
+    if (window.parent !== window) {
+      window.parent.postMessage({ ddppHeight: h }, '*');
+    }
+  });
+}
+function ddScrollParentToTop() {
+  if (window.parent !== window) {
+    window.parent.postMessage({ ddppScrollTop: true }, '*');
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
+window.addEventListener('load', ddReportHeight);
+window.addEventListener('resize', ddReportHeight);
+document.addEventListener('toggle', ddReportHeight, true);   // FAQ open/close
+if (window.ResizeObserver) {
+  new ResizeObserver(ddReportHeight).observe(document.body);
+}
+
+/* ---------- By-site leaderboard ---------- */
+function ddRenderSites(sites, unit) {
+  var wrap = document.getElementById('dd-sites-wrap');
+  var host = document.getElementById('dd-sites');
+  if (!wrap || !host) return;
+
+  if (!sites || !sites.length) { wrap.hidden = true; return; }
+
+  host.textContent = '';
+  var top = sites[0].children || 1;
+
+  sites.forEach(function (site) {
+    var row = document.createElement('div');
+    row.className = 'siterow';
+
+    var name = document.createElement('span');
+    name.className = 'sitename';
+    name.textContent = site.name;          // textContent, never innerHTML
+
+    var track = document.createElement('span');
+    track.className = 'sitetrack';
+    var fill = document.createElement('i');
+    fill.style.width = Math.max(2, (site.children / top) * 100) + '%';
+    track.appendChild(fill);
+
+    var count = document.createElement('span');
+    count.className = 'sitecount';
+    count.textContent = site.children.toLocaleString('en-US');
+    if (site.applications !== null && site.applications !== undefined) {
+      var sub = document.createElement('span');
+      sub.textContent = site.applications === 1
+        ? '1 application' : site.applications + ' applications';
+      count.appendChild(sub);
+    }
+
+    row.appendChild(name);
+    row.appendChild(track);
+    row.appendChild(count);
+    host.appendChild(row);
+  });
+
+  wrap.hidden = false;
+}
+
+/* ---------- Enrollment window countdown ---------- */
+var DD_OPEN  = new Date(2026, 9, 1);        // October 1 2026, local time
+var DD_CLOSE = new Date(2026, 11, 23, 23, 59, 59);
+
+function ddWindow() {
+  var num   = document.getElementById('dd-days');
+  var label = document.getElementById('dd-days-label');
+  var fill  = document.getElementById('dd-window-fill');
+  var dot   = document.getElementById('dd-window-dot');
+  var note  = document.getElementById('dd-window-note');
+  var panel = document.getElementById('dd-window');
+  if (!num) return;
+
+  var now = new Date();
+  var DAY = 86400000;
+  var pct = 0, days;
+
+  if (now < DD_OPEN) {
+    days = Math.ceil((DD_OPEN - now) / DAY);
+    num.textContent = days;
+    label.textContent = (days === 1 ? 'day' : 'days') + ' until enrollment opens';
+    note.textContent = 'Not open yet';
+  } else if (now <= DD_CLOSE) {
+    days = Math.ceil((DD_CLOSE - now) / DAY);
+    num.textContent = days;
+    label.textContent = (days === 1 ? 'day' : 'days') + ' left to enroll';
+    pct = Math.min(100, Math.max(0, ((now - DD_OPEN) / (DD_CLOSE - DD_OPEN)) * 100));
+    note.textContent = 'Open now';
+  } else {
+    panel.classList.add('closed');
+    num.textContent = 'Closed';
+    label.textContent = 'enrolled families keep their benefit';
+    pct = 100;
+    note.textContent = 'Window has ended';
+  }
+
+  // The dot marks today's position between the two dates.
+  fill.style.width = pct + '%';
+  dot.style.left = pct + '%';
+  ddReportHeight();
+}
+ddWindow();
+setInterval(ddWindow, 60 * 60 * 1000);
+
+/* ---------- Live counter ---------- */
+var ddGotCount = false;
+
+function ddLoadCount() {
+  fetch(DD_ENDPOINT, { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (data) {
+      var n = parseInt(data.count, 10);
+      if (isNaN(n)) return;
+      ddGotCount = true;
+      document.getElementById('dd-count').textContent = n.toLocaleString('en-US');
+      /* The workbook says what it is counting. Until "Number of Children
+         under 3" is in the Jotform export it can only count households, and
+         the goal is expressed in children — so the page says which it is
+         rather than quietly comparing two different units. */
+      var unit = String(data.unit || 'children').toLowerCase();
+      document.getElementById('dd-label').textContent = data.label || (unit + ' enrolled');
+      var goal = parseInt(data.goal, 10) || DD_GOAL;
+      var pct = Math.min(100, (n / goal) * 100);
+      document.getElementById('dd-bar').style.width = pct + '%';
+      document.getElementById('dd-pct').textContent = Math.round(pct) + '%';
+      if (data.asOf) {
+        var d = new Date(data.asOf);
+        document.getElementById('dd-asof').textContent =
+          'Updated ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+          + (unit === 'children' ? '' : ' \u00b7 counting households, not children');
+      }
+      ddRenderSites(data.sites, data.unit);
+      ddReportHeight();
+    })
+    .catch(function () {
+      /* Never got a number. Keep the box: it is half of the home page's
+         purpose. Show a dash rather than 0, which would be a claim that no
+         family has applied, and say plainly that the feed is not connected. */
+      if (!ddGotCount) {
+        document.getElementById('dd-count').textContent = '—';
+        document.getElementById('dd-label').textContent = 'not connected yet';
+        document.getElementById('dd-asof').textContent = 'Awaiting data source';
+        document.getElementById('dd-pct').textContent = '';
+        document.getElementById('dd-bar').style.width = '0%';
+        var sw = document.getElementById('dd-sites-wrap');
+        if (sw) sw.hidden = true;
+        ddReportHeight();
+      }
+    });
+}
+ddLoadCount();
+setInterval(ddLoadCount, 10 * 60 * 1000);
+
+/* ---------- Open a section directly from the address, e.g. /#enroll ---------- */
+(function () {
+  var want = (location.hash || '').replace(/^#/, '');
+  if (want && want !== 'home' && DD_SECTIONS.indexOf(want) !== -1) {
+    ddGo(want, { quiet: true });
+  }
+})();
+</script>
+
+</body>
+</html>
