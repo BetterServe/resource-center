@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Your BABY PASS</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   BABY PASS — family guide
+   Sent to a family after the MOMS Helpline submits their application, before
+   the benefit arrives.
+
+   Written for a parent on a phone. One column, large type. It answers the four
+   questions the program reference allows on client-facing material — where,
+   what, how much and how long, and how to get help — plus what happens next.
+   It carries no eligibility rules, no screener, and no enrollment steps.
+
+   The family has applied but has not been approved: scoring happens after
+   submission. Nothing on this page may promise a benefit.
+
+   English and Spanish are two parallel blocks rather than a string table, so
+   the Spanish can be read and corrected as ordinary prose.
+   ========================================================================== */
+
+.bp {
+  --blue: #233E90;
+  --blue-deep: #182C68;
+  --blue-tint: #E9EDF8;
+  --teal: #149A9A;
+  --teal-text: #0C6B6B;      /* #149A9A fails contrast for body text on white */
+  --red: #FF4440;
+  --red-text: #B3261E;       /* same reason */
+  --ink: #1A2440;
+  --muted: #55607A;
+  --line: #D3D9E8;
+  --page: #F5F7FC;
+  --white: #FFFFFF;
+  --font: "Nunito", "Segoe UI", Arial, sans-serif;
+  --wrap: 680px;
+
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--page);
+  line-height: 1.6;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+html, body { margin: 0; padding: 0; background: #F5F7FC; }
+.bp *, .bp *::before, .bp *::after { box-sizing: border-box; }
+.bp img { max-width: 100%; height: auto; display: block; }
+.bp a { color: var(--blue); }
+.bp :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+.bp [hidden] { display: none !important; }
+
+/* ---------- Header ---------- */
+.bp .top { background: var(--blue); }
+.bp .top .inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 18px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.bp .top img { width: 118px; }
+.bp .langbar { display: flex; gap: 6px; }
+.bp .langbar button {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.45);
+  padding: 8px 16px; border-radius: 999px; transition: background .15s, color .15s;
+}
+.bp .langbar button:hover { background: rgba(255,255,255,.12); }
+.bp .langbar button.active { background: var(--white); color: var(--blue); border-color: var(--white); }
+
+.bp .wrap { max-width: var(--wrap); margin: 0 auto; padding: 38px 20px 56px; }
+
+/* ---------- Type ---------- */
+.bp h1 { font-weight: 900; font-size: clamp(31px, 7vw, 42px); line-height: 1.12; margin: 0 0 14px; color: var(--blue); letter-spacing: -.01em; }
+.bp .lede { font-size: 20px; color: var(--muted); margin: 0; }
+.bp h2 { font-size: 24px; font-weight: 900; line-height: 1.25; margin: 0 0 12px; color: var(--blue); }
+.bp h3 { font-size: 19px; font-weight: 800; margin: 0 0 6px; }
+.bp p { margin: 0 0 15px; }
+.bp .sec { padding: 32px 0; border-bottom: 1px solid var(--line); }
+.bp .sec:last-of-type { border-bottom: none; }
+.bp .sec p:last-child { margin-bottom: 0; }
+.bp .tag {
+  display: inline-block; background: var(--blue-tint); color: var(--blue);
+  font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 13px; border-radius: 999px; margin-bottom: 12px;
+}
+
+/* ---------- The number to save ---------- */
+.bp .from {
+  background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 22px 20px; margin: 20px 0 0; display: flex; gap: 18px; align-items: center;
+}
+.bp .from .bubble {
+  flex: none; width: 54px; height: 54px; border-radius: 16px; background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+}
+.bp .from .bubble svg { width: 28px; height: 28px; }
+.bp .from .lbl { font-size: 14px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 0; }
+.bp .from .num { font-size: 28px; font-weight: 900; color: var(--blue); margin: 0; line-height: 1.2; white-space: nowrap; }
+
+/* ---------- Benefit cards ---------- */
+.bp .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 20px 0 0; }
+.bp .benefit { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px; border-top: 6px solid var(--blue); }
+.bp .benefit.seat { border-top-color: var(--teal); }
+.bp .benefit .amt { font-size: 40px; font-weight: 900; color: var(--blue); line-height: 1; margin: 6px 0 4px; }
+.bp .benefit.seat .amt { color: var(--teal-text); }
+.bp .benefit .per { font-size: 16px; font-weight: 700; color: var(--muted); margin: 0 0 14px; }
+.bp .benefit ul { margin: 0; padding: 0 0 0 20px; font-size: 16.5px; }
+.bp .benefit li { margin-bottom: 6px; }
+.bp .loads { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
+.bp .loads span { background: var(--blue-tint); color: var(--blue); font-size: 14px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
+
+/* ---------- Highlight boxes ---------- */
+.bp .warn, .bp .note {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 14px; padding: 20px 22px; margin: 20px 0 0;
+}
+.bp .warn { border-left: 6px solid var(--red); }
+.bp .note { border-left: 6px solid var(--teal); }
+.bp .warn strong { color: var(--red-text); }
+.bp .warn p:last-child, .bp .note p:last-child { margin-bottom: 0; }
+
+/* ---------- Covered / not covered ---------- */
+.bp .buy { display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr)); gap: 14px; margin: 16px 0 0; }
+.bp .buy > div { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+.bp .buy h4 { margin: 0 0 12px; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; font-weight: 900; }
+.bp .buy .ok h4 { color: var(--teal-text); }
+.bp .buy .no h4 { color: var(--red-text); }
+.bp .buy ul { list-style: none; padding: 0; margin: 0; }
+.bp .buy li { position: relative; padding: 0 0 10px 30px; font-size: 17px; line-height: 1.45; }
+.bp .buy li:last-child { padding-bottom: 0; }
+.bp .buy li::before { position: absolute; left: 0; top: -1px; font-weight: 900; font-size: 18px; }
+.bp .buy .ok li::before { content: "✓"; color: var(--teal-text); }
+.bp .buy .no li::before { content: "✕"; color: var(--red-text); }
+.bp .subhead { margin-top: 26px; }
+
+/* ---------- Stores ---------- */
+.bp .stores {
+  list-style: none; padding: 0; margin: 20px 0 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;
+}
+.bp .stores li {
+  background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 12px; text-align: center; font-size: 15.5px; font-weight: 800; color: var(--ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+}
+.bp .stores .on {
+  font-size: 10.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--teal-text); background: rgba(20,154,154,.13); padding: 2px 8px; border-radius: 999px;
+}
+
+/* ---------- Help ---------- */
+.bp .help { background: var(--blue); color: var(--white); border-radius: 18px; padding: 30px 28px 28px; margin-top: 32px; }
+.bp .help h2 { color: var(--white); font-size: clamp(26px, 5vw, 32px); margin: 0 0 10px; }
+.bp .help p { margin: 0 0 18px; font-size: 17px; }
+.bp .help .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.bp .btn {
+  display: inline-block; background: var(--white); color: var(--blue);
+  padding: 14px 26px; border-radius: 999px; text-decoration: none;
+  font-weight: 900; font-size: 17px; border: 2px solid var(--white);
+}
+.bp .btn.ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,.6); }
+.bp .btn:hover { background: var(--blue-tint); }
+.bp .btn.ghost:hover { background: rgba(255,255,255,.12); }
+.bp .help .other { border-top: 1px solid rgba(255,255,255,.25); margin-top: 24px; padding-top: 20px; }
+.bp .help .other p { margin-bottom: 6px; }
+.bp .help .other a { color: var(--white); font-weight: 800; }
+
+/* ---------- Footer: unity bar sits directly above the partner footer, once ---------- */
+.bp .unity { display: flex; height: 7px; }
+.bp .unity i { flex: 1; }
+.bp .unity i:nth-child(1) { background: var(--blue); }
+.bp .unity i:nth-child(2) { background: var(--teal); }
+.bp .unity i:nth-child(3) { background: var(--red); }
+.bp .foot { background: var(--white); color: var(--muted); }
+.bp .foot .inner { max-width: var(--wrap); margin: 0 auto; padding: 26px 20px 34px; }
+.bp .partners { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 0; }
+.bp .partners a { font-size: 14px; font-weight: 800; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--line); padding-bottom: 1px; }
+.bp .partners a:hover { color: var(--blue); border-bottom-color: var(--teal); }
+.bp .foot p { font-size: 13px; margin: 0 0 8px; }
+
+@media (prefers-reduced-motion: reduce) { .bp * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="bp">
+
+  <div class="top">
+    <div class="inner">
+      <img src="img/logo-white.svg" width="118" height="74" alt="BABY PASS">
+      <div class="langbar">
+        <button type="button" id="lang-en" class="active" onclick="bpLang('en')">English</button>
+        <button type="button" id="lang-es" lang="es" onclick="bpLang('es')">Espa&ntilde;ol</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div id="content-en" lang="en">
+
+      <h1>Your BABY PASS application is in.</h1>
+      <p class="lede">Here is what happens next, what BABY PASS covers, and where to use it.</p>
+
+      <div class="sec">
+        <span class="tag">What happens next</span>
+        <h2>Watch for a text from BABY PASS</h2>
+        <p>The MOMS Helpline has sent your application. Nothing else is needed from you right now.</p>
+        <div class="from">
+          <div class="bubble" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"/></svg>
+          </div>
+          <div>
+            <p class="lbl">Texts come from</p>
+            <p class="num">463-837-1840</p>
+          </div>
+        </div>
+        <p style="margin-top:18px">If you are approved, a text from that number will have a link to your BABY PASS card. The card opens on your phone, so there is nothing to download and nothing comes in the mail.</p>
+        <div class="note">
+          <p><strong>Save 463-837-1840 in your contacts as BABY PASS.</strong> It is not spam. Every message about your benefit comes from this number, and it is also the number to text or call when you need help.</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">How much, and for how long</span>
+        <h2>What BABY PASS gives your family</h2>
+        <p>There are two benefits. Your family may get one or both, depending on what you applied for.</p>
+        <div class="benefits">
+          <div class="benefit">
+            <h3>Diapers</h3>
+            <p class="amt">$40</p>
+            <p class="per">per child, every month, for 6 months</p>
+            <div class="loads"><span>1 child: $40</span><span>2 children: $80</span><span>3 or more: $120</span></div>
+            <ul>
+              <li>Up to 3 children</li>
+              <li>A new balance arrives every 31 days</li>
+            </ul>
+          </div>
+          <div class="benefit seat">
+            <h3>Car seat</h3>
+            <p class="amt">$100</p>
+            <p class="per">one time, toward a new car seat</p>
+            <ul>
+              <li>Use it within 90 days</li>
+              <li>One per family</li>
+              <li>If the seat costs more than $100, you pay the rest</li>
+            </ul>
+          </div>
+        </div>
+        <div class="warn">
+          <p><strong>Diaper money does not carry over.</strong> Each monthly balance has to be used within 31 days. Whatever is left after that is removed, and the next month's balance takes its place. Your card shows the last day to use what you have.</p>
+        </div>
+        <div class="note">
+          <p><strong>31 days is not the same as a month.</strong> If your first balance arrives on February 1, your next one comes around March 3, not March 1. Go by the date on your card, not the calendar.</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">What you can buy</span>
+        <h2>Diapers, diapering supplies, and car seats</h2>
+
+        <h3 class="subhead">With the diaper benefit</h3>
+        <p>Diapers and diapering supplies on the BABY PASS approved list. Name brands and store brands both count.</p>
+
+        <h3 class="subhead">With the car seat benefit</h3>
+        <div class="buy">
+          <div class="ok">
+            <h4>You can buy</h4>
+            <ul>
+              <li>Rear-facing infant car seats</li>
+              <li>Convertible car seats</li>
+              <li>All-in-one or 3-in-1 car seats that start rear-facing</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>You cannot buy</h4>
+            <ul>
+              <li>Booster seats of any kind</li>
+              <li>Used, refurbished, or open-box seats</li>
+              <li>Car seat and stroller sets</li>
+              <li>Add-ons like mirrors, head supports, or seat protectors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">Where to shop</span>
+        <h2>Stores that take BABY PASS</h2>
+        <p>Use your card in the store, or online at the three stores marked below.</p>
+        <ul class="stores">
+          <li>CVS</li>
+          <li>Dollar General</li>
+          <li>Family Dollar</li>
+          <li>Food 4 Less<span class="on">Online too</span></li>
+          <li>Jay C</li>
+          <li>Jewel<span class="on">Online too</span></li>
+          <li>Kroger</li>
+          <li>Market District</li>
+          <li>Meijer</li>
+          <li>Payless</li>
+          <li>Ruler</li>
+          <li>Walgreens</li>
+          <li>Walmart<span class="on">Online too</span></li>
+        </ul>
+        <p style="margin-top:18px">Not every store carries car seats. If you are shopping for a seat, check with the store before you go, or order online.</p>
+      </div>
+
+      <div class="sec">
+        <span class="tag">After you buy a car seat</span>
+        <h2>Get it checked for free</h2>
+        <p>How a seat is installed matters as much as which seat you buy. Indiana has free car seat inspection stations in every part of the state. A certified technician will check that your seat fits your child and your car, and show you how to install it.</p>
+        <p><a href="https://www.in.gov/cji/traffic-safety/occupant-protection/children/child-safety-seat-inspection-stations" target="_blank" rel="noopener"><strong>Find an inspection station near you</strong></a>. Call ahead to make an appointment.</p>
+      </div>
+
+      <div class="help">
+        <h2>Need help?</h2>
+        <p>Text or call BABY PASS. If you already have a text from us, you can just reply to it.</p>
+        <div class="btns">
+          <a class="btn" href="sms:+14638371840">Text 463-837-1840</a>
+          <a class="btn ghost" href="tel:+14638371840">Call</a>
+        </div>
+        <div class="other">
+          <p><strong>Looking for other help</strong> with formula, food, housing, childcare, or prenatal care? The MOMS Helpline can connect you.</p>
+          <p><a href="tel:+18446246667">844-624-6667</a> &middot; Monday to Friday, 8:30am to 7pm Eastern</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== ESPAÑOL ==================== -->
+    <!-- Draft translation. Needs review by a native Spanish speaker before launch. -->
+    <div id="content-es" lang="es" hidden>
+
+      <h1>Recibimos su solicitud de BABY PASS.</h1>
+      <p class="lede">Aqu&iacute; le explicamos lo que sigue, lo que cubre BABY PASS y d&oacute;nde usarlo.</p>
+
+      <div class="sec">
+        <span class="tag">Lo que sigue</span>
+        <h2>Est&eacute; pendiente de un mensaje de texto de BABY PASS</h2>
+        <p>La MOMS Helpline ya envi&oacute; su solicitud. Por ahora no tiene que hacer nada m&aacute;s.</p>
+        <div class="from">
+          <div class="bubble" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"/></svg>
+          </div>
+          <div>
+            <p class="lbl">Los mensajes llegan del</p>
+            <p class="num">463-837-1840</p>
+          </div>
+        </div>
+        <p style="margin-top:18px">Si su solicitud es aprobada, recibir&aacute; un mensaje de ese n&uacute;mero con un enlace a su tarjeta BABY PASS. La tarjeta se abre en su tel&eacute;fono: no tiene que descargar nada y no llega nada por correo.</p>
+        <div class="note">
+          <p><strong>Guarde el 463-837-1840 en sus contactos como BABY PASS.</strong> No es spam. Todos los mensajes sobre su beneficio llegan de este n&uacute;mero, y es tambi&eacute;n el n&uacute;mero al que puede escribir o llamar si necesita ayuda.</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">Cu&aacute;nto y por cu&aacute;nto tiempo</span>
+        <h2>Lo que BABY PASS le da a su familia</h2>
+        <p>Hay dos beneficios. Su familia puede recibir uno o los dos, seg&uacute;n lo que haya solicitado.</p>
+        <div class="benefits">
+          <div class="benefit">
+            <h3>Pa&ntilde;ales</h3>
+            <p class="amt">$40</p>
+            <p class="per">por ni&ntilde;o, cada mes, durante 6 meses</p>
+            <div class="loads"><span>1 ni&ntilde;o: $40</span><span>2 ni&ntilde;os: $80</span><span>3 o m&aacute;s: $120</span></div>
+            <ul>
+              <li>Hasta 3 ni&ntilde;os</li>
+              <li>Recibe un saldo nuevo cada 31 d&iacute;as</li>
+            </ul>
+          </div>
+          <div class="benefit seat">
+            <h3>Asiento de seguridad para el auto</h3>
+            <p class="amt">$100</p>
+            <p class="per">una sola vez, para un asiento nuevo</p>
+            <ul>
+              <li>&Uacute;selo dentro de 90 d&iacute;as</li>
+              <li>Uno por familia</li>
+              <li>Si el asiento cuesta m&aacute;s de $100, usted paga la diferencia</li>
+            </ul>
+          </div>
+        </div>
+        <div class="warn">
+          <p><strong>El dinero para pa&ntilde;ales no se acumula.</strong> Cada saldo mensual se tiene que usar dentro de 31 d&iacute;as. Lo que quede despu&eacute;s se borra y llega el saldo del mes siguiente. Su tarjeta muestra el &uacute;ltimo d&iacute;a para usar lo que tiene.</p>
+        </div>
+        <div class="note">
+          <p><strong>31 d&iacute;as no es lo mismo que un mes.</strong> Si su primer saldo llega el 1 de febrero, el siguiente llegar&aacute; alrededor del 3 de marzo, no el 1 de marzo. Gu&iacute;ese por la fecha de su tarjeta, no por el calendario.</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">Qu&eacute; puede comprar</span>
+        <h2>Pa&ntilde;ales, art&iacute;culos para cambiar pa&ntilde;ales y asientos para el auto</h2>
+
+        <h3 class="subhead">Con el beneficio de pa&ntilde;ales</h3>
+        <p>Pa&ntilde;ales y art&iacute;culos para cambiar pa&ntilde;ales que est&eacute;n en la lista aprobada de BABY PASS. Sirven tanto las marcas conocidas como las marcas de la tienda.</p>
+
+        <h3 class="subhead">Con el beneficio de asiento para el auto</h3>
+        <div class="buy">
+          <div class="ok">
+            <h4>S&iacute; puede comprar</h4>
+            <ul>
+              <li>Asientos para beb&eacute; orientados hacia atr&aacute;s</li>
+              <li>Asientos convertibles</li>
+              <li>Asientos todo en uno o 3 en 1 que empiezan orientados hacia atr&aacute;s</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>No puede comprar</h4>
+            <ul>
+              <li>Asientos elevados (boosters) de ning&uacute;n tipo</li>
+              <li>Asientos usados, reacondicionados o de caja abierta</li>
+              <li>Paquetes de asiento y carriola</li>
+              <li>Accesorios como espejos, soportes para la cabeza o protectores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <span class="tag">D&oacute;nde comprar</span>
+        <h2>Tiendas que aceptan BABY PASS</h2>
+        <p>Use su tarjeta en la tienda, o en l&iacute;nea en las tres tiendas marcadas abajo.</p>
+        <ul class="stores">
+          <li>CVS</li>
+          <li>Dollar General</li>
+          <li>Family Dollar</li>
+          <li>Food 4 Less<span class="on">Tambi&eacute;n en l&iacute;nea</span></li>
+          <li>Jay C</li>
+          <li>Jewel<span class="on">Tambi&eacute;n en l&iacute;nea</span></li>
+          <li>Kroger</li>
+          <li>Market District</li>
+          <li>Meijer</li>
+          <li>Payless</li>
+          <li>Ruler</li>
+          <li>Walgreens</li>
+          <li>Walmart<span class="on">Tambi&eacute;n en l&iacute;nea</span></li>
+        </ul>
+        <p style="margin-top:18px">No todas las tiendas venden asientos para el auto. Si busca un asiento, pregunte en la tienda antes de ir o p&iacute;dalo en l&iacute;nea.</p>
+      </div>
+
+      <div class="sec">
+        <span class="tag">Despu&eacute;s de comprar el asiento</span>
+        <h2>H&aacute;galo revisar gratis</h2>
+        <p>La forma en que se instala el asiento importa tanto como el asiento que compra. Indiana tiene estaciones gratuitas de inspecci&oacute;n de asientos en todo el estado. Un t&eacute;cnico certificado revisar&aacute; que el asiento sea adecuado para su ni&ntilde;o y su auto, y le ense&ntilde;ar&aacute; a instalarlo.</p>
+        <p><a href="https://www.in.gov/cji/traffic-safety/occupant-protection/children/child-safety-seat-inspection-stations" target="_blank" rel="noopener"><strong>Busque una estaci&oacute;n de inspecci&oacute;n cerca de usted</strong></a> (p&aacute;gina en ingl&eacute;s). Llame antes para hacer una cita.</p>
+      </div>
+
+      <div class="help">
+        <h2>&iquest;Necesita ayuda?</h2>
+        <p>Escriba o llame a BABY PASS. Si ya tiene un mensaje nuestro, solo responda a ese mensaje.</p>
+        <div class="btns">
+          <a class="btn" href="sms:+14638371840">Escribir al 463-837-1840</a>
+          <a class="btn ghost" href="tel:+14638371840">Llamar</a>
+        </div>
+        <div class="other">
+          <p><strong>&iquest;Busca otro tipo de ayuda</strong> con f&oacute;rmula, comida, vivienda, cuidado infantil o atenci&oacute;n prenatal? La MOMS Helpline le puede ayudar.</p>
+          <p><a href="tel:+18446246667">844-624-6667</a> &middot; De lunes a viernes, de 8:30am a 7pm, hora del Este</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="unity" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="foot">
+    <div class="inner">
+      <!-- Partner marks go here, in a support position: IDOH, MOMS Helpline, MOD Collective.
+           Text links until the logo files are in img/. -->
+      <div class="partners">
+        <a href="https://www.in.gov/health/" target="_blank" rel="noopener">Indiana Department of Health</a>
+        <a href="https://www.in.gov/health/mch/moms-helpline/" target="_blank" rel="noopener">MOMS Helpline</a>
+        <a href="https://modcollective.org/" target="_blank" rel="noopener">MOD Collective</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ---------- Language toggle ---------- */
+function bpLang(l) {
+  if (l !== 'es') l = 'en';
+  document.getElementById('content-en').hidden = (l !== 'en');
+  document.getElementById('content-es').hidden = (l !== 'es');
+  document.getElementById('lang-en').classList.toggle('active', l === 'en');
+  document.getElementById('lang-es').classList.toggle('active', l === 'es');
+  document.documentElement.lang = l;
+  document.title = l === 'es' ? 'Su BABY PASS' : 'Your BABY PASS';
+  try { localStorage.setItem('bpLang', l); } catch (e) {}
+}
+
+/* Remember the choice; otherwise follow the phone's own language.
+   A link ending in #es opens in Spanish, so the Helpline can text the right one. */
+(function () {
+  var want = (location.hash || '').replace(/^#/, '');
+  var saved = null;
+  try { saved = localStorage.getItem('bpLang'); } catch (e) {}
+  if (want === 'es' || want === 'en') saved = want;
+  if (!saved) {
+    var nav = (navigator.language || '').toLowerCase();
+    saved = nav.indexOf('es') === 0 ? 'es' : 'en';
+  }
+  bpLang(saved);
+})();
+</script>
+
+</body>
+</html>

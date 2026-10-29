@@ -1,0 +1,23 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Pre-launch: keep search engines out. The site is shared by link with
+# partners for review. Remove the X-Robots-Tag line (and robots.txt) at launch.
+#
+# frame-ancestors controls who may iframe these pages. Add a domain to the end
+# of that line if the pages get embedded somewhere, e.g. an IDOH or MOD page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Content-Security-Policy = "frame-ancestors 'self' https://modcollective.org https://*.modcollective.org"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# The card art is for IQPay, not for the public site.
+[[redirects]]
+  from = "/card/*"
+  to = "/404"
+  status = 404
+  force = true
