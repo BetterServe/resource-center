@@ -13,7 +13,8 @@ embed-snippet.html             what goes on the MOD page
 
 ## How updates work
 
-This folder is a git repository connected to Netlify. Push a commit and Netlify
+This folder lives in the shared `resource-center` repo, next to `baby-pass/`.
+Netlify builds it with `ddpp` as the base directory. Push a commit and Netlify
 rebuilds the live page in about 30 seconds. The MOD site is never touched again
 after the one-time embed in step 3.
 
@@ -26,17 +27,12 @@ Every change is dated and revertable. If an edit breaks something,
 
 ## 1. Connect the repo to Netlify
 
-Create an empty private repo on github.com (no README, no .gitignore — this
-folder already has both), then from this folder:
-
-```
-git remote add origin https://github.com/YOUR-USERNAME/ddpp-resource-center.git
-git push -u origin main
-```
-
-In Netlify: Add new site > Import an existing project > GitHub, and pick the
-repo. Netlify reads `netlify.toml`, so leave the build settings alone — build
-command empty, publish directory `.`.
+This site was first deployed from its own repo, `ddpp-resource-center`. It
+now builds from the shared `resource-center` repo. In the existing Netlify
+site: Site configuration > Build & deploy > Link repository, pick
+`resource-center`, and set **Base directory** to `ddpp`. Leave the rest
+alone: Netlify reads this folder's `netlify.toml` (build command empty,
+publish directory `.`).
 
 Rename the site under Site configuration > Change site name. Something like
 `modcollective-ddpp`, so the URL becomes `modcollective-ddpp.netlify.app`.

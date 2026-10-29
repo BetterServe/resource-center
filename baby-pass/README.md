@@ -25,16 +25,12 @@ what is unconfirmed.
 
 ## Deploy
 
-Create an empty private repo on GitHub, then from this folder:
+This folder lives in the shared `resource-center` repo, next to `ddpp/`.
 
-```
-git remote add origin https://github.com/YOUR-USERNAME/baby-pass-resource-center.git
-git push -u origin main
-```
-
-In Netlify: Add new site > Import an existing project > GitHub, pick the repo,
-and leave the build settings alone. Rename the site to something like
-`baby-pass` so the URL is `baby-pass.netlify.app`.
+In Netlify: Add new site > Import an existing project > GitHub, pick the
+`resource-center` repo, and set **Base directory** to `baby-pass`. Leave the
+rest alone: Netlify reads this folder's `netlify.toml`. Rename the site to
+something like `baby-pass` so the URL is `baby-pass.netlify.app`.
 
 ## Things to fill in
 
