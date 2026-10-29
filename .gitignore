@@ -1,0 +1,11 @@
+# Netlify
+.netlify/
+
+# Local env — the feed URL belongs in Netlify's environment variables
+.env
+.env.*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini

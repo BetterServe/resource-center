@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BABY PASS Staff Resource Center</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   BABY PASS — staff resource center
+   For MOMS Helpline Communication Specialists, who enroll every family.
+
+   Helpline-facing training is the one place the teal mark is approved, so
+   teal carries more weight here than on the family page.
+
+   Rules this page keeps:
+   - No screener cut scores, anywhere. Staff who know the number coach
+     sympathetic families toward it, and that ruins the instrument.
+   - The payment platform and the operations contractor are not named.
+   - Unconfirmed program details carry a "Pending" tag, so a reviewer can
+     see at a glance what still needs sign-off.
+   ========================================================================== */
+
+:root {
+  --blue: #233E90;
+  --blue-deep: #182C68;
+  --blue-tint: #E9EDF8;
+  --teal: #149A9A;
+  --teal-text: #0C6B6B;
+  --teal-tint: #E3F4F4;
+  --red: #FF4440;
+  --red-text: #B3261E;
+  --ink: #1A2440;
+  --muted: #55607A;
+  --line: #D3D9E8;
+  --page: #F5F7FC;
+  --white: #FFFFFF;
+  --font: "Nunito", "Segoe UI", Arial, sans-serif;
+  --wrap: 1040px;
+}
+html, body { margin: 0; padding: 0; background: var(--page); }
+body {
+  font-family: var(--font); color: var(--ink); line-height: 1.6; font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Draft ribbon ---------- */
+.draft {
+  background: #FFF4D6; color: #6B4E00; font-size: 14px; font-weight: 700; text-align: center;
+  padding: 8px 16px; border-bottom: 1px solid #F0DCA0;
+}
+
+/* ---------- Header ---------- */
+.hero { background: var(--blue); color: var(--white); }
+.hero .wrap { padding-top: 30px; padding-bottom: 40px; }
+.hero .brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+.hero .brand img { width: 128px; }
+.hero .brand .for {
+  font-size: 13px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--teal); color: var(--white); padding: 6px 14px; border-radius: 999px;
+}
+.hero h1 { font-size: clamp(30px, 5.5vw, 46px); font-weight: 900; line-height: 1.1; margin: 0 0 12px; letter-spacing: -.01em; }
+.hero .lede { font-size: 19px; max-width: 640px; margin: 0 0 26px; color: #DCE3F5; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); color: var(--blue); border: 2px solid var(--white);
+  padding: 13px 24px; border-radius: 999px; text-decoration: none;
+  font-weight: 900; font-size: 16px; cursor: pointer; font-family: inherit;
+}
+.btn:hover { background: var(--blue-tint); }
+.btn.teal { background: var(--teal); border-color: var(--teal); color: var(--white); }
+.btn.teal:hover { background: #10807F; border-color: #10807F; }
+.btn.off { opacity: .55; cursor: not-allowed; }
+.btn small { font-weight: 700; font-size: 12px; opacity: .85; }
+
+/* ---------- Counters ---------- */
+.counters { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 34px; }
+.panel { background: var(--white); color: var(--ink); border-radius: 18px; padding: 22px 24px 20px; }
+.panel .phead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+.panel .ptitle { font-size: 14px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.panel .pmeta { font-size: 13px; color: var(--muted); font-weight: 700; }
+.panel .big { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 12px; flex-wrap: wrap; }
+.panel .big strong { font-size: 46px; font-weight: 900; line-height: 1; color: var(--blue); }
+.panel.seat .big strong { color: var(--teal-text); }
+.panel .big span { font-size: 16px; font-weight: 700; color: var(--muted); }
+.track { height: 12px; background: var(--blue-tint); border-radius: 999px; overflow: hidden; }
+.track .fill { height: 100%; width: 0; background: var(--blue); border-radius: 999px; transition: width .6s ease; }
+.panel.seat .track { background: var(--teal-tint); }
+.panel.seat .track .fill { background: var(--teal); }
+.panel .pfoot { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted); margin-top: 8px; }
+.panel .left { color: var(--ink); }
+.panel.full .left { color: var(--red-text); }
+.sample { font-size: 12px; font-weight: 900; color: #6B4E00; background: #FFF4D6; padding: 2px 8px; border-radius: 6px; }
+
+/* ---------- Section nav ---------- */
+.secnav { position: sticky; top: 0; z-index: 10; background: var(--white); border-bottom: 1px solid var(--line); }
+.secnav .wrap { display: flex; gap: 4px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
+.secnav .wrap::-webkit-scrollbar { display: none; }
+.secnav a {
+  flex: none; text-decoration: none; color: var(--ink); font-weight: 800; font-size: 15px;
+  padding: 9px 14px; border-radius: 999px; white-space: nowrap;
+}
+.secnav a:hover { background: var(--blue-tint); color: var(--blue); }
+.secnav a.on { background: var(--blue); color: var(--white); }
+
+/* ---------- Sections ---------- */
+section { padding: 56px 0 8px; }
+section > .wrap > .kicker {
+  display: inline-block; font-size: 12.5px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--teal-text); background: var(--teal-tint); padding: 5px 13px; border-radius: 999px; margin-bottom: 12px;
+}
+h2 { font-size: clamp(26px, 4vw, 34px); font-weight: 900; color: var(--blue); line-height: 1.15; margin: 0 0 12px; letter-spacing: -.01em; }
+h3 { font-size: 20px; font-weight: 900; margin: 30px 0 10px; color: var(--ink); }
+p { margin: 0 0 14px; }
+.intro { font-size: 18.5px; color: var(--muted); max-width: 720px; }
+.pending {
+  display: inline-block; font-size: 11px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase;
+  background: #FFF4D6; color: #6B4E00; padding: 2px 8px; border-radius: 6px; vertical-align: 2px; margin-left: 4px;
+}
+
+/* ---------- Cards and grids ---------- */
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 20px; }
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; }
+.card h3 { margin-top: 0; }
+.card p:last-child, .card ul:last-child { margin-bottom: 0; }
+.card.b { border-top: 6px solid var(--blue); }
+.card.t { border-top: 6px solid var(--teal); }
+.num-badge {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: var(--white);
+  display: flex; align-items: center; justify-content: center; font-weight: 900; margin-bottom: 12px;
+}
+
+/* ---------- Facts table ---------- */
+.facts { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--white); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 20px; }
+.facts th, .facts td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.facts tr:last-child th, .facts tr:last-child td { border-bottom: none; }
+.facts thead th { background: var(--blue); color: var(--white); font-size: 15px; font-weight: 900; }
+.facts thead th:last-child { background: var(--teal-text); }
+.facts tbody th { font-weight: 800; color: var(--muted); font-size: 15px; width: 26%; }
+.facts td { font-weight: 700; }
+.tablewrap { overflow-x: auto; }
+
+/* ---------- Callouts ---------- */
+.warn, .note {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 22px; margin: 20px 0 0;
+}
+.warn { border-left: 6px solid var(--red); }
+.note { border-left: 6px solid var(--teal); }
+.warn strong { color: var(--red-text); }
+.warn p:last-child, .note p:last-child { margin-bottom: 0; }
+
+/* ---------- Lists ---------- */
+ul.check, ul.cross { list-style: none; padding: 0; margin: 0; }
+ul.check li, ul.cross li { position: relative; padding: 0 0 9px 28px; line-height: 1.45; }
+ul.check li::before, ul.cross li::before { position: absolute; left: 0; top: -1px; font-weight: 900; }
+ul.check li::before { content: "✓"; color: var(--teal-text); }
+ul.cross li::before { content: "✕"; color: var(--red-text); }
+
+ol.flow { list-style: none; counter-reset: f; padding: 0; margin: 20px 0 0; }
+ol.flow li {
+  counter-increment: f; position: relative; background: var(--white); border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 20px 16px 70px; margin-bottom: 10px;
+}
+ol.flow li::before {
+  content: counter(f); position: absolute; left: 18px; top: 15px; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 900;
+}
+ol.flow li strong { display: block; font-size: 17.5px; }
+ol.flow li span { color: var(--muted); font-size: 16px; }
+
+/* ---------- ZIP checker ---------- */
+.zipbox { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; margin-top: 20px; }
+.zipform { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.zipform label { font-weight: 900; width: 100%; }
+.zipform input {
+  font: inherit; font-size: 22px; font-weight: 800; letter-spacing: .08em; width: 160px;
+  padding: 10px 14px; border: 2px solid var(--line); border-radius: 12px; color: var(--ink);
+}
+.zipform input:focus { border-color: var(--teal); outline: none; }
+.zipresult { font-weight: 800; font-size: 17px; margin: 14px 0 0; min-height: 1.6em; }
+.zipresult.yes { color: var(--teal-text); }
+.zipresult.no { color: var(--red-text); }
+details.ziplist { margin-top: 14px; }
+details.ziplist summary { cursor: pointer; font-weight: 800; color: var(--blue); }
+.counties { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 24px; margin-top: 14px; font-size: 15px; }
+.counties b { display: block; }
+
+/* ---------- Screener ---------- */
+.q { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin-bottom: 10px; }
+.q .qid { font-size: 12px; font-weight: 900; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
+.q p { margin: 4px 0 8px; font-weight: 800; font-size: 17.5px; }
+.q .opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.q .opts span { background: var(--blue-tint); color: var(--blue); font-size: 13.5px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
+.q.seatq .opts span { background: var(--teal-tint); color: var(--teal-text); }
+
+/* ---------- Script ---------- */
+.script { background: var(--blue-deep); color: #EEF2FB; border-radius: 16px; padding: 22px 26px; margin-top: 20px; }
+.script .who { font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #9FB3E6; margin: 0 0 4px; }
+.script p { margin: 0 0 16px; font-size: 17.5px; }
+.script p:last-child { margin-bottom: 0; }
+.script .say { font-weight: 700; }
+
+/* ---------- FAQ ---------- */
+details.faq { background: var(--white); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; }
+details.faq summary { cursor: pointer; padding: 16px 20px; font-weight: 900; font-size: 17px; list-style: none; position: relative; padding-right: 48px; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; position: absolute; right: 20px; top: 12px; font-size: 24px; color: var(--teal-text); }
+details.faq[open] summary::after { content: "–"; }
+details.faq .a { padding: 0 20px 16px; }
+details.faq .a p:last-child { margin-bottom: 0; }
+
+/* ---------- Phone numbers ---------- */
+.phones { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 20px; }
+.phone { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; }
+.phone .n { font-size: 28px; font-weight: 900; color: var(--blue); margin: 4px 0 8px; }
+.phone.t .n { color: var(--teal-text); }
+.phone .lbl { font-size: 13px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 0; }
+
+/* ---------- Footer ---------- */
+footer { margin-top: 64px; }
+.unity { display: flex; height: 7px; }
+.unity i { flex: 1; }
+.unity i:nth-child(1) { background: var(--blue); }
+.unity i:nth-child(2) { background: var(--teal); }
+.unity i:nth-child(3) { background: var(--red); }
+.foot { background: var(--white); color: var(--muted); }
+.foot .wrap { padding-top: 26px; padding-bottom: 34px; }
+.partners { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; margin: 0; }
+.partners a { font-size: 14px; font-weight: 800; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--line); padding-bottom: 1px; }
+.partners a:hover { color: var(--blue); border-bottom-color: var(--teal); }
+.foot p { font-size: 13px; margin: 0 0 8px; }
+
+@media (max-width: 560px) {
+  .facts tbody th { width: auto; }
+  .panel .big strong { font-size: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="draft">DRAFT for partner review. Not for distribution. Items marked <b>Pending</b> are not confirmed yet.</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <img src="img/logo-white.svg" width="128" height="80" alt="BABY PASS">
+      <span class="for">MOMS Helpline staff</span>
+    </div>
+    <h1>Everything you need to enroll a family in BABY PASS.</h1>
+    <p class="lede">BABY PASS is Indiana's diaper and car seat benefit pilot. Every family enrolls through the MOMS Helpline, so every enrollment starts with you.</p>
+    <div class="actions">
+      <a class="btn teal off" id="bp-enroll" href="#" aria-disabled="true">Open the enrollment form <small id="bp-enroll-note">link coming</small></a>
+      <a class="btn off" id="bp-training" href="#" aria-disabled="true">Take the training check <small id="bp-training-note">link coming</small></a>
+    </div>
+
+    <div class="counters" aria-live="polite">
+      <div class="panel" id="c-diapers">
+        <div class="phead"><p class="ptitle">Diaper benefit</p><span class="pmeta" data-asof>Checking&hellip;</span></div>
+        <div class="big"><strong data-n>&mdash;</strong><span data-label>children enrolled</span></div>
+        <div class="track"><div class="fill" data-fill></div></div>
+        <div class="pfoot"><span class="left" data-left></span><span>Limit: <span data-cap>500</span> children</span></div>
+      </div>
+      <div class="panel seat" id="c-seats">
+        <div class="phead"><p class="ptitle">Car seat benefit</p><span class="pmeta" data-asof>Checking&hellip;</span></div>
+        <div class="big"><strong data-n>&mdash;</strong><span data-label>families enrolled</span></div>
+        <div class="track"><div class="fill" data-fill></div></div>
+        <div class="pfoot"><span class="left" data-left></span><span>Limit: <span data-cap>1,200</span> families</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="secnav" aria-label="Sections">
+  <div class="wrap">
+    <a href="#benefits">The benefits</a>
+    <a href="#qualify">Who qualifies</a>
+    <a href="#enroll">Enrolling a family</a>
+    <a href="#families">Family questions</a>
+    <a href="#support">Training &amp; support</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================ BENEFITS ============================ -->
+<section id="benefits">
+  <div class="wrap">
+    <span class="kicker">The benefits</span>
+    <h2>Two benefits, one card, different rules.</h2>
+    <p class="intro">A family can get the diaper benefit, the car seat benefit, or both. Both sit on the same digital card as separate offers. The card arrives by text. There is no warehouse, no pickup, and no appointment.</p>
+
+    <div class="tablewrap">
+      <table class="facts">
+        <thead><tr><th scope="col"></th><th scope="col">Diapers</th><th scope="col">Car seat</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Amount</th><td>$40 per child, per month</td><td>$100, one time</td></tr>
+          <tr><th scope="row">Per household</th><td>Up to 3 children: $40, $80, or $120 a month</td><td>One per family <span class="pending">Pending</span></td></tr>
+          <tr><th scope="row">How long</th><td>6 monthly loads</td><td>Does not renew or reissue</td></tr>
+          <tr><th scope="row">Use it within</th><td>31 days of each load</td><td>90 days</td></tr>
+          <tr><th scope="row">Buys</th><td>Diapers and diapering supplies on the approved list</td><td>Rear-facing infant, convertible, and all-in-one seats that start rear-facing</td></tr>
+          <tr><th scope="row">Pilot limit</th><td>500 children</td><td>1,200 families</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warn">
+      <p><strong>The most likely way a family loses money is mixing these two up.</strong> Diaper money reloads every 31 days for six months, and whatever is left at the end of each 31 days is gone. The car seat money comes once and lasts 90 days. When you explain the benefit, keep them separate.</p>
+    </div>
+
+    <h3>What the car seat benefit covers</h3>
+    <div class="grid2">
+      <div class="card t">
+        <h3>Covered</h3>
+        <ul class="check">
+          <li>Rear-facing infant seats</li>
+          <li>Convertible seats</li>
+          <li>All-in-one or 3-in-1 seats that start in a rear-facing configuration</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Not covered</h3>
+        <ul class="cross">
+          <li>Boosters: backless, high-back, and belt-positioning</li>
+          <li>Used, refurbished, and open-box seats</li>
+          <li>Travel systems (infant seat and stroller sets)</li>
+          <li>Accessories: seat protectors, head supports, mirrors</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      <p><strong>$100 is help toward a seat, not a free seat.</strong> If the seat a family picks costs more, they pay the difference. Say so plainly, so nobody is surprised at the register.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ QUALIFY ============================ -->
+<section id="qualify">
+  <div class="wrap">
+    <span class="kicker">Who qualifies</span>
+    <h2>All three, not any one.</h2>
+    <p class="intro">A family qualifies only when all three of these are true. Living in a pilot ZIP code is not enough by itself.</p>
+
+    <div class="grid3">
+      <div class="card b">
+        <div class="num-badge">1</div>
+        <h3>Lives in a pilot ZIP code</h3>
+        <p>The family tells you their ZIP. The form stops if it is not on the list. There is no address check beyond that.</p>
+      </div>
+      <div class="card b">
+        <div class="num-badge">2</div>
+        <h3>Gets SNAP, WIC, or Medicaid</h3>
+        <p>The caregiver says they are enrolled in at least one public benefit program. No proof is collected.</p>
+      </div>
+      <div class="card b">
+        <div class="num-badge">3</div>
+        <h3>Answers the need questions</h3>
+        <p>Four short questions for diapers and four for car seats, asked separately. A family can qualify for one benefit and not the other.</p>
+      </div>
+    </div>
+
+    <h3>Also required</h3>
+    <ul class="check">
+      <li><strong>Child's age.</strong> The child must be under 3, confirmed by date of birth. <span class="pending">Pending</span></li>
+      <li><strong>Vehicle access,</strong> on the car seat path only.</li>
+    </ul>
+
+    <div class="zipbox">
+      <form class="zipform" onsubmit="bpZip(); return false;">
+        <label for="zip">Check a ZIP code</label>
+        <input id="zip" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="47xxx" oninput="bpZip()">
+      </form>
+      <p class="zipresult" id="zipresult" aria-live="polite"></p>
+      <details class="ziplist">
+        <summary>All pilot ZIP codes, by county</summary>
+        <div class="counties" id="counties"></div>
+        <p style="font-size:14px;color:var(--muted);margin-top:12px">A few ZIP codes cross county lines and appear twice. IDOH has approved using all of them.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ENROLL ============================ -->
+<section id="enroll">
+  <div class="wrap">
+    <span class="kicker">Enrolling a family</span>
+    <h2>One form, one pass through.</h2>
+    <p class="intro">There is a single enrollment form. The first answer decides which questions come next, so you never fill out more than the family needs.</p>
+
+    <div class="warn">
+      <p><strong>You must finish BABY PASS training before you submit an enrollment.</strong> Passing the training check puts you on the authorized enrollment list. Enrollments from anyone not on the list cannot be accepted.</p>
+    </div>
+
+    <ol class="flow">
+      <li><strong>Which benefit</strong><span>Diapers, car seat, or both. Everything after this depends on it.</span></li>
+      <li><strong>Eligibility basics</strong><span>ZIP code, and the child's date of birth. Vehicle access too, if car seat was picked.</span></li>
+      <li><strong>Caregiver and child information</strong><span>Asked once, whichever benefit the family wants.</span></li>
+      <li><strong>Diaper questions</strong><span>Only on the diaper or both path.</span></li>
+      <li><strong>Car seat questions</strong><span>Only on the car seat or both path.</span></li>
+      <li><strong>Submit</strong><span>The form does not show a score or a result. Approval is decided after you submit.</span></li>
+    </ol>
+
+    <h3>The need questions</h3>
+    <p>Read each question exactly as written, then read the answer choices. Don't rephrase, don't explain what an answer means, and don't suggest an answer. If a family asks which answer will qualify them, tell them there is no right answer and that you just need what is true for them.</p>
+
+    <h3 style="margin-top:22px">Diapers</h3>
+    <div class="q"><span class="qid">D1</span><p>In the last 6 months, how often have you run out of diapers and not been able to buy more right away?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D2</span><p>In the last 6 months, how often have you left your child in a diaper longer than you wanted, or reused one, to make your supply last?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D3</span><p>In the last 6 months, how often has your child had a diaper rash, skin irritation, or infection because you could not change them as often as needed?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D4</span><p>In the last 6 months, how often have you or your child missed work, school, or childcare because you did not have enough diapers?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+
+    <h3 style="margin-top:22px">Car seat</h3>
+    <div class="q seatq"><span class="qid">C1</span><p>Does this child currently ride in a car seat that fits their age and weight?</p><div class="opts"><span>Yes, always</span><span>Sometimes</span><span>No, we have a seat but it doesn't fit right</span><span>No, we don't have a seat</span></div></div>
+    <div class="q seatq"><span class="qid">C2</span><p>Is the car seat you have now used, handed down, borrowed, or more than six years old?</p><div class="opts"><span>Yes</span><span>No</span><span>I don't have a car seat</span></div></div>
+    <div class="q seatq"><span class="qid">C3</span><p>If you needed to buy a car seat this month, would you be able to cover the cost without putting off a bill, borrowing money, or going without something else?</p><div class="opts"><span>Answer choices as shown on the form</span></div></div>
+    <div class="q seatq"><span class="qid">C4</span><p>In the last 6 months, has this child ridden in a vehicle without a proper car seat because you could not afford one?</p><div class="opts"><span>Never</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+
+    <div class="note">
+      <p><strong>Why exact wording matters.</strong> These answers are also the family's starting point for a short follow-up at the end of the program. The pilot measures change by asking the same questions twice, so a question that is asked differently on day one can't be compared to the answer six months later. These results are what makes the case for expanding BABY PASS statewide.</p>
+    </div>
+
+    <h3>After you submit</h3>
+    <div class="script">
+      <p class="who">What to say</p>
+      <p class="say">"Your application for BABY PASS is in. Over the next few days, watch for a text from BABY PASS at 463-837-1840. Please save that number. If you're approved, that text will have a link to your card."</p>
+      <p class="say">"I'm going to text you a short guide that explains what BABY PASS covers and where you can use it."</p>
+      <p class="who">Then</p>
+      <p>Text the family the guide: <a href="families.html" style="color:#fff;font-weight:800" id="guide-link">families.html</a>. Add <b>#es</b> to the end of the link to open it in Spanish.</p>
+    </div>
+
+    <div class="warn">
+      <p><strong>Don't tell a family they're approved, and don't promise a spot.</strong> You won't know the result when you submit. Both benefits have a limit, and a benefit can fill up before a family calls back. Check the counters at the top of this page before each call.</p>
+    </div>
+    <div class="note">
+      <p><strong>If a family doesn't qualify:</strong> how they will be told is still being decided. <span class="pending">Pending</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAMILY QUESTIONS ============================ -->
+<section id="families">
+  <div class="wrap">
+    <span class="kicker">Family questions</span>
+    <h2>What families ask, and what to say.</h2>
+    <p class="intro">The family guide covers these four questions. Keep your answers to the same four, and send anything about a card that isn't working to the BABY PASS support line.</p>
+
+    <details class="faq" open>
+      <summary>Where can I use this card?</summary>
+      <div class="a">
+        <p>In the store at CVS, Dollar General, Family Dollar, Food 4 Less, Jay C, Jewel, Kroger, Market District, Meijer, Payless, Ruler, Walgreens, and Walmart. Online at Walmart, Food 4 Less, and Jewel.</p>
+        <p>Not every store carries car seats. A family shopping for a seat should check with the store first, or order online.</p>
+      </div>
+    </details>
+    <details class="faq">
+      <summary>What can I buy?</summary>
+      <div class="a">
+        <p><b>Diaper benefit:</b> diapers and diapering supplies on the approved list.</p>
+        <p><b>Car seat benefit:</b> a new car seat for a child under 3. Rear-facing infant seats, convertible seats, and all-in-one seats that start rear-facing. No boosters, no used or open-box seats, and no stroller sets.</p>
+      </div>
+    </details>
+    <details class="faq">
+      <summary>How much do I get, and for how long?</summary>
+      <div class="a">
+        <p><b>Diapers:</b> $40 per child each month for 6 months, for up to 3 children. Each month's money must be used within 31 days, and anything left over doesn't carry forward.</p>
+        <p><b>Car seat:</b> $100 one time, to be used within 90 days. If the seat costs more, the family pays the rest.</p>
+      </div>
+    </details>
+    <details class="faq">
+      <summary>How do I get help?</summary>
+      <div class="a">
+        <p>Text or call BABY PASS at <b>463-837-1840</b>. It is the same number the program texts from, so a family can just reply to the thread.</p>
+      </div>
+    </details>
+
+    <div class="note">
+      <p><strong>After a car seat purchase,</strong> point families to a free car seat inspection station. Correct installation does more for a child's safety than the seat itself. <a href="https://www.in.gov/cji/traffic-safety/occupant-protection/children/child-safety-seat-inspection-stations" target="_blank" rel="noopener">Find a station by county</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SUPPORT ============================ -->
+<section id="support">
+  <div class="wrap">
+    <span class="kicker">Training &amp; support</span>
+    <h2>Training, and who to call.</h2>
+
+    <div class="grid2">
+      <div class="card t">
+        <h3>BABY PASS training</h3>
+        <p>Read this page, then take the training check. It covers the three things that cause the most trouble when they go wrong:</p>
+        <ul class="check">
+          <li>All three eligibility conditions are required, not just one</li>
+          <li>Diaper money is monthly with a 31-day window; car seat money is one-time with a 90-day window</li>
+          <li>Both benefits have limits and can fill up</li>
+        </ul>
+        <p style="margin-top:14px">Passing puts you on the authorized enrollment list.</p>
+        <a class="btn teal off" id="bp-training-2" href="#" aria-disabled="true">Take the training check <small>link coming</small></a>
+      </div>
+      <div class="card b">
+        <h3>Writing the name</h3>
+        <p>Always <b>BABY PASS</b>: two words, all capitals, in emails, notes, and texts too.</p>
+        <p>Never BabyPass, Baby Pass, BABYPASS, or BP.</p>
+        <p>The name is short for something, but you never need to say the full version on a call.</p>
+      </div>
+    </div>
+
+    <h3>Phone numbers</h3>
+    <div class="phones">
+      <div class="phone">
+        <p class="lbl">BABY PASS support line</p>
+        <p class="n">463-837-1840</p>
+        <p>For families: card access, balances, and problems paying. It is also the number program texts come from. Give this one to families.</p>
+      </div>
+      <div class="phone t">
+        <p class="lbl">MOMS Helpline</p>
+        <p class="n">844-624-6667</p>
+        <p>Where families apply. Monday to Friday, 8:30am to 7pm Eastern, in English, Spanish, and other languages by interpreter.</p>
+      </div>
+    </div>
+    <div class="note">
+      <p><strong>Questions about the program or the form?</strong> Contact the MOD Collective program team. <span class="pending">Pending: name and email</span></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="unity" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="foot">
+    <div class="wrap">
+      <!-- Partner marks go here, in a support position: IDOH, MOMS Helpline, MOD Collective.
+           Text links until the logo files are in img/. -->
+      <div class="partners">
+        <a href="https://www.in.gov/health/" target="_blank" rel="noopener">Indiana Department of Health</a>
+        <a href="https://www.in.gov/health/mch/moms-helpline/" target="_blank" rel="noopener">MOMS Helpline</a>
+        <a href="https://modcollective.org/" target="_blank" rel="noopener">MOD Collective</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Settings you may want to change ---------- */
+var BP_ENDPOINT     = '/api/count';
+var BP_ENROLL_URL   = 'enroll.html';   // the enrollment page, with the Jotform embedded
+var BP_TRAINING_URL = '';   // Jotform training check, once it exists
+
+/* Pilot ZIP codes, from IDOH (Rose Douglass, Aug 25 2026). Shared ZIPs appear
+   under both counties; the check below treats the list as one set. */
+var BP_ZIPS = {
+  'Greene':     ['47424','47438','47441','47443','47445','47449','47453','47457','47459','47465','47471'],
+  'Daviess':    ['47501','47519','47529','47558','47562','47568'],
+  'Martin':     ['47553','47581','47522','47432','47446','47470'],
+  'Orange':     ['47454','47452','47432','47469','47108','47118','47125','47140','47175','47527'],
+  'Washington': ['47108','47120','47125','47165','47167'],
+  'Scott':      ['47102','47138','47170','47177']
+};
+
+/* ---------- Links that only exist once the forms do ---------- */
+function bpLink(id, url) {
+  var a = document.getElementById(id);
+  if (!a || !url) return;
+  a.href = url; a.target = '_blank'; a.rel = 'noopener';
+  a.classList.remove('off'); a.removeAttribute('aria-disabled');
+  var small = a.querySelector('small'); if (small) small.remove();
+}
+bpLink('bp-enroll', BP_ENROLL_URL);
+bpLink('bp-training', BP_TRAINING_URL);
+bpLink('bp-training-2', BP_TRAINING_URL);
+document.querySelectorAll('a.off').forEach(function (a) {
+  a.addEventListener('click', function (e) { if (a.classList.contains('off')) e.preventDefault(); });
+});
+
+/* The family guide link staff text out: absolute, so it works from a phone. */
+(function () {
+  var g = document.getElementById('guide-link');
+  if (!g) return;
+  var url = new URL('families.html', location.href).href;
+  if (location.protocol.indexOf('http') === 0) { g.href = url; g.textContent = url.replace(/^https?:\/\//, ''); }
+})();
+
+/* ---------- ZIP checker ---------- */
+(function () {
+  var host = document.getElementById('counties');
+  Object.keys(BP_ZIPS).forEach(function (c) {
+    var d = document.createElement('div');
+    var b = document.createElement('b'); b.textContent = c + ' County';
+    d.appendChild(b);
+    d.appendChild(document.createTextNode(BP_ZIPS[c].join(', ')));
+    host.appendChild(d);
+  });
+})();
+
+function bpZip() {
+  var v = document.getElementById('zip').value.replace(/\D/g, '').slice(0, 5);
+  var out = document.getElementById('zipresult');
+  out.className = 'zipresult';
+  if (v.length < 5) { out.textContent = ''; return; }
+  var where = Object.keys(BP_ZIPS).filter(function (c) { return BP_ZIPS[c].indexOf(v) !== -1; });
+  if (where.length) {
+    out.classList.add('yes');
+    out.textContent = '✓ ' + v + ' is a pilot ZIP code (' + where.join(' / ') + ' County). The family still has to meet the other two conditions.';
+  } else {
+    out.classList.add('no');
+    out.textContent = '✕ ' + v + ' is not a pilot ZIP code. The form will not accept it.';
+  }
+}
+
+/* ---------- Live counters ---------- */
+function bpPanel(id, b, asOf, isSample) {
+  var p = document.getElementById(id);
+  if (!p || !b) return;
+  var n = parseInt(b.enrolled, 10), cap = parseInt(b.cap, 10);
+  if (isNaN(n) || !cap) return;
+  var left = Math.max(0, cap - n);
+  var pct = Math.min(100, (n / cap) * 100);
+  p.querySelector('[data-n]').textContent = n.toLocaleString('en-US');
+  if (b.label) p.querySelector('[data-label]').textContent = b.label;
+  p.querySelector('[data-cap]').textContent = cap.toLocaleString('en-US');
+  p.querySelector('[data-fill]').style.width = pct + '%';
+  p.classList.toggle('full', left === 0);
+  p.querySelector('[data-left]').textContent = left === 0
+    ? 'Full: not accepting new enrollments'
+    : left.toLocaleString('en-US') + ' spots left';
+  var meta = p.querySelector('[data-asof]');
+  meta.textContent = '';
+  if (isSample) {
+    var s = document.createElement('span'); s.className = 'sample'; s.textContent = 'SAMPLE NUMBERS';
+    meta.appendChild(s);
+  } else if (asOf) {
+    meta.textContent = 'Updated ' + new Date(asOf).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+}
+
+function bpNotConnected() {
+  ['c-diapers', 'c-seats'].forEach(function (id) {
+    var p = document.getElementById(id);
+    p.querySelector('[data-n]').textContent = '—';
+    p.querySelector('[data-label]').textContent = 'not connected yet';
+    p.querySelector('[data-asof]').textContent = 'Awaiting data source';
+    p.querySelector('[data-left]').textContent = '';
+  });
+}
+
+var bpGotCount = false;
+function bpLoadCount() {
+  /* ?sample shows what the counters look like with data, for review.
+     The numbers are labelled as samples on the page. */
+  if (/[?&]sample\b/.test(location.search)) {
+    bpPanel('c-diapers', { enrolled: 212, cap: 500, label: 'children enrolled' }, null, true);
+    bpPanel('c-seats', { enrolled: 431, cap: 1200, label: 'families enrolled' }, null, true);
+    return;
+  }
+  fetch(BP_ENDPOINT, { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (d) {
+      if (!d || !d.benefits) throw new Error('bad payload');
+      bpGotCount = true;
+      bpPanel('c-diapers', d.benefits.diapers, d.asOf);
+      bpPanel('c-seats', d.benefits.car_seats, d.asOf);
+    })
+    .catch(function () {
+      /* A dash, not a zero: zero would claim nobody has enrolled. */
+      if (!bpGotCount) bpNotConnected();
+    });
+}
+bpLoadCount();
+setInterval(bpLoadCount, 10 * 60 * 1000);
+
+/* ---------- Highlight the section in view ---------- */
+(function () {
+  if (!window.IntersectionObserver) return;
+  var links = {};
+  document.querySelectorAll('.secnav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      Object.keys(links).forEach(function (k) { links[k].classList.toggle('on', k === e.target.id); });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  Object.keys(links).forEach(function (k) { var s = document.getElementById(k); if (s) io.observe(s); });
+})();
+</script>
+
+</body>
+</html>
