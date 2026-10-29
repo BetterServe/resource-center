@@ -107,6 +107,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
 /* ---------- Section nav ---------- */
 .secnav { position: sticky; top: 0; z-index: 10; background: var(--white); border-bottom: 1px solid var(--line); }
+.embedded .secnav { position: static; }   /* sticky can't work inside a full-height frame */
 .secnav .wrap { display: flex; gap: 4px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
 .secnav .wrap::-webkit-scrollbar { display: none; }
 .secnav a {
@@ -256,6 +257,7 @@ footer { margin-top: 64px; }
 </style>
 </head>
 <body>
+<script>if (window.parent !== window) document.documentElement.classList.add('embedded');</script>
 
 <div class="draft">DRAFT for partner review. Not for distribution. Items marked <b>Pending</b> are not confirmed yet.</div>
 
@@ -688,7 +690,9 @@ setInterval(bpLoadCount, 10 * 60 * 1000);
 
 /* ---------- Highlight the section in view ---------- */
 (function () {
-  if (!window.IntersectionObserver) return;
+  /* Embedded, the frame is as tall as the page, so nothing scrolls inside it
+     and there is no section "in view" to highlight. */
+  if (!window.IntersectionObserver || window.parent !== window) return;
   var links = {};
   document.querySelectorAll('.secnav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
   var io = new IntersectionObserver(function (entries) {
@@ -699,6 +703,55 @@ setInterval(bpLoadCount, 10 * 60 * 1000);
   }, { rootMargin: '-40% 0px -55% 0px' });
   Object.keys(links).forEach(function (k) { var s = document.getElementById(k); if (s) io.observe(s); });
 })();
+</script>
+
+<script>
+/* ---------- Embedding on modcollective.org ----------
+   Inside an iframe the page can't scroll itself, so it tells the parent page
+   two things: how tall it is (so the frame grows to fit, with no inner
+   scrollbar), and where to scroll when a link jumps within the page. The
+   embed snippets listen for exactly these two messages. */
+var bpEmbedded = window.parent !== window;
+var bpLastHeight = 0, bpHeightPending = false;
+
+function bpReportHeight() {
+  if (!bpEmbedded || bpHeightPending) return;
+  bpHeightPending = true;
+  /* A timer, not requestAnimationFrame: browsers pause animation frames in
+     cross-origin frames that are off screen, which would stall the resize. */
+  setTimeout(function () {
+    bpHeightPending = false;
+    /* Measure the body, never documentElement.scrollHeight: inside a frame
+       that is at least the frame's own height, so reporting it makes the
+       frame grow forever. */
+    var h = Math.ceil(document.body.getBoundingClientRect().height);
+    if (!h || Math.abs(h - bpLastHeight) < 2) return;
+    bpLastHeight = h;
+    window.parent.postMessage({ bpHeight: h }, '*');
+  }, 30);
+}
+
+function bpScrollParentTo(y) {
+  if (bpEmbedded) window.parent.postMessage({ bpScrollTo: Math.max(0, Math.round(y)) }, '*');
+}
+
+if (bpEmbedded) {
+  window.addEventListener('load', bpReportHeight);
+  window.addEventListener('resize', bpReportHeight);
+  document.addEventListener('toggle', bpReportHeight, true);
+  if (window.ResizeObserver) new ResizeObserver(bpReportHeight).observe(document.body);
+  bpReportHeight();
+
+  /* Links to a section of this page: scroll the parent instead. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1));
+    if (!t) return;
+    e.preventDefault();
+    bpScrollParentTo(t.getBoundingClientRect().top + window.pageYOffset - 16);
+  });
+}
 </script>
 
 </body>

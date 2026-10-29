@@ -32,6 +32,25 @@ In Netlify: Add new site > Import an existing project > GitHub, pick the
 rest alone: Netlify reads this folder's `netlify.toml`. Rename the site to
 something like `baby-pass` so the URL is `baby-pass.netlify.app`.
 
+## Embedding on modcollective.org
+
+Live at `https://babypass.netlify.app`. Each page goes on its own MOD page,
+pasted once into an Elementor HTML widget:
+
+| Snippet | Page |
+|---|---|
+| `embed-snippet-staff.html` | Staff resource center |
+| `embed-snippet-enroll.html` | Enrollment |
+| `embed-snippet-families.html` | Family guide |
+
+Each snippet's comment has the Elementor settings (Canvas template, zero
+padding). The pages report their height to the snippet, so the frame always
+fits with no inner scrollbar, and in-page links scroll the MOD page.
+
+The enrollment page sizes the Jotform frame itself rather than loading
+Jotform's embed handler script, which throws once the page is framed on
+another domain.
+
 ## Things to fill in
 
 | What | Where |

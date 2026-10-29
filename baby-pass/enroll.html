@@ -193,7 +193,7 @@ footer { margin-top: 56px; }
     <iframe
       id="JotFormIFrame-262915028133150"
       title="IN FY27 BABY PASS - Enrollment"
-      onload="window.parent.scrollTo(0,0)"
+      onload="bpFormLoaded(this)"
       allowtransparency="true"
       allow="geolocation; microphone; camera; fullscreen; payment"
       src="https://form.jotform.com/262915028133150"
@@ -220,9 +220,39 @@ footer { margin-top: 56px; }
   </div>
 </footer>
 
-<!-- Jotform's own script: resizes the frame to fit the form, so there is no inner scrollbar. -->
-<script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
-<script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-262915028133150']", "https://form.jotform.com/");</script>
+<script>
+/* First load: leave the page where it is. Later loads (the thank-you page
+   after a submit) scroll back up to the form. */
+var bpFormLoads = 0;
+function bpFormLoaded(frame) {
+  if (bpFormLoads++ === 0) return;
+  var y = frame.getBoundingClientRect().top + window.pageYOffset - 16;
+  if (window.parent !== window) window.parent.postMessage({ bpScrollTo: Math.max(0, Math.round(y)) }, '*');
+  else window.scrollTo(0, y);
+}
+</script>
+
+<!-- Sizes the form frame to fit the form, so there is no inner scrollbar.
+     This replaces Jotform's embed handler script, which reads the outer page's
+     address and throws once this page is itself framed on modcollective.org.
+     The form announces its height as "setHeight:<px>:<formId>". -->
+<script>
+window.addEventListener('message', function (e) {
+  if (!/^https:\/\/([a-z0-9-]+\.)*jotform\.com$/.test(e.origin)) return;
+  if (typeof e.data !== 'string') return;
+  var frame = document.getElementById('JotFormIFrame-262915028133150');
+  if (!frame || e.source !== frame.contentWindow) return;
+  var parts = e.data.split(':');
+  if (parts[0] === 'setHeight') {
+    var h = parseInt(parts[1], 10);
+    if (!isNaN(h) && h > 100 && h < 30000) frame.style.height = h + 'px';
+  } else if (parts[0] === 'scrollIntoView') {
+    var y = frame.getBoundingClientRect().top + window.pageYOffset - 16;
+    if (window.parent !== window) window.parent.postMessage({ bpScrollTo: Math.max(0, Math.round(y)) }, '*');
+    else window.scrollTo(0, y);
+  }
+});
+</script>
 
 <script>
 /* ---------- Live counters (same as index.html) ---------- */
@@ -281,6 +311,55 @@ function bpLoadCount() {
 }
 bpLoadCount();
 setInterval(bpLoadCount, 10 * 60 * 1000);
+</script>
+
+<script>
+/* ---------- Embedding on modcollective.org ----------
+   Inside an iframe the page can't scroll itself, so it tells the parent page
+   two things: how tall it is (so the frame grows to fit, with no inner
+   scrollbar), and where to scroll when a link jumps within the page. The
+   embed snippets listen for exactly these two messages. */
+var bpEmbedded = window.parent !== window;
+var bpLastHeight = 0, bpHeightPending = false;
+
+function bpReportHeight() {
+  if (!bpEmbedded || bpHeightPending) return;
+  bpHeightPending = true;
+  /* A timer, not requestAnimationFrame: browsers pause animation frames in
+     cross-origin frames that are off screen, which would stall the resize. */
+  setTimeout(function () {
+    bpHeightPending = false;
+    /* Measure the body, never documentElement.scrollHeight: inside a frame
+       that is at least the frame's own height, so reporting it makes the
+       frame grow forever. */
+    var h = Math.ceil(document.body.getBoundingClientRect().height);
+    if (!h || Math.abs(h - bpLastHeight) < 2) return;
+    bpLastHeight = h;
+    window.parent.postMessage({ bpHeight: h }, '*');
+  }, 30);
+}
+
+function bpScrollParentTo(y) {
+  if (bpEmbedded) window.parent.postMessage({ bpScrollTo: Math.max(0, Math.round(y)) }, '*');
+}
+
+if (bpEmbedded) {
+  window.addEventListener('load', bpReportHeight);
+  window.addEventListener('resize', bpReportHeight);
+  document.addEventListener('toggle', bpReportHeight, true);
+  if (window.ResizeObserver) new ResizeObserver(bpReportHeight).observe(document.body);
+  bpReportHeight();
+
+  /* Links to a section of this page: scroll the parent instead. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1));
+    if (!t) return;
+    e.preventDefault();
+    bpScrollParentTo(t.getBoundingClientRect().top + window.pageYOffset - 16);
+  });
+}
 </script>
 
 </body>

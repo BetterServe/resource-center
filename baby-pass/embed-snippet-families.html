@@ -1,0 +1,63 @@
+<!--
+  BABY PASS FAMILY GUIDE embed.  Paste this whole file into an Elementor HTML
+  widget on the family guide page (a different page from the staff ones).
+
+  ELEMENTOR SETUP -- both steps matter.
+
+  1. PAGE TEMPLATE
+     Edit the page in Elementor. Gear icon (Page Settings) -> Page Layout ->
+     Elementor Canvas. No MOD header, footer or sidebar: the page carries its
+     own BABY PASS header and partner footer, and BABY PASS leads on anything
+     a family or partner sees.
+
+  2. CONTAINER PADDING
+     Section or Container holding the widget:
+       Layout tab   -> Content Width: Full Width
+       Advanced tab -> Padding 0 and Margin 0 on all four sides
+     The HTML widget itself: Advanced tab -> Padding 0, Margin 0
+
+  BEFORE LAUNCH
+     Keep the WordPress page unpublished, password protected, or set to
+     noindex in your SEO plugin. The pages inside the frame already tell
+     search engines to stay away; the MOD page around them does not.
+
+  IF THE HEIGHT DOES NOT ADJUST BY ITSELF
+     WordPress strips script tags for users without the unfiltered_html
+     capability. Save the page while logged in as an Administrator. Without
+     the script the frame stays at its starting height and scrolls inside.
+
+  This is pasted once. Content changes happen by pushing to the
+  resource-center repo; the frame picks them up on its own.
+-->
+
+<iframe
+  id="bp-families"
+  src="https://babypass.netlify.app/families.html"
+  title="Your BABY PASS"
+  style="width:100%; border:0; display:block; min-height:200px; height:4800px;"
+  loading="lazy"></iframe>
+
+<script>
+(function () {
+  var frame = document.getElementById('bp-families');
+  var allowed = 'https://babypass.netlify.app';
+  if (!frame) return;
+
+  window.addEventListener('message', function (e) {
+    // Only trust our own frame, on the expected origin.
+    if (e.origin !== allowed || e.source !== frame.contentWindow) return;
+    if (!e.data || typeof e.data !== 'object') return;
+
+    if (e.data.bpHeight) {
+      var h = parseInt(e.data.bpHeight, 10);
+      // Ignore nonsense rather than collapsing the page around it.
+      if (!isNaN(h) && h > 200 && h < 30000) frame.style.height = (h + 2) + 'px';
+    }
+
+    if (typeof e.data.bpScrollTo === 'number') {
+      var top = frame.getBoundingClientRect().top + window.pageYOffset + e.data.bpScrollTo;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  });
+})();
+</script>
