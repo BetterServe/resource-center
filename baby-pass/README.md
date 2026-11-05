@@ -58,21 +58,29 @@ another domain.
 | Enrollment form | Embedded in `enroll.html` (Jotform 262915028133150). If the form is replaced, change the ID in the iframe, the two script lines below it, and the fallback link |
 | Training check link (Jotform) | `BP_TRAINING_URL`, same place |
 | IDOH, MOMS Helpline, MOD logos (optional) | `.partners` in every footer. Text links for now |
-| MOD program contact for Helpline staff | Training & support, `index.html` |
 | Spanish review by a native speaker | `#content-es` in `families.html` |
 
 Setting a link turns its button on. Until then the buttons read "link coming"
 and do nothing.
 
-## Pending with IDOH
+## Confirmed by IDOH (November 5, 2026)
 
-These are marked on the page. Change the copy, then delete the tag.
+Nothing is Pending. If a new open item comes up, tag it on the page and list it here.
 
-- One car seat offer per family, or one per seat needed.
-- The diaper benefit age limit (the page says under 3).
-- What happens when a family does not qualify.
-- Screener thresholds. **These never go on either page**, confirmed or not.
-  Staff who know the cut score coach families toward it.
+- **Eligibility:** pilot ZIP, plus SNAP, WIC, Medicaid, or home visiting, plus a
+  child under 3, plus the family says they need the benefit (the specialist's
+  judgment). The D1-D4 and C1-C4 questions are evaluation baseline only. They
+  never decide eligibility, so there is no cut score to keep off the page.
+- **The enrollment form blocks submission** for a family who doesn't qualify, or
+  who says no to any consent question. Every submission is an application and
+  starts the automated workflow. Staff refer ineligible families to WIC, home
+  visiting, and the Indiana Diaper Bank.
+- **One car seat benefit per family.** It's $100, used within 90 days.
+- **Consent is a checklist, not a script.** Staff cover four points (sharing,
+  texts, one application, it's true) in their own words, then tick a box for
+  each. The details are on the page and in `BABY PASS/BABY_PASS_Consent_Script.md` in
+  the FY27 folder. Change both together.
+- **Staff questions** go to support@modcollective.org or 463-837-1840.
 
 ## The counters
 
@@ -96,7 +104,7 @@ set its URL as `BP_FEED_URL` in Netlify's environment variables. Never publish
 the entire document: the log tabs hold family information.
 
 `enrolled` should count approved enrollments, not form submissions, because
-scoring happens after submission. Where approvals are recorded decides how the
+a submission can still be declined afterward (a duplicate household, or a full benefit). Where approvals are recorded decides how the
 Apps Script that fills the Feed tab gets written.
 
 ## Brand rules the pages follow
@@ -135,5 +143,5 @@ the public site in `netlify.toml`.
 
 1. Remove `X-Robots-Tag` from `netlify.toml`, and delete `robots.txt`.
 2. Remove the `noindex` meta tags from both pages, and the DRAFT ribbon.
-3. Confirm every Pending item is resolved and its tag is gone.
+3. Confirm no Pending tags are left on either page.
 4. Get written sign-off from each partner on the final pages, for the grant record.

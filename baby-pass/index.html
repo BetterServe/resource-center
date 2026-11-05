@@ -21,8 +21,10 @@
    - No screener cut scores, anywhere. Staff who know the number coach
      sympathetic families toward it, and that ruins the instrument.
    - The payment platform and the operations contractor are not named.
+   - The need questions are for the evaluation only. They never decide
+     eligibility (IDOH, Nov 5, 2026).
    - Unconfirmed program details carry a "Pending" tag, so a reviewer can
-     see at a glance what still needs sign-off.
+     see at a glance what still needs sign-off. None are open as of Nov 5.
    ========================================================================== */
 
 :root {
@@ -259,7 +261,7 @@ footer { margin-top: 64px; }
 <body>
 <script>if (window.parent !== window) document.documentElement.classList.add('embedded');</script>
 
-<div class="draft">DRAFT for partner review. Not for distribution. Items marked <b>Pending</b> are not confirmed yet.</div>
+<div class="draft">DRAFT for partner review. Not for distribution.</div>
 
 <header class="hero">
   <div class="wrap">
@@ -315,7 +317,7 @@ footer { margin-top: 64px; }
         <thead><tr><th scope="col"></th><th scope="col">Diapers</th><th scope="col">Car seat</th></tr></thead>
         <tbody>
           <tr><th scope="row">Amount</th><td>$40 per child, per month</td><td>$100, one time</td></tr>
-          <tr><th scope="row">Per household</th><td>Up to 3 children: $40, $80, or $120 a month</td><td>One per family <span class="pending">Pending</span></td></tr>
+          <tr><th scope="row">Per household</th><td>Up to 3 children: $40, $80, or $120 a month</td><td>One per family</td></tr>
           <tr><th scope="row">How long</th><td>6 monthly loads</td><td>Does not renew or reissue</td></tr>
           <tr><th scope="row">Use it within</th><td>31 days of each load</td><td>90 days</td></tr>
           <tr><th scope="row">Buys</th><td>Diapers and diapering supplies on the approved list</td><td>Rear-facing infant, convertible, and all-in-one seats that start rear-facing</td></tr>
@@ -359,7 +361,7 @@ footer { margin-top: 64px; }
   <div class="wrap">
     <span class="kicker">Who qualifies</span>
     <h2>All three, not any one.</h2>
-    <p class="intro">A family qualifies only when all three of these are true. Living in a pilot ZIP code is not enough by itself.</p>
+    <p class="intro">A family qualifies only when all three of these are true. Living in a pilot ZIP code is not enough by itself. If any one isn't met, the enrollment form won't let you submit.</p>
 
     <div class="grid3">
       <div class="card b">
@@ -369,19 +371,19 @@ footer { margin-top: 64px; }
       </div>
       <div class="card b">
         <div class="num-badge">2</div>
-        <h3>Gets SNAP, WIC, or Medicaid</h3>
-        <p>The caregiver says they are enrolled in at least one public benefit program. No proof is collected.</p>
+        <h3>Gets SNAP, WIC, Medicaid, or home visiting</h3>
+        <p>The caregiver says they are enrolled in at least one of these programs. No proof is collected.</p>
       </div>
       <div class="card b">
         <div class="num-badge">3</div>
-        <h3>Answers the need questions</h3>
-        <p>Four short questions for diapers and four for car seats, asked separately. A family can qualify for one benefit and not the other.</p>
+        <h3>Says they need the benefit</h3>
+        <p>You explain what BABY PASS offers, and the family tells you whether they need diapers, a car seat, or both. That's your judgment with the family. There is no score.</p>
       </div>
     </div>
 
     <h3>Also required</h3>
     <ul class="check">
-      <li><strong>Child's age.</strong> The child must be under 3, confirmed by date of birth. <span class="pending">Pending</span></li>
+      <li><strong>Child's age.</strong> The child must be under 3, confirmed by date of birth.</li>
       <li><strong>Vehicle access,</strong> on the car seat path only.</li>
     </ul>
 
@@ -413,15 +415,15 @@ footer { margin-top: 64px; }
 
     <ol class="flow">
       <li><strong>Which benefit</strong><span>Diapers, car seat, or both. Everything after this depends on it.</span></li>
-      <li><strong>Eligibility basics</strong><span>ZIP code, and the child's date of birth. Vehicle access too, if car seat was picked.</span></li>
+      <li><strong>Eligibility basics</strong><span>ZIP code, SNAP, WIC, Medicaid, or home visiting, and the child's date of birth. Vehicle access too, if car seat was picked. The form stops here if the family doesn't qualify.</span></li>
       <li><strong>Caregiver and child information</strong><span>Asked once, whichever benefit the family wants.</span></li>
-      <li><strong>Diaper questions</strong><span>Only on the diaper or both path.</span></li>
-      <li><strong>Car seat questions</strong><span>Only on the car seat or both path.</span></li>
-      <li><strong>Submit</strong><span>The form does not show a score or a result. Approval is decided after you submit.</span></li>
+      <li><strong>Diaper questions</strong><span>Only on the diaper or both path. For the evaluation, not eligibility.</span></li>
+      <li><strong>Car seat questions</strong><span>Only on the car seat or both path. For the evaluation, not eligibility.</span></li>
+      <li><strong>Consent, then submit</strong><span>Cover the four consent points in your own words and tick a box for each. The form does not show a result.</span></li>
     </ol>
 
-    <h3>The need questions</h3>
-    <p>Read each question exactly as written, then read the answer choices. Don't rephrase, don't explain what an answer means, and don't suggest an answer. If a family asks which answer will qualify them, tell them there is no right answer and that you just need what is true for them.</p>
+    <h3>The evaluation questions</h3>
+    <p><strong>These do not decide eligibility.</strong> They record where each family starts, so the pilot can measure what changed by the end. Read each question exactly as written, then read the answer choices. Don't rephrase, don't explain what an answer means, and don't suggest an answer. If a family worries that their answers decide whether they get help, tell them there is no right answer and that you just need what is true for them.</p>
 
     <h3 style="margin-top:22px">Diapers</h3>
     <div class="q"><span class="qid">D1</span><p>In the last 6 months, how often have you run out of diapers and not been able to buy more right away?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
@@ -439,6 +441,16 @@ footer { margin-top: 64px; }
       <p><strong>Why exact wording matters.</strong> These answers are also the family's starting point for a short follow-up at the end of the program. The pilot measures change by asking the same questions twice, so a question that is asked differently on day one can't be compared to the answer six months later. These results are what makes the case for expanding BABY PASS statewide.</p>
     </div>
 
+    <h3>Consent</h3>
+    <p>There is no script to read. Explain consent in your own words, the way you normally talk with families. Just make sure you cover all four points below. On the form, you tick a box for each one to confirm you covered it and the family agreed. The form won't submit until all four are ticked.</p>
+    <div class="q"><span class="qid">1 &middot; Sharing</span><p>Their information goes to MOD Collective, which runs BABY PASS for the Indiana Department of Health. It's used only to run BABY PASS and to report on the program.</p></div>
+    <div class="q"><span class="qid">2 &middot; Texts</span><p>BABY PASS sends the card and all updates by text to the number they gave you. Message and data rates may apply.</p></div>
+    <div class="q"><span class="qid">3 &middot; One application</span><p>This is the only BABY PASS application for their household.</p></div>
+    <div class="q"><span class="qid">4 &middot; It is true</span><p>What they told you is true, to the best of their knowledge.</p></div>
+    <div class="warn">
+      <p><strong>A "no" to sharing or texts means the family can't be enrolled.</strong> The card is delivered by text, so there is no other way to get it to them. If someone in the household already applied, don't submit; the family can text or call BABY PASS at <span style="white-space:nowrap">463-837-1840</span>. If they want to correct an answer, fix it, then confirm again.</p>
+    </div>
+
     <h3>After you submit</h3>
     <div class="script">
       <p class="who">What to say</p>
@@ -452,7 +464,7 @@ footer { margin-top: 64px; }
       <p><strong>Don't tell a family they're approved, and don't promise a spot.</strong> You won't know the result when you submit. Both benefits have a limit, and a benefit can fill up before a family calls back. Check the counters at the top of this page before each call.</p>
     </div>
     <div class="note">
-      <p><strong>If a family doesn't qualify:</strong> how they will be told is still being decided. <span class="pending">Pending</span></p>
+      <p><strong>If a family doesn't qualify,</strong> the form won't let you submit, so you'll know on the call. Tell the family kindly, then refer them to WIC, home visiting, and the Indiana Diaper Bank.</p>
     </div>
   </div>
 </section>
@@ -538,7 +550,7 @@ footer { margin-top: 64px; }
       </div>
     </div>
     <div class="note">
-      <p><strong>Questions about the program or the form?</strong> Contact the MOD Collective program team. <span class="pending">Pending: name and email</span></p>
+      <p><strong>Questions about the program or the form?</strong> Email the MOD Collective program team at <a href="mailto:support@modcollective.org">support@modcollective.org</a>, or text or call the BABY PASS line at 463-837-1840.</p>
     </div>
   </div>
 </section>
