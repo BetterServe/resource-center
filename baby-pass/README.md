@@ -101,25 +101,31 @@ Nothing is Pending. If a new open item comes up, tag it on the page and list it 
 The staff page shows two counters: diapers in **children** (limit 500) and car
 seats in **families** (limit 1,200). The units are different on purpose.
 
-Until a feed exists they show "not connected yet". Add `?sample` to the URL to
-see them with sample numbers, which are labelled SAMPLE on the page.
+They are live (connected November 6, 2026). The numbers come from the **Feed**
+tab of the `IN FY27 BABY PASS - Enrollment` Google Sheet, which is published
+on its own as CSV. Only that tab is published; the form responses are not.
+The link is in `netlify/functions/count.mjs` (`BP_FEED_URL` in Netlify
+overrides it). Add `?sample` to a page URL to see sample numbers, labelled
+SAMPLE.
 
-When the forms are live, a Feed tab in the enrollment workbook should hold
-exactly this, and nothing else:
+The Feed tab holds exactly this, computed by formulas from the Form responses
+tab:
 
 ```
 benefit,enrolled,cap,label,updated
-diapers,212,500,children enrolled,2026-11-02T10:20:28-05:00
-car_seats,431,1200,families enrolled,2026-11-02T10:20:28-05:00
+diapers,<children>,500,children enrolled,<latest submission>
+car_seats,<families>,1200,families enrolled,<latest submission>
 ```
 
-Publish **only** that tab (File > Share > Publish to web > Feed > CSV), then
-set its URL as `BP_FEED_URL` in Netlify's environment variables. Never publish
-the entire document: the log tabs hold family information.
+- **diapers**: the sum of the number in "How many eligible children..." on
+  rows where "Is the client enrolling for diapers?" is Yes.
+- **car_seats**: rows where "Is the client enrolling for a car seat?" is Yes.
+- Rows whose Staff Email starts with `test@` are skipped.
+- The formulas use columns D (car seat), E (children), F (diapers). If the
+  form's columns move, fix the formulas.
 
-`enrolled` should count approved enrollments, not form submissions, because
-a submission can still be declined afterward (a duplicate household, or a full benefit). Where approvals are recorded decides how the
-Apps Script that fills the Feed tab gets written.
+Google and the function each cache for 5 minutes, so a new enrollment can take
+up to about 10 minutes to show. Never publish the entire document.
 
 ## Brand rules the pages follow
 

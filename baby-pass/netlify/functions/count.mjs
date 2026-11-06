@@ -13,12 +13,18 @@
  * Diapers are counted in children, car seats in families. The two limits are
  * different units on purpose; the label column says which is which.
  *
- * The feed URL is set in Netlify as BP_FEED_URL. Until it is, this returns 503
- * and the page shows "not connected yet".
+ * The feed is the Feed tab of "IN FY27 BABY PASS - Enrollment", published on its
+ * own as CSV (connected Nov 6, 2026). Formulas in that tab sum children for
+ * diapers and count families for car seats, skipping rows whose staff email
+ * starts with test@. Optional override, if the sheet is ever republished at a
+ * new URL: BP_FEED_URL in Netlify's environment variables.
  *
  * Returns: {"benefits":{"diapers":{"enrolled":212,"cap":500,"label":"..."},
  *           "car_seats":{...}},"asOf":"..."}
  */
+
+const FEED_URL =
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vROAgl68D93dNkPrZbkR9nmb3g-WtalYIW6kQXb_SaZ3r-O1Go9AHHTbW0OuP5_8WtSB3K7ZAKvwiOd/pub?gid=834250283&single=true&output=csv';
 
 let cache = { value: null, at: 0 };
 const CACHE_MS = 5 * 60 * 1000; // matches Google's own cache on a published CSV
@@ -51,7 +57,7 @@ export default async () => {
     'Cache-Control': 'public, max-age=300'
   };
 
-  const url = process.env.BP_FEED_URL;
+  const url = process.env.BP_FEED_URL || FEED_URL;
   if (!url) {
     return new Response(JSON.stringify({ error: 'Feed not configured' }), { status: 503, headers });
   }
