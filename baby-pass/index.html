@@ -611,13 +611,6 @@ document.querySelectorAll('a.off').forEach(function (a) {
   a.addEventListener('click', function (e) { if (a.classList.contains('off')) e.preventDefault(); });
 });
 
-/* The family guide link staff text out: absolute, so it works from a phone. */
-(function () {
-  var g = document.getElementById('guide-link');
-  if (!g) return;
-  var url = new URL('families.html', location.href).href;
-  if (location.protocol.indexOf('http') === 0) { g.href = url; g.textContent = url.replace(/^https?:\/\//, ''); }
-})();
 
 /* ---------- ZIP checker ---------- */
 (function () {

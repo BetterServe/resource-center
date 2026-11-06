@@ -41,7 +41,7 @@ pasted once into an Elementor HTML widget:
 |---|---|
 | `embed-snippet-staff.html` | Staff resource center |
 | `embed-snippet-enroll.html` | Enrollment |
-| `embed-snippet-families.html` | Family guide |
+| `embed-snippet-families.html` | Family guide, at **modcollective.org/babypass/client** (on the card, in IQPay's resource link, and in the welcome text; `/babypass` itself is the public info page) |
 
 Each snippet's comment has the Elementor settings (Canvas template, zero
 padding). The pages report their height to the snippet, so the frame always
