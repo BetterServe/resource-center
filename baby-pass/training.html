@@ -119,7 +119,7 @@ footer { margin-top: 56px; }
         <img src="img/logo-white.svg" width="112" height="70" alt="BABY PASS">
         <span class="for">MOMS Helpline staff</span>
       </div>
-      <a class="btn" href="index.html" data-bp-page="staff" target="_blank" rel="noopener">
+      <a class="btn" href="https://modcollective.org/babypass-staff/" data-bp-page="staff" target="_blank" rel="noopener">
         Resource center
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg>
         <span class="sr">(opens in a new tab)</span>
@@ -163,18 +163,17 @@ footer { margin-top: 56px; }
 
 <script>
 /* ---------- Links between the pages ----------
-   On modcollective.org each page sits in its own frame, so the buttons that
-   move between pages go to the MOD addresses. Opened straight from Netlify,
-   they stay on Netlify. */
+   The pages live on modcollective.org, each in its own frame, so the buttons
+   that move between pages always go to the MOD addresses, even when a page
+   is opened straight from Netlify. */
 var BP_PAGES = {
   staff:    'https://modcollective.org/babypass-staff/',
   enroll:   'https://modcollective.org/babypass-enroll/',
   training: 'https://modcollective.org/babypass-training/',
   client:   'https://modcollective.org/babypass-client/'
 };
-var BP_ON_MOD = window.parent !== window;
 document.querySelectorAll('a[data-bp-page]').forEach(function (a) {
-  if (BP_ON_MOD) a.href = BP_PAGES[a.getAttribute('data-bp-page')];
+  a.href = BP_PAGES[a.getAttribute('data-bp-page')];
 });
 </script>
 

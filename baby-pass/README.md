@@ -50,9 +50,9 @@ Each snippet's comment has the Elementor settings (Canvas template, zero
 padding). The pages report their height to the snippet, so the frame always
 fits with no inner scrollbar, and in-page links scroll the MOD page.
 
-When a page is framed, the buttons between the staff pages go to the MOD
-addresses above (`BP_PAGES` in `index.html`, `enroll.html`, `training.html`;
-change all three together). Opened straight from Netlify, they stay on Netlify.
+The buttons between the staff pages always go to the MOD addresses above,
+even when a page is opened straight from Netlify (`BP_PAGES` in `index.html`,
+`enroll.html`, `training.html`; change all three together).
 
 The enrollment page sizes the Jotform frame itself rather than loading
 Jotform's embed handler script, which throws once the page is framed on
