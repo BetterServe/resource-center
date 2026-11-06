@@ -16,12 +16,12 @@ card/                          eCard art for IQPay (not served by the site)
 Built on the same pattern as the Diaper Dollars resource center: static pages,
 one serverless function, no credentials anywhere.
 
-## Status: draft
+## Status: live
 
-The site is shared by link for partner review and is not public until launch.
-Every page carries `noindex`, and the staff page has a DRAFT ribbon. Items still
-waiting on IDOH carry a yellow **Pending** tag on the page, so reviewers can see
-what is unconfirmed.
+Launched November 6, 2026 on modcollective.org (see the embedding table
+below). The Netlify site stays out of search on purpose: the public addresses
+are the MOD pages, and the staff pages shouldn't be searchable. Set noindex on
+the three staff MOD pages in WordPress too.
 
 ## Deploy
 
@@ -153,12 +153,12 @@ IQPay adds the card number, name, and network mark itself. Ask for their art
 spec; the SVG scales to any size they need. The card folder is blocked from
 the public site in `netlify.toml`.
 
-## At launch
+## Launch record
 
-1. Remove `X-Robots-Tag` from `netlify.toml`, and delete `robots.txt`.
-2. Remove the `noindex` meta tags from both pages, and the DRAFT ribbon.
-3. Confirm no Pending tags are left on either page.
-4. Get written sign-off from each partner on the final pages, for the grant record.
+- November 6, 2026: DRAFT ribbon removed; the four MOD pages live.
+- Still to do: native-speaker review of the Spanish family guide
+  (`#content-es` in `families.html`), and written partner sign-off on the
+  final pages for the grant record.
 
 ## The training page
 
