@@ -69,16 +69,23 @@ Nothing is Pending. If a new open item comes up, tag it on the page and list it 
 
 - **Eligibility:** pilot ZIP, plus SNAP, WIC, Medicaid, or home visiting, plus a
   child under 3, plus the family says they need the benefit (the specialist's
-  judgment). The D1-D4 and C1-C4 questions are evaluation baseline only. They
-  never decide eligibility, so there is no cut score to keep off the page.
+  judgment). The evaluation questions (six diaper, D1-D6, and six car seat,
+  C1-C6, as revised in late October 2026) are baseline only. They never decide
+  eligibility, so there is no cut score to keep off the page.
+- **A completed enrollment means the family is in** (Brendan, Nov 6). Only the
+  eligibility questions gate (pilot ZIP, a qualifying program, child under 3,
+  a benefit selected). The last step is the family replying YES to the BABY PASS
+  text, which verifies their phone number with MOD Collective.
+- **The live enrollment form is the source of truth** for question wording and
+  page order (Brendan, Nov 6). If the page and the form disagree, fix the page.
 - **The enrollment form blocks submission** for a family who doesn't qualify, or
   who says no to any consent question. Every submission is an application and
   starts the automated workflow. Staff refer ineligible families to WIC, home
   visiting, and the Indiana Diaper Bank.
 - **One car seat benefit per family.** It's $100, used within 90 days.
 - **Consent is a checklist, not a script.** Staff cover four points (sharing,
-  texts, one application, it's true) in their own words, then tick a box for
-  each. The details are on the page and in `BABY PASS/BABY_PASS_Consent_Script.md` in
+  texts, one application, it's true) in their own words, then answer Yes for
+  each on the form. The details are on the page and in `BABY PASS/BABY_PASS_Consent_Script.md` in
   the FY27 folder. Change both together.
 - **Staff questions** go to support@modcollective.org or 463-837-1840.
 

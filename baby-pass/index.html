@@ -384,7 +384,6 @@ footer { margin-top: 64px; }
     <h3>Also required</h3>
     <ul class="check">
       <li><strong>Child's age.</strong> The child must be under 3, confirmed by date of birth.</li>
-      <li><strong>Vehicle access,</strong> on the car seat path only.</li>
     </ul>
 
     <div class="zipbox">
@@ -407,42 +406,49 @@ footer { margin-top: 64px; }
   <div class="wrap">
     <span class="kicker">Enrolling a family</span>
     <h2>One form, one pass through.</h2>
-    <p class="intro">There is a single enrollment form. The first answer decides which questions come next, so you never fill out more than the family needs.</p>
+    <p class="intro">There is a single enrollment form. The benefits the family picks decide which question pages come next, so you never fill out more than the family needs.</p>
 
     <div class="warn">
       <p><strong>You must finish BABY PASS training before you submit an enrollment.</strong> Passing the training check puts you on the authorized enrollment list. Enrollments from anyone not on the list cannot be accepted.</p>
     </div>
 
     <ol class="flow">
-      <li><strong>Which benefit</strong><span>Diapers, car seat, or both. Everything after this depends on it.</span></li>
-      <li><strong>Eligibility basics</strong><span>ZIP code, SNAP, WIC, Medicaid, or home visiting, and the child's date of birth. Vehicle access too, if car seat was picked. The form stops here if the family doesn't qualify.</span></li>
-      <li><strong>Caregiver and child information</strong><span>Asked once, whichever benefit the family wants.</span></li>
-      <li><strong>Diaper questions</strong><span>Only on the diaper or both path. For the evaluation, not eligibility.</span></li>
-      <li><strong>Car seat questions</strong><span>Only on the car seat or both path. For the evaluation, not eligibility.</span></li>
-      <li><strong>Consent, then submit</strong><span>Cover the four consent points in your own words and tick a box for each. The form does not show a result.</span></li>
+      <li><strong>Caregiver and eligibility</strong><span>Your staff email, the caregiver ID, the caregiver's name, their mobile number (twice), their ZIP code, and which programs they are enrolled in: SNAP, WIC, Medicaid, or home visiting. If the ZIP is not in the pilot area, the form stops and says so.</span></li>
+      <li><strong>Consent</strong><span>Cover the four consent points in your own words, then answer Yes for each one the family agrees to.</span></li>
+      <li><strong>The child and the benefits</strong><span>Whether the child is under 3, their date of birth, whether the family is enrolling for diapers (and for how many children), and whether they are enrolling for a car seat.</span></li>
+      <li><strong>Diaper Need Assessment</strong><span>Only if the family is enrolling for diapers. Six questions, for the evaluation, not eligibility.</span></li>
+      <li><strong>Car Seat Need Assessment</strong><span>Only if the family is enrolling for a car seat. Six questions, for the evaluation, not eligibility.</span></li>
+      <li><strong>Submit</strong><span>Use Back to check anything, then Submit. The form does not show a result.</span></li>
     </ol>
+    <div class="note">
+      <p><strong>The mobile number is the whole enrollment.</strong> The confirmation text and the card both go to it. Read it back to the family. Checking it against the second box is not enough, because you can type the same wrong number twice.</p>
+    </div>
 
     <h3>The evaluation questions</h3>
     <p><strong>These do not decide eligibility.</strong> They record where each family starts, so the pilot can measure what changed by the end. Read each question exactly as written, then read the answer choices. Don't rephrase, don't explain what an answer means, and don't suggest an answer. If a family worries that their answers decide whether they get help, tell them there is no right answer and that you just need what is true for them.</p>
 
     <h3 style="margin-top:22px">Diapers</h3>
-    <div class="q"><span class="qid">D1</span><p>In the last 6 months, how often have you run out of diapers and not been able to buy more right away?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
-    <div class="q"><span class="qid">D2</span><p>In the last 6 months, how often have you left your child in a diaper longer than you wanted, or reused one, to make your supply last?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
-    <div class="q"><span class="qid">D3</span><p>In the last 6 months, how often has your child had a diaper rash, skin irritation, or infection because you could not change them as often as needed?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
-    <div class="q"><span class="qid">D4</span><p>In the last 6 months, how often have you or your child missed work, school, or childcare because you did not have enough diapers?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D1</span><p>In the last 6 months, how often have you or another adult in your household missed work or school because you did not have enough diapers for your child?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D2</span><p>In the last 6 months, how often has your child had to miss childcare or school because you did not have enough diapers?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D3</span><p>In the last 6 months, how often has your child stayed in a dirty diaper because you did not have enough diapers to change them regularly?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D4</span><p>In the last 6 months, how often have you been worried about how you will afford diapers?</p><div class="opts"><span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q"><span class="qid">D5</span><p>Approximately how much do you spend on diapers each month?</p><div class="opts"><span>A dollar amount</span></div></div>
+    <div class="q"><span class="qid">D6</span><p>In the last 6 months, how difficult has it been for you to pay for usual household expenses, including food, rent or mortgage, car payments, and medical expenses?</p><div class="opts"><span>Not at all difficult</span><span>Slightly difficult</span><span>Somewhat difficult</span><span>Very difficult</span><span>Extremely difficult</span></div></div>
 
     <h3 style="margin-top:22px">Car seat</h3>
-    <div class="q seatq"><span class="qid">C1</span><p>Does this child currently ride in a car seat that fits their age and weight?</p><div class="opts"><span>Yes, always</span><span>Sometimes</span><span>No, we have a seat but it doesn't fit right</span><span>No, we don't have a seat</span></div></div>
-    <div class="q seatq"><span class="qid">C2</span><p>Is the car seat you have now used, handed down, borrowed, or more than six years old?</p><div class="opts"><span>Yes</span><span>No</span><span>I don't have a car seat</span></div></div>
-    <div class="q seatq"><span class="qid">C3</span><p>If you needed to buy a car seat this month, would you be able to cover the cost without putting off a bill, borrowing money, or going without something else?</p><div class="opts"><span>Answer choices as shown on the form</span></div></div>
-    <div class="q seatq"><span class="qid">C4</span><p>In the last 6 months, has this child ridden in a vehicle without a proper car seat because you could not afford one?</p><div class="opts"><span>Never</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q seatq"><span class="qid">C1</span><p>Does your child currently ride in a car seat or booster seat that fits their age and size?</p><div class="opts"><span>Yes, always</span><span>Sometimes</span><span>No, we have a seat but it doesn't fit right</span><span>No, we don't have a seat</span></div></div>
+    <div class="q seatq"><span class="qid">C2</span><p>How confident are you that you fully understand how to keep your child safe in the car, including choosing the right seat and installing it correctly?</p><div class="opts"><span>Very confident</span><span>Somewhat confident</span><span>Not very confident</span><span>Not at all confident</span></div></div>
+    <div class="q seatq"><span class="qid">C3</span><p>In the last 6 months, has your child ridden in a vehicle without an appropriate car seat because you could not afford one?</p><div class="opts"><span>Never</span><span>Sometimes</span><span>Often</span><span>Always</span></div></div>
+    <div class="q seatq"><span class="qid">C4</span><p>Have you had to choose between buying a car seat and paying for other needs like food, rent, or bills?</p><div class="opts"><span>Yes</span><span>No</span></div></div>
+    <div class="q seatq"><span class="qid">C5</span><p>If you have a car seat now, how did you get it?</p><div class="opts"><span>Bought new</span><span>Bought used</span><span>Hand-me-down or borrowed</span><span>Free from a program or organization</span><span>Don't have one</span></div></div>
+    <div class="q seatq"><span class="qid">C6</span><p>Does your household own or have regular access to a vehicle?</p><div class="opts"><span>Yes, we own one</span><span>Yes, regular access</span><span>Occasional access</span><span>No</span></div></div>
 
     <div class="note">
       <p><strong>Why exact wording matters.</strong> These answers are also the family's starting point for a short follow-up at the end of the program. The pilot measures change by asking the same questions twice, so a question that is asked differently on day one can't be compared to the answer six months later. These results are what makes the case for expanding BABY PASS statewide.</p>
     </div>
 
     <h3>Consent</h3>
-    <p>There is no script to read. Explain consent in your own words, the way you normally talk with families. Just make sure you cover all four points below. On the form, you tick a box for each one to confirm you covered it and the family agreed. The form won't submit until all four are ticked.</p>
+    <p>There is no script to read. Explain consent in your own words, the way you normally talk with families. Just make sure you cover all four points below. On the form, you answer Yes for each one to confirm you covered it and the family agreed. The family can't be enrolled unless all four are Yes.</p>
     <div class="q"><span class="qid">1 &middot; Sharing</span><p>Their information goes to MOD Collective, which runs BABY PASS for the Indiana Department of Health. It's used only to run BABY PASS and to report on the program.</p></div>
     <div class="q"><span class="qid">2 &middot; Texts</span><p>BABY PASS sends the card and all updates by text to the number they gave you. Message and data rates may apply.</p></div>
     <div class="q"><span class="qid">3 &middot; One application</span><p>This is the only BABY PASS application for their household.</p></div>
@@ -454,14 +460,14 @@ footer { margin-top: 64px; }
     <h3>After you submit</h3>
     <div class="script">
       <p class="who">What to say</p>
-      <p class="say">"Your application for BABY PASS is in. Over the next few days, watch for a text from BABY PASS at 463-837-1840. Please save that number. If you're approved, that text will have a link to your card."</p>
+      <p class="say">"You're signed up for BABY PASS. In a few minutes you'll get a text from BABY PASS at 463-837-1840. Please reply YES to it. That confirms your phone number, and it's the last step. After that, your card comes by text from the same number, so please save it."</p>
       <p class="say">"I'm going to text you a short guide that explains what BABY PASS covers and where you can use it."</p>
       <p class="who">Then</p>
       <p>Text the family the guide: <a href="families.html" style="color:#fff;font-weight:800" id="guide-link">families.html</a>. Add <b>#es</b> to the end of the link to open it in Spanish.</p>
     </div>
 
     <div class="warn">
-      <p><strong>Don't tell a family they're approved, and don't promise a spot.</strong> You won't know the result when you submit. Both benefits have a limit, and a benefit can fill up before a family calls back. Check the counters at the top of this page before each call.</p>
+      <p><strong>A completed enrollment means the family is in.</strong> The last step is theirs: replying YES to the text confirms their phone number with MOD Collective. If they don't reply, the card can't be sent. Both benefits have a limit, and a benefit can fill up before a family calls back, so check the counters at the top of this page before each call.</p>
     </div>
     <div class="note">
       <p><strong>If a family doesn't qualify,</strong> the form won't let you submit, so you'll know on the call. Tell the family kindly, then refer them to WIC, home visiting, and the Indiana Diaper Bank.</p>
@@ -481,6 +487,7 @@ footer { margin-top: 64px; }
       <div class="a">
         <p>In the store at CVS, Dollar General, Family Dollar, Food 4 Less, Jay C, Jewel, Kroger, Market District, Meijer, Payless, Ruler, Walgreens, and Walmart. Online at Walmart, Food 4 Less, and Jewel.</p>
         <p>Not every store carries car seats. A family shopping for a seat should check with the store first, or order online.</p>
+        <p>The store list on the card shows about 65 stores nationwide, and many of them aren't in Indiana or don't apply to BABY PASS. Go by the list above.</p>
       </div>
     </details>
     <details class="faq">
@@ -495,6 +502,7 @@ footer { margin-top: 64px; }
       <div class="a">
         <p><b>Diapers:</b> $40 per child each month for 6 months, for up to 3 children. Each month's money must be used within 31 days, and anything left over doesn't carry forward.</p>
         <p><b>Car seat:</b> $100 one time, to be used within 90 days. If the seat costs more, the family pays the rest.</p>
+        <p><b>Paying the rest:</b> for both benefits, the card pays only for covered items, up to the balance. The family pays for anything else in the cart, and for any amount over the balance, with another payment method. That applies in the store and online.</p>
       </div>
     </details>
     <details class="faq">
