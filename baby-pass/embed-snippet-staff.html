@@ -1,41 +1,35 @@
 <!--
-  BABY PASS STAFF RESOURCE CENTER embed.  Paste this whole file into an Elementor HTML
-  widget on the staff resource center page.
+  BABY PASS STAFF RESOURCE CENTER embed.
+  Goes on: modcollective.org/babypass/staff
+  (a child page of /babypass: create it with Page Attributes -> Parent ->
+  BABY PASS, and slug "staff")
 
-  ELEMENTOR SETUP -- both steps matter.
+  WHO SEES IT: MOMS Helpline staff. Leave it out of the site menu and set
+  it to noindex in your SEO plugin.
 
-  1. PAGE TEMPLATE
-     Edit the page in Elementor. Gear icon (Page Settings) -> Page Layout ->
-     Elementor Canvas. No MOD header, footer or sidebar: the page carries its
-     own BABY PASS header and partner footer, and BABY PASS leads on anything
-     a family or partner sees.
+  SETUP
+  1. Edit the page in Elementor. Gear icon (Page Settings) -> Page Layout ->
+     Elementor Canvas. The page carries its own BABY PASS header and footer,
+     so it shouldn't also get the MOD ones.
+  2. Section or Container: Content Width Full Width, Padding 0, Margin 0.
+     The HTML widget: Padding 0, Margin 0.
+  3. Paste this whole file into the HTML widget and save while logged in as
+     an Administrator. Otherwise WordPress strips the script, and the frame
+     stays at its starting height and scrolls inside.
 
-  2. CONTAINER PADDING
-     Section or Container holding the widget:
-       Layout tab   -> Content Width: Full Width
-       Advanced tab -> Padding 0 and Margin 0 on all four sides
-     The HTML widget itself: Advanced tab -> Padding 0, Margin 0
+  The buttons between the staff pages go to the /babypass/... addresses
+  when framed here. Content changes happen by pushing to the
+  resource-center repo; this is pasted once and never needs editing.
 
-  BEFORE LAUNCH
-     Keep the WordPress page unpublished, password protected, or set to
-     noindex in your SEO plugin. The pages inside the frame already tell
-     search engines to stay away; the MOD page around them does not.
-
-  IF THE HEIGHT DOES NOT ADJUST BY ITSELF
-     WordPress strips script tags for users without the unfiltered_html
-     capability. Save the page while logged in as an Administrator. Without
-     the script the frame stays at its starting height and scrolls inside.
-
-  This is pasted once. Content changes happen by pushing to the
-  resource-center repo; the frame picks them up on its own.
+  BEFORE LAUNCH: keep the page unpublished or password protected until the
+  pages are signed off.
 -->
 
 <iframe
   id="bp-staff"
   src="https://babypass.netlify.app/"
   title="BABY PASS Staff Resource Center"
-  style="width:100%; border:0; display:block; min-height:200px; height:6000px;"
-  loading="lazy"></iframe>
+  style="width:100%; border:0; display:block; min-height:900px; height:6000px;"></iframe>
 
 <script>
 (function () {
@@ -44,16 +38,21 @@
   if (!frame) return;
 
   window.addEventListener('message', function (e) {
-    // Only trust our own frame, on the expected origin.
-    if (e.origin !== allowed || e.source !== frame.contentWindow) return;
+    // Only trust messages from our own frame, on the expected origin.
+    if (e.origin !== allowed) return;
+    if (e.source !== frame.contentWindow) return;
     if (!e.data || typeof e.data !== 'object') return;
 
+    // The page reports its height, so the frame fits with no inner scrollbar.
     if (e.data.bpHeight) {
       var h = parseInt(e.data.bpHeight, 10);
-      // Ignore nonsense rather than collapsing the page around it.
-      if (!isNaN(h) && h > 200 && h < 30000) frame.style.height = (h + 2) + 'px';
+      // Ignore nonsense values rather than collapsing the page around them.
+      if (!isNaN(h) && h > 200 && h < 30000) {
+        frame.style.height = (h + 20) + 'px';
+      }
     }
 
+    // In-page links and "next section" ask the MOD page to scroll.
     if (typeof e.data.bpScrollTo === 'number') {
       var top = frame.getBoundingClientRect().top + window.pageYOffset + e.data.bpScrollTo;
       window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });

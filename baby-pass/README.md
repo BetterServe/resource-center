@@ -34,18 +34,24 @@ something like `baby-pass` so the URL is `baby-pass.netlify.app`.
 
 ## Embedding on modcollective.org
 
-Live at `https://babypass.netlify.app`. Each page goes on its own MOD page,
-pasted once into an Elementor HTML widget:
+`/babypass` is the public BABY PASS info page on modcollective.org. Each page
+here goes on a child page of it, pasted once into an Elementor HTML widget:
 
-| Snippet | Page |
-|---|---|
-| `embed-snippet-staff.html` | Staff resource center |
-| `embed-snippet-enroll.html` | Enrollment |
-| `embed-snippet-families.html` | Family guide, at **modcollective.org/babypass/client** (on the card, in IQPay's resource link, and in the welcome text; `/babypass` itself is the public info page) |
+| Snippet | MOD page | Who |
+|---|---|---|
+| `embed-snippet-client.html` | modcollective.org/babypass/client | Families. On the card, in IQPay's resource link, and in the welcome text, so the slug never changes after launch |
+| `embed-snippet-staff.html` | modcollective.org/babypass/staff | MOMS Helpline staff |
+| `embed-snippet-enroll.html` | modcollective.org/babypass/enroll | Staff, on calls |
+| `embed-snippet-training.html` | modcollective.org/babypass/training | Staff, before they enroll anyone |
 
+Keep the three staff pages out of the site menu and set them to noindex.
 Each snippet's comment has the Elementor settings (Canvas template, zero
 padding). The pages report their height to the snippet, so the frame always
 fits with no inner scrollbar, and in-page links scroll the MOD page.
+
+When a page is framed, the buttons between the staff pages go to the MOD
+addresses above (`BP_PAGES` in `index.html`, `enroll.html`, `training.html`;
+change all three together). Opened straight from Netlify, they stay on Netlify.
 
 The enrollment page sizes the Jotform frame itself rather than loading
 Jotform's embed handler script, which throws once the page is framed on
