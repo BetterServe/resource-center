@@ -171,6 +171,23 @@ html, body { margin: 0; padding: 0; background: #F5F7FC; }
 .bp .help .other p { margin-bottom: 6px; }
 .bp .help .other a { color: var(--white); font-weight: 800; }
 
+/* ---------- Terms: collapsed, so they don't crowd the guide ---------- */
+.bp .terms { margin-top: 32px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+.bp .terms summary {
+  cursor: pointer; padding: 16px 20px; font-weight: 800; font-size: 16px; color: var(--blue);
+  list-style: none; position: relative; padding-right: 48px;
+}
+.bp .terms summary::-webkit-details-marker { display: none; }
+.bp .terms summary::after { content: "+"; position: absolute; right: 20px; top: 11px; font-size: 22px; color: var(--teal-text); }
+.bp .terms[open] summary::after { content: "–"; }
+.bp .terms-body { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.bp .terms-body h3 { font-size: 15.5px; margin: 16px 0 8px; }
+.bp .terms-body ol { padding-left: 22px; margin: 0; }
+.bp .terms-body li { margin-bottom: 10px; }
+.bp .terms-body .note { background: var(--blue-tint); border-radius: 10px; padding: 12px 14px; }
+/* The summary and the note follow the language toggle, which sets <html lang>. */
+html[lang="es"] .bp .t-en, html:not([lang="es"]) .bp .t-es { display: none; }
+
 /* ---------- Footer: unity bar sits directly above the partner footer, once ---------- */
 .bp .unity { display: flex; height: 7px; }
 .bp .unity i { flex: 1; }
@@ -466,6 +483,38 @@ html, body { margin: 0; padding: 0; background: #F5F7FC; }
       </div>
 
     </div>
+
+    <!-- ==================== TERMS (both languages) ====================
+         One English text for now. The Spanish view shows it with a note that
+         it is in English, until a reviewed translation exists. -->
+    <details class="terms" id="terms">
+      <summary><span class="t-en">Terms and conditions</span><span class="t-es" lang="es">T&eacute;rminos y condiciones (en ingl&eacute;s)</span></summary>
+      <div class="terms-body" lang="en">
+        <p class="t-es note" lang="es">Por ahora, los t&eacute;rminos y condiciones solo est&aacute;n disponibles en ingl&eacute;s. Si tiene preguntas, escriba o llame a BABY PASS al 463-837-1840.</p>
+
+        <p>Welcome to the BABY PASS Program. To make sure you qualify for the program and to give you the best service, we collect certain information from you. Please read the following legal language, disclaimer, and opt-in language carefully.</p>
+
+        <h3>Disclaimer and Legal Terms</h3>
+        <ol>
+          <li><strong>Information Collection and Use:</strong> By applying, you acknowledge and agree that BABY PASS will collect and use your personal information, including but not limited to your contact details, information about your children, the public benefit or home visiting programs you take part in, and your answers to program survey questions. This information is essential for determining your eligibility for the program and for program administration. Your personal information (PII) will be stored securely within our form system and will be shared with a third-party company for the sole purpose of distributing the benefit.</li>
+          <li><strong>Data Security and Privacy:</strong> While BABY PASS takes reasonable measures to protect your personal information, we cannot guarantee absolute security. By applying, you acknowledge that BABY PASS is not HIPAA compliant. You further acknowledge and agree that BABY PASS, despite employing various security measures, shall not be held liable for any unauthorized access, data breaches, or other security incidents that may compromise your personal information.</li>
+          <li><strong>Eligibility Criteria:</strong> BABY PASS is offered in partnership with the Indiana Department of Health (IDOH), and families apply through the MOMS Helpline. The program is open to families who live in a BABY PASS pilot ZIP code, take part in SNAP, WIC, Medicaid, or a home visiting program, and have a child under age 3.</li>
+          <li><strong>Benefit Usage:</strong> The digital benefit provided through this program can be used only to purchase diapers and diapering supplies, and car seats, on the BABY PASS approved list at participating stores. The benefit is sent by text message as a web link.</li>
+          <li><strong>No Guarantee of Benefits:</strong> Completion of an application does not guarantee that you will receive the BABY PASS benefit. Eligibility will be determined based on the information provided, and acceptance into the program is at the sole discretion of BABY PASS.</li>
+          <li><strong>Program Modification and Termination:</strong> BABY PASS reserves the right to modify, suspend, or terminate the BABY PASS program at its sole discretion and without prior notice. Any such changes will be communicated to you through the contact information you have provided.</li>
+          <li><strong>Indemnification:</strong> By participating in the BABY PASS program, you agree to indemnify, defend, and hold harmless BABY PASS, its affiliates, and their respective officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, and expenses, including, without limitation, reasonable legal and accounting fees, arising out of or in any way connected with your participation in the program, the use or misuse of your personal information, and any data breaches or unauthorized access incidents.</li>
+          <li><strong>Non-Discrimination Clause:</strong> BABY PASS does not discriminate on the basis of race, color, religion, sex, national origin, age, disability, or any other characteristic protected by law. Eligibility and participation in the BABY PASS program are determined solely based on the criteria outlined in this agreement.</li>
+          <li><strong>Confidentiality Clause:</strong> All personal information collected through your application will be treated as confidential. BABY PASS will not disclose any personal information to third parties except as necessary to administer the program or as required by law.</li>
+          <li><strong>Accuracy of Information:</strong> By applying, you certify that all information provided is true, complete, and accurate to the best of your knowledge. Providing false or misleading information may result in disqualification from the BABY PASS program.</li>
+          <li><strong>No Transferability:</strong> The benefits provided through the BABY PASS program are non-transferable and may only be used by the individual or household approved to receive the benefit.</li>
+          <li><strong>Notification of Changes:</strong> You agree to promptly notify BABY PASS of any changes to your contact information or eligibility status. Failure to do so may result in termination of your benefits.</li>
+          <li><strong>Voluntary Participation:</strong> Participation in the BABY PASS program is voluntary. You are under no obligation to participate, and you may withdraw from the program at any time without penalty. By applying to the BABY PASS program, applicants acknowledge that their participation is governed by the rules and guidelines of IDOH. All personal information provided will be used solely for eligibility determination and program operation in compliance with privacy and data protection policies. BABY PASS is operated by MOD Collective under a grant from IDOH and assumes no liability for actions outside of its control.</li>
+          <li><strong>Contact and Communication:</strong> By participating in this program, you consent to receive text messages from BABY PASS and its affiliates regarding program updates, benefits, and other relevant information. Message and data rates may apply.</li>
+          <li><strong>Governing Law:</strong> This agreement shall be governed by and construed in accordance with the laws of the state in which BABY PASS is headquartered, without regard to its conflict of laws principles.</li>
+          <li><strong>Severability:</strong> If any provision of this agreement is found to be invalid or unenforceable, the remaining provisions shall continue to be valid and enforceable to the fullest extent permitted by law.</li>
+        </ol>
+      </div>
+    </details>
 
   </div>
 
