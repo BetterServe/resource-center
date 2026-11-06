@@ -35,14 +35,15 @@ something like `baby-pass` so the URL is `baby-pass.netlify.app`.
 ## Embedding on modcollective.org
 
 `/babypass` is the public BABY PASS info page on modcollective.org. Each page
-here goes on a child page of it, pasted once into an Elementor HTML widget:
+here goes on its own top-level MOD page (slug `babypass-...`), pasted once into
+an Elementor HTML widget:
 
 | Snippet | MOD page | Who |
 |---|---|---|
-| `embed-snippet-client.html` | modcollective.org/babypass/client | Families. On the card, in IQPay's resource link, and in the welcome text, so the slug never changes after launch |
-| `embed-snippet-staff.html` | modcollective.org/babypass/staff | MOMS Helpline staff |
-| `embed-snippet-enroll.html` | modcollective.org/babypass/enroll | Staff, on calls |
-| `embed-snippet-training.html` | modcollective.org/babypass/training | Staff, before they enroll anyone |
+| `embed-snippet-client.html` | modcollective.org/babypass-client/ | Families. On the card, in IQPay's resource link, and in the welcome text, so the slug never changes after launch |
+| `embed-snippet-staff.html` | modcollective.org/babypass-staff/ | MOMS Helpline staff |
+| `embed-snippet-enroll.html` | modcollective.org/babypass-enroll/ | Staff, on calls |
+| `embed-snippet-training.html` | modcollective.org/babypass-training/ | Staff, before they enroll anyone |
 
 Keep the three staff pages out of the site menu and set them to noindex.
 Each snippet's comment has the Elementor settings (Canvas template, zero
