@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BABY PASS Staff Training</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   BABY PASS — staff training
+   The training itself is the MOD Training Engine (a Google Apps Script web
+   app, in the training-engine folder next to this repo). This page frames it
+   so it feels like part of the resource center. Content changes to the
+   training happen there, not here.
+
+   Same tokens and components as enroll.html, kept in step by hand.
+   ========================================================================== */
+
+:root {
+  --blue: #233E90;
+  --blue-tint: #E9EDF8;
+  --teal: #149A9A;
+  --teal-text: #0C6B6B;
+  --teal-tint: #E3F4F4;
+  --red: #FF4440;
+  --ink: #1A2440;
+  --muted: #55607A;
+  --line: #D3D9E8;
+  --page: #F5F7FC;
+  --white: #FFFFFF;
+  --font: "Nunito", "Segoe UI", Arial, sans-serif;
+  --wrap: 1180px;
+}
+html, body { margin: 0; padding: 0; background: var(--page); }
+body {
+  font-family: var(--font); color: var(--ink); line-height: 1.6; font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+.sr { position: absolute; left: -9999px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Draft ribbon ---------- */
+.draft {
+  background: #FFF4D6; color: #6B4E00; font-size: 14px; font-weight: 700; text-align: center;
+  padding: 8px 16px; border-bottom: 1px solid #F0DCA0;
+}
+
+/* ---------- Header ---------- */
+.hero { background: var(--blue); color: var(--white); }
+.hero .wrap { padding-top: 26px; padding-bottom: 30px; }
+.hero .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.hero .brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hero .brand img { width: 112px; }
+.hero .brand .for {
+  font-size: 13px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--teal); color: var(--white); padding: 6px 14px; border-radius: 999px;
+}
+.hero h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 900; line-height: 1.1; margin: 0 0 8px; letter-spacing: -.01em; }
+.hero .lede { font-size: 18px; max-width: 700px; margin: 0; color: #DCE3F5; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6);
+  padding: 10px 20px; border-radius: 999px; text-decoration: none;
+  font-weight: 900; font-size: 15px;
+}
+.btn:hover { background: rgba(255,255,255,.12); }
+.btn svg { width: 15px; height: 15px; }
+
+/* ---------- What to expect ---------- */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 24px; }
+.fact { background: var(--white); color: var(--ink); border-radius: 16px; padding: 14px 18px; }
+.fact strong { display: block; font-size: 26px; font-weight: 900; color: var(--blue); line-height: 1.1; }
+.fact span { font-size: 15px; font-weight: 700; color: var(--muted); }
+
+/* ---------- The training ---------- */
+.traincard {
+  background: var(--white); border: 1px solid var(--line); border-radius: 18px;
+  margin: 28px 0 0; overflow: hidden;
+}
+.traincard iframe { display: block; width: 100%; border: 0; height: 1400px; }
+.trainhelp { font-size: 14.5px; color: var(--muted); margin: 12px 4px 0; }
+
+/* ---------- Footer ---------- */
+footer { margin-top: 56px; }
+.unity { display: flex; height: 7px; }
+.unity i { flex: 1; }
+.unity i:nth-child(1) { background: var(--blue); }
+.unity i:nth-child(2) { background: var(--teal); }
+.unity i:nth-child(3) { background: var(--red); }
+.foot { background: var(--white); color: var(--muted); }
+.foot .wrap { padding-top: 26px; padding-bottom: 34px; }
+.partners { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; margin: 0; }
+.partners a { font-size: 14px; font-weight: 800; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--line); padding-bottom: 1px; }
+.partners a:hover { color: var(--blue); border-bottom-color: var(--teal); }
+
+@media (max-width: 560px) {
+  .wrap { padding: 0 12px; }
+  .traincard { border-radius: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="draft">DRAFT for partner review. Not for distribution.</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="bar">
+      <div class="brand">
+        <img src="img/logo-white.svg" width="112" height="70" alt="BABY PASS">
+        <span class="for">MOMS Helpline staff</span>
+      </div>
+      <a class="btn" href="index.html" target="_blank" rel="noopener">
+        Resource center
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg>
+        <span class="sr">(opens in a new tab)</span>
+      </a>
+    </div>
+    <h1>BABY PASS staff training</h1>
+    <p class="lede">Finish this before you enroll any families. Passing puts you on the authorized enrollment list.</p>
+
+    <div class="facts">
+      <div class="fact"><strong>About 35 min</strong><span>Do it yourself, in one sitting</span></div>
+      <div class="fact"><strong>90% to pass</strong><span>You can retake the final quiz</span></div>
+      <div class="fact"><strong>1 business day</strong><span>To be added to the enrollment list</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="traincard">
+    <iframe
+      id="bp-training-frame"
+      title="BABY PASS staff training"
+      src="https://script.google.com/macros/s/AKfycbyGWMqMyk2ES2Fa6XHcWmXGqlO5cUHcoWBPSuNBxAKoNDHJrj9G7Jlbl8hDe-9kEHzTfQ/exec?course=baby-pass&amp;embed=1"
+      allow="clipboard-write"
+    ></iframe>
+  </div>
+  <p class="trainhelp">Training not loading? <a id="bp-training-direct" href="https://script.google.com/macros/s/AKfycbyGWMqMyk2ES2Fa6XHcWmXGqlO5cUHcoWBPSuNBxAKoNDHJrj9G7Jlbl8hDe-9kEHzTfQ/exec?course=baby-pass" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+</main>
+
+<footer>
+  <div class="unity" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="foot">
+    <div class="wrap">
+      <div class="partners">
+        <a href="https://www.in.gov/health/" target="_blank" rel="noopener">Indiana Department of Health</a>
+        <a href="https://www.in.gov/health/mch/moms-helpline/" target="_blank" rel="noopener">MOMS Helpline</a>
+        <a href="https://modcollective.org/" target="_blank" rel="noopener">MOD Collective</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Sizing the training frame ----------
+   The training app runs on Google's servers inside its own nested frame, so
+   its messages come from a *.googleusercontent.com page nested inside our
+   iframe. It sends two things: its height, and "scroll to my top" whenever
+   the learner moves to a new section. */
+var bpEmbedded = window.parent !== window;
+var bpFrame = document.getElementById('bp-training-frame');
+var bpScrollAsks = 0;
+
+function bpScrollParentTo(y) {
+  if (bpEmbedded) window.parent.postMessage({ bpScrollTo: Math.max(0, Math.round(y)) }, '*');
+  else if (window.pageYOffset > y) window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
+window.addEventListener('message', function (e) {
+  var host = '';
+  try { host = new URL(e.origin).hostname; } catch (err) { return; }
+  if (!/\.googleusercontent\.com$/.test(host)) return;
+  /* Apps Script nests the app two frames deep, so walk up from the sender. */
+  var ours = false, w = e.source;
+  try { for (var i = 0; i < 4 && w && !ours; i++) { ours = w === bpFrame.contentWindow; w = w.parent; } } catch (err) { ours = false; }
+  if (!ours || !e.data || typeof e.data !== 'object') return;
+
+  if (e.data.modTrainingHeight) {
+    var h = parseInt(e.data.modTrainingHeight, 10);
+    if (!isNaN(h) && h > 300 && h < 30000) bpFrame.style.height = (h + 4) + 'px';
+  }
+  /* The first ask is the page loading; leave the reader at the top of ours. */
+  if (e.data.modTrainingScrollTop && bpScrollAsks++ > 0) {
+    bpScrollParentTo(bpFrame.getBoundingClientRect().top + window.pageYOffset - 16);
+  }
+});
+</script>
+
+<script>
+/* ---------- Embedding on modcollective.org ----------
+   Same as the other pages: report this page's height to the MOD page so its
+   frame grows to fit. The embed snippets listen for bpHeight and bpScrollTo. */
+var bpLastHeight = 0, bpHeightPending = false;
+function bpReportHeight() {
+  if (!bpEmbedded || bpHeightPending) return;
+  bpHeightPending = true;
+  setTimeout(function () {
+    bpHeightPending = false;
+    var h = Math.ceil(document.body.getBoundingClientRect().height);
+    if (!h || Math.abs(h - bpLastHeight) < 2) return;
+    bpLastHeight = h;
+    window.parent.postMessage({ bpHeight: h }, '*');
+  }, 30);
+}
+if (bpEmbedded) {
+  window.addEventListener('load', bpReportHeight);
+  window.addEventListener('resize', bpReportHeight);
+  if (window.ResizeObserver) new ResizeObserver(bpReportHeight).observe(document.body);
+  bpReportHeight();
+}
+</script>
+
+</body>
+</html>

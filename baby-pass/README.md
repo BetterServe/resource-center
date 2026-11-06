@@ -152,3 +152,16 @@ the public site in `netlify.toml`.
 2. Remove the `noindex` meta tags from both pages, and the DRAFT ribbon.
 3. Confirm no Pending tags are left on either page.
 4. Get written sign-off from each partner on the final pages, for the grant record.
+
+## The training page
+
+`training.html` frames the BABY PASS staff training, which runs on the MOD
+Training Engine (a Google Apps Script web app; source in `training-engine/`
+in the FY27 folder, course file `courses/baby-pass.json`). The "Take the
+training check" buttons on the staff page link here (`BP_TRAINING_URL`).
+
+Training content changes happen in the engine, not in this repo. The frame
+URL ends in `&embed=1`, which hides the training's own logo bar because this
+page already carries the header. The frame sizes itself from the training's
+`modTrainingHeight` messages, and passes its own height up to modcollective.org
+the same way the other pages do.
