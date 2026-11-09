@@ -111,6 +111,18 @@ a { color: var(--blue); }
 }
 .formcard iframe { display: block; width: 100%; min-width: 100%; border: 0; }
 .formhelp { font-size: 14.5px; color: var(--muted); margin: 12px 4px 0; }
+[hidden] { display: none !important; }
+.notyet {
+  background: var(--white); border: 2px dashed var(--teal); border-radius: 18px;
+  margin: 16px 0 0; padding: 34px 28px; text-align: center;
+}
+.notyet h2 { font-size: clamp(22px, 4vw, 28px); font-weight: 900; color: var(--blue); margin: 0 0 10px; line-height: 1.2; }
+.notyet p { margin: 0 auto; max-width: 560px; font-size: 16.5px; }
+.notyet a { color: var(--teal-text); font-weight: 900; }
+.testing {
+  background: #FFF4D6; color: #6B4E00; border: 1px solid #F0DCA0; border-radius: 12px;
+  font-size: 14.5px; font-weight: 700; padding: 10px 14px; margin: 16px 0 0;
+}
 
 /* ---------- Footer ---------- */
 footer { margin-top: 56px; }
@@ -181,20 +193,26 @@ footer { margin-top: 56px; }
     </div>
   </div>
 
-  <div class="formcard">
+  <!-- Shown instead of the form until BP_OPENS_AT (script below). -->
+  <div class="notyet" id="bp-notyet" hidden>
+    <h2>Enrollment opens <span id="bp-opens-text">Thursday, November 12, at 8:30 a.m. ET</span></h2>
+    <p>The enrollment form will appear right here then. Until then, finish the <a href="https://modcollective.org/babypass-training/" data-bp-page="training" target="_blank" rel="noopener">BABY PASS staff training</a>. Passing it puts you on the authorized enrollment list.</p>
+  </div>
+
+  <div class="formcard" id="bp-formcard">
     <iframe
       id="JotFormIFrame-262915028133150"
       title="IN FY27 BABY PASS - Enrollment"
       onload="bpFormLoaded(this)"
       allowtransparency="true"
       allow="geolocation; microphone; camera; fullscreen; payment"
-      src="https://form.jotform.com/262915028133150"
+      data-src="https://form.jotform.com/262915028133150"
       frameborder="0"
       style="min-width:100%;max-width:100%;height:690px;border:none;"
       scrolling="no"
     ></iframe>
   </div>
-  <p class="formhelp">Form not loading? <a href="https://form.jotform.com/262915028133150" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+  <p class="formhelp" id="bp-formhelp">Form not loading? <a href="https://form.jotform.com/262915028133150" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
 
 </main>
 
@@ -226,6 +244,42 @@ var BP_PAGES = {
 document.querySelectorAll('a[data-bp-page]').forEach(function (a) {
   a.href = BP_PAGES[a.getAttribute('data-bp-page')];
 });
+</script>
+
+<script>
+/* ---------- Enrollment opening time ----------
+   Until BP_OPENS_AT the form is not loaded at all, and staff see when it
+   opens. The page switches over by itself at that time, even if it was left
+   open. For testing before then, add ?test to the address:
+     https://babypass.netlify.app/enroll.html?test
+   Delete this block (and the #bp-notyet box) once enrollment is open, or
+   leave it: after the opening time it does nothing. */
+var BP_OPENS_AT = new Date('2026-11-12T08:30:00-05:00');   // Thu Nov 12, 8:30 a.m. ET
+(function () {
+  var testing = /[?&]test\b/.test(location.search);
+  var frame = document.getElementById('JotFormIFrame-262915028133150');
+  var card = document.getElementById('bp-formcard');
+  var help = document.getElementById('bp-formhelp');
+  var notyet = document.getElementById('bp-notyet');
+
+  function open() {
+    if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
+    card.hidden = false; help.hidden = false; notyet.hidden = true;
+  }
+  if (testing) {
+    var note = document.createElement('p');
+    note.className = 'testing';
+    note.textContent = 'TESTING: the form is shown early because the address ends in ?test. Use a test@ staff email so test rows stay out of the counters.';
+    card.parentNode.insertBefore(note, card);
+    return open();
+  }
+  if (Date.now() >= BP_OPENS_AT.getTime()) return open();
+
+  card.hidden = true; help.hidden = true; notyet.hidden = false;
+  var timer = setInterval(function () {
+    if (Date.now() >= BP_OPENS_AT.getTime()) { clearInterval(timer); open(); }
+  }, 30000);
+})();
 </script>
 
 <script>
