@@ -193,10 +193,10 @@ footer { margin-top: 56px; }
     </div>
   </div>
 
-  <!-- Shown instead of the form until BP_OPENS_AT (script below). -->
+  <!-- Shown instead of the form while BP_ENROLL_OPEN is false (script below). -->
   <div class="notyet" id="bp-notyet" hidden>
-    <h2>Enrollment opens <span id="bp-opens-text">Thursday, November 12, at 8:30 a.m. ET</span></h2>
-    <p>The enrollment form will appear right here then. Until then, finish the <a href="https://modcollective.org/babypass-training/" data-bp-page="training" target="_blank" rel="noopener">BABY PASS staff training</a>. Passing it puts you on the authorized enrollment list.</p>
+    <h2>Enrollment isn't open yet</h2>
+    <p>MOD Collective will let the Helpline know as soon as it opens, and the enrollment form will appear right here. Until then, finish the <a href="https://modcollective.org/babypass-training/" data-bp-page="training" target="_blank" rel="noopener">BABY PASS staff training</a>. Passing it puts you on the authorized enrollment list.</p>
   </div>
 
   <div class="formcard" id="bp-formcard">
@@ -247,38 +247,31 @@ document.querySelectorAll('a[data-bp-page]').forEach(function (a) {
 </script>
 
 <script>
-/* ---------- Enrollment opening time ----------
-   Until BP_OPENS_AT the form is not loaded at all, and staff see when it
-   opens. The page switches over by itself at that time, even if it was left
-   open. For testing before then, add ?test to the address:
-     https://babypass.netlify.app/enroll.html?test
-   Delete this block (and the #bp-notyet box) once enrollment is open, or
-   leave it: after the opening time it does nothing. */
-var BP_OPENS_AT = new Date('2026-11-12T08:30:00-05:00');   // Thu Nov 12, 8:30 a.m. ET
+/* ---------- Enrollment on or off ----------
+   While BP_ENROLL_OPEN is false the form is not loaded at all, and staff see
+   that enrollment isn't open yet. To open enrollment, set it to true and push.
+   For testing while it's off, add ?test to the address:
+     https://babypass.netlify.app/enroll.html?test */
+var BP_ENROLL_OPEN = false;
 (function () {
-  var testing = /[?&]test\b/.test(location.search);
+  var testing = /[?&]test/.test(location.search);
   var frame = document.getElementById('JotFormIFrame-262915028133150');
   var card = document.getElementById('bp-formcard');
   var help = document.getElementById('bp-formhelp');
   var notyet = document.getElementById('bp-notyet');
 
-  function open() {
-    if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
+  if (BP_ENROLL_OPEN || testing) {
+    frame.setAttribute('src', frame.getAttribute('data-src'));
     card.hidden = false; help.hidden = false; notyet.hidden = true;
+    if (testing && !BP_ENROLL_OPEN) {
+      var note = document.createElement('p');
+      note.className = 'testing';
+      note.textContent = 'TESTING: the form is shown because the address ends in ?test. Enrollment is still closed for staff. Use a test@ staff email so test rows stay out of the counters.';
+      card.parentNode.insertBefore(note, card);
+    }
+  } else {
+    card.hidden = true; help.hidden = true; notyet.hidden = false;
   }
-  if (testing) {
-    var note = document.createElement('p');
-    note.className = 'testing';
-    note.textContent = 'TESTING: the form is shown early because the address ends in ?test. Use a test@ staff email so test rows stay out of the counters.';
-    card.parentNode.insertBefore(note, card);
-    return open();
-  }
-  if (Date.now() >= BP_OPENS_AT.getTime()) return open();
-
-  card.hidden = true; help.hidden = true; notyet.hidden = false;
-  var timer = setInterval(function () {
-    if (Date.now() >= BP_OPENS_AT.getTime()) { clearInterval(timer); open(); }
-  }, 30000);
 })();
 </script>
 
