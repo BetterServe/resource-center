@@ -203,7 +203,7 @@ footer { margin-top: 56px; }
     <iframe
       id="JotFormIFrame-262915028133150"
       title="IN FY27 BABY PASS - Enrollment"
-      onload="bpFormLoaded(this)"
+      onload="if (window.bpFormLoaded && this.getAttribute('src')) bpFormLoaded(this)"
       allowtransparency="true"
       allow="geolocation; microphone; camera; fullscreen; payment"
       data-src="https://form.jotform.com/262915028133150"
@@ -254,7 +254,7 @@ document.querySelectorAll('a[data-bp-page]').forEach(function (a) {
      https://babypass.netlify.app/enroll.html?test */
 var BP_ENROLL_OPEN = false;
 (function () {
-  var testing = /[?&]test/.test(location.search);
+  var testing = /[?&]test(=|&|$)/.test(location.search);
   var frame = document.getElementById('JotFormIFrame-262915028133150');
   var card = document.getElementById('bp-formcard');
   var help = document.getElementById('bp-formhelp');
