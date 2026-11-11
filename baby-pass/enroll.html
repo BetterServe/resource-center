@@ -252,7 +252,7 @@ document.querySelectorAll('a[data-bp-page]').forEach(function (a) {
    that enrollment isn't open yet. To open enrollment, set it to true and push.
    For testing while it's off, add ?test to the address:
      https://babypass.netlify.app/enroll.html?test */
-var BP_ENROLL_OPEN = false;
+var BP_ENROLL_OPEN = true;
 (function () {
   var testing = /[?&]test(=|&|$)/.test(location.search);
   var frame = document.getElementById('JotFormIFrame-262915028133150');
