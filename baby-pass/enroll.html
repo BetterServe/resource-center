@@ -332,7 +332,7 @@ function bpPanel(id, b, asOf, isSample) {
   if (isSample) {
     var s = document.createElement('span'); s.className = 'sample'; s.textContent = 'SAMPLE NUMBERS';
     meta.appendChild(s);
-  } else if (asOf) {
+  } else if (asOf && !isNaN(new Date(asOf).getTime())) {
     meta.textContent = 'Updated ' + new Date(asOf).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
   }
 }

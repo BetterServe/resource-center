@@ -102,7 +102,9 @@ export default async () => {
         // The sheet owns the wording, so it can change without a deploy.
         label: col(row, 'label') || LABELS[key]
       };
-      asOf = asOf || col(row, 'updated');
+      // Only a real timestamp counts; a blank or a stray label must not reach the page.
+      const updated = col(row, 'updated');
+      if (!asOf && updated && !isNaN(Date.parse(updated))) asOf = updated;
     }
     if (!benefits.diapers && !benefits.car_seats) throw new Error('Feed has no benefit rows');
 
