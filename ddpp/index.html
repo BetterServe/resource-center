@@ -164,6 +164,7 @@ html, body { margin: 0; padding: 0; background: #EBE9E3; }
 }
 .mod-dd .pbig span { font-size: 16px; color: var(--cream); margin-left: 9px; }
 .mod-dd .panel.closed .pbig strong { color: var(--med-gray); }
+.mod-dd .pnote { margin: 4px 0 0; max-width: 70ch; font-size: 15px; line-height: 1.55; color: var(--cream); }
 
 /* The track. A dot rides it for the date window; the fill alone carries the count. */
 .mod-dd .track {
@@ -514,8 +515,8 @@ html, body { margin: 0; padding: 0; background: #EBE9E3; }
         </button>
         <button type="button" class="card" onclick="ddGo('enroll')">
           <h3>Enroll a Family</h3>
-          <p>The step by step workflow, and what to tell families about what happens next.</p>
-          <span class="go">Start here</span>
+          <p>Enrollment is closed. Review how it worked and what enrolled families can expect next.</p>
+          <span class="go">Review</span>
         </button>
         <button type="button" class="card" onclick="ddGo('about')">
           <h3>About the DDPP</h3>
@@ -531,49 +532,25 @@ html, body { margin: 0; padding: 0; background: #EBE9E3; }
 
       <div class="panels">
 
-        <div class="panel" id="dd-window">
+        <div class="panel" id="dd-done">
           <div class="phead">
-            <h3>Enrollment window</h3>
-            <span class="pmeta" id="dd-window-note">Opens October 1, 2026</span>
+            <h3>Enrollment complete</h3>
+            <span class="pmeta">Closed November 19, 2026</span>
           </div>
-          <p class="pbig"><strong id="dd-days">&mdash;</strong><span id="dd-days-label">days until enrollment opens</span></p>
+          <p class="pbig"><strong>5,500+</strong><span>children enrolled</span></p>
           <div class="track">
-            <div class="fill" id="dd-window-fill"></div>
-            <div class="dot" id="dd-window-dot"></div>
+            <div class="fill" style="width:100%"></div>
           </div>
-          <div class="ends">
-            <span><b>Oct 1, 2026</b></span>
-            <span><b>Dec 23, 2026</b></span>
-          </div>
+          <p class="pnote">Together, our 12 partner sites reached the FY27 enrollment goal on November 19, 2026, more than a month ahead of schedule. Thank you to every staff member who enrolled a family. Enrollment for FY27 is now closed, and the enrollment forms no longer accept applications.</p>
         </div>
 
-        <div class="panel" id="dd-tally">
-          <div class="phead">
-            <h3>Enrollment goal</h3>
-            <span class="pmeta" id="dd-asof">Checking&hellip;</span>
-          </div>
-          <p class="pbig"><strong id="dd-count">&mdash;</strong><span id="dd-label">enrolled</span></p>
-          <div class="track">
-            <div class="fill" id="dd-bar"></div>
-          </div>
-          <div class="ends">
-            <span>Goal: <b>5,500 children</b> across all 12 sites</span>
-            <span id="dd-pct">0%</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div id="dd-sites-wrap" hidden>
-        <h3 class="sectitle">Enrollments by site</h3>
-        <div class="sites" id="dd-sites"></div>
       </div>
 
       <div class="help">
         <h3>Need support?</h3>
-        <p>Enrollment questions, a lost enrollment link, a family situation you are not sure about, or anything else about the pilot. Reach MOD Collective directly.</p>
+        <p>If an enrolled family needs help with their card or benefit, they can contact the Diaper Dollars support team directly. Staff with questions about the pilot can reach us the same way.</p>
         <a class="btn" href="tel:+18446632655">Call 844-663-2655</a>
-        <a class="btn secondary" href="mailto:support@modcollective.org?subject=DDPP%20site%20question">Email us</a>
+        <a class="btn secondary" href="mailto:support@modcollective.org?subject=DDPP%20site%20question">Email support@modcollective.org</a>
       </div>
     </div>
 
@@ -850,6 +827,11 @@ html, body { margin: 0; padding: 0; background: #EBE9E3; }
       <button type="button" class="back" onclick="ddGo('home')">&larr; Resource Center home</button>
       <h2>Enroll a family.</h2>
       <p class="lede">Five minutes at the visit. Nothing after that.</p>
+
+      <div class="callout warn">
+        <h3>FY27 enrollment is closed.</h3>
+        <p>We reached our goal of 5,500 children on November 19, 2026, and the enrollment forms no longer accept applications. Please do not collect family information to submit later. If an enrolled family needs help, they can call <strong>844-663-2655</strong> or email <strong>support@modcollective.org</strong>.</p>
+      </div>
 
       <div class="elig">
         <h3>Who is eligible</h3>
@@ -1182,9 +1164,6 @@ html, body { margin: 0; padding: 0; background: #EBE9E3; }
 </div>
 
 <script>
-/* ---------- Settings you may want to change ---------- */
-var DD_ENDPOINT = '/api/count';   // the Netlify function
-var DD_GOAL     = 5500;           // fallback only — the feed supplies the real goal
 
 /* ---------- Section switching ---------- */
 var DD_SECTIONS = ['home', 'program', 'card', 'enroll', 'about', 'support'];
@@ -1260,142 +1239,9 @@ if (window.ResizeObserver) {
   new ResizeObserver(ddReportHeight).observe(document.body);
 }
 
-/* ---------- By-site leaderboard ---------- */
-function ddRenderSites(sites, unit) {
-  var wrap = document.getElementById('dd-sites-wrap');
-  var host = document.getElementById('dd-sites');
-  if (!wrap || !host) return;
-
-  if (!sites || !sites.length) { wrap.hidden = true; return; }
-
-  host.textContent = '';
-  var top = sites[0].children || 1;
-
-  sites.forEach(function (site) {
-    var row = document.createElement('div');
-    row.className = 'siterow';
-
-    var name = document.createElement('span');
-    name.className = 'sitename';
-    name.textContent = site.name;          // textContent, never innerHTML
-
-    var track = document.createElement('span');
-    track.className = 'sitetrack';
-    var fill = document.createElement('i');
-    fill.style.width = Math.max(2, (site.children / top) * 100) + '%';
-    track.appendChild(fill);
-
-    var count = document.createElement('span');
-    count.className = 'sitecount';
-    count.textContent = site.children.toLocaleString('en-US');
-    if (site.applications !== null && site.applications !== undefined) {
-      var sub = document.createElement('span');
-      sub.textContent = site.applications === 1
-        ? '1 application' : site.applications + ' applications';
-      count.appendChild(sub);
-    }
-
-    row.appendChild(name);
-    row.appendChild(track);
-    row.appendChild(count);
-    host.appendChild(row);
-  });
-
-  wrap.hidden = false;
-}
-
-/* ---------- Enrollment window countdown ---------- */
-var DD_OPEN  = new Date(2026, 9, 1);        // October 1 2026, local time
-var DD_CLOSE = new Date(2026, 11, 23, 23, 59, 59);
-
-function ddWindow() {
-  var num   = document.getElementById('dd-days');
-  var label = document.getElementById('dd-days-label');
-  var fill  = document.getElementById('dd-window-fill');
-  var dot   = document.getElementById('dd-window-dot');
-  var note  = document.getElementById('dd-window-note');
-  var panel = document.getElementById('dd-window');
-  if (!num) return;
-
-  var now = new Date();
-  var DAY = 86400000;
-  var pct = 0, days;
-
-  if (now < DD_OPEN) {
-    days = Math.ceil((DD_OPEN - now) / DAY);
-    num.textContent = days;
-    label.textContent = (days === 1 ? 'day' : 'days') + ' until enrollment opens';
-    note.textContent = 'Not open yet';
-  } else if (now <= DD_CLOSE) {
-    days = Math.ceil((DD_CLOSE - now) / DAY);
-    num.textContent = days;
-    label.textContent = (days === 1 ? 'day' : 'days') + ' left to enroll';
-    pct = Math.min(100, Math.max(0, ((now - DD_OPEN) / (DD_CLOSE - DD_OPEN)) * 100));
-    note.textContent = 'Open now';
-  } else {
-    panel.classList.add('closed');
-    num.textContent = 'Closed';
-    label.textContent = 'enrolled families keep their benefit';
-    pct = 100;
-    note.textContent = 'Window has ended';
-  }
-
-  // The dot marks today's position between the two dates.
-  fill.style.width = pct + '%';
-  dot.style.left = pct + '%';
-  ddReportHeight();
-}
-ddWindow();
-setInterval(ddWindow, 60 * 60 * 1000);
-
-/* ---------- Live counter ---------- */
-var ddGotCount = false;
-
-function ddLoadCount() {
-  fetch(DD_ENDPOINT, { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (data) {
-      var n = parseInt(data.count, 10);
-      if (isNaN(n)) return;
-      ddGotCount = true;
-      document.getElementById('dd-count').textContent = n.toLocaleString('en-US');
-      /* The workbook says what it is counting. Until "Number of Children
-         under 3" is in the Jotform export it can only count households, and
-         the goal is expressed in children — so the page says which it is
-         rather than quietly comparing two different units. */
-      var unit = String(data.unit || 'children').toLowerCase();
-      document.getElementById('dd-label').textContent = data.label || (unit + ' enrolled');
-      var goal = parseInt(data.goal, 10) || DD_GOAL;
-      var pct = Math.min(100, (n / goal) * 100);
-      document.getElementById('dd-bar').style.width = pct + '%';
-      document.getElementById('dd-pct').textContent = Math.round(pct) + '%';
-      if (data.asOf) {
-        var d = new Date(data.asOf);
-        document.getElementById('dd-asof').textContent =
-          'Updated ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-          + (unit === 'children' ? '' : ' \u00b7 counting households, not children');
-      }
-      ddRenderSites(data.sites, data.unit);
-      ddReportHeight();
-    })
-    .catch(function () {
-      /* Never got a number. Keep the box: it is half of the home page's
-         purpose. Show a dash rather than 0, which would be a claim that no
-         family has applied, and say plainly that the feed is not connected. */
-      if (!ddGotCount) {
-        document.getElementById('dd-count').textContent = '—';
-        document.getElementById('dd-label').textContent = 'not connected yet';
-        document.getElementById('dd-asof').textContent = 'Awaiting data source';
-        document.getElementById('dd-pct').textContent = '';
-        document.getElementById('dd-bar').style.width = '0%';
-        var sw = document.getElementById('dd-sites-wrap');
-        if (sw) sw.hidden = true;
-        ddReportHeight();
-      }
-    });
-}
-ddLoadCount();
-setInterval(ddLoadCount, 10 * 60 * 1000);
+/* Enrollment closed Nov 19, 2026. The live counter, by-site leaderboard and
+   enrollment-window countdown were removed; netlify/functions/count.mjs is
+   no longer called by this page. */
 
 /* ---------- Open a section directly from the address, e.g. /#enroll ---------- */
 (function () {
